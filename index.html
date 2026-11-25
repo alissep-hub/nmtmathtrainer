@@ -1,0 +1,2855 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>НМТ Математика — Підготовка до тестування 2026</title>
+  <style>
+    :root {
+      --bg-app: #f8fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --blue: #1d4ed8;
+      --blue-2: #2563eb;
+      --blue-soft: #eff6ff;
+      --green-soft: #dcfce7;
+      --green-border: #16a34a;
+      --green-text: #15803d;
+      --red-soft: #fee2e2;
+      --red-border: #dc2626;
+      --red-text: #b91c1c;
+      --purple-soft: #f3e8ff;
+      --purple-text: #6b21a8;
+      --amber-soft: #fef3c7;
+      --amber-text: #92400e;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+      background: var(--bg-app);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .content-area {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 24px 20px 104px;
+    }
+
+    .header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .app-title { font-size: 24px; font-weight: 800; }
+    .app-sub { font-size: 13.5px; color: var(--muted); }
+
+    .header-pills { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+    .target-pill {
+      background: var(--blue-soft);
+      color: var(--blue);
+      border: 1px solid #bfdbfe;
+      border-radius: 999px;
+      padding: 7px 13px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .auth-pill {
+      background: #fff;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 7px 13px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+
+    .card--clickable {
+      cursor: pointer;
+      transition: transform 0.12s ease, border-color 0.12s ease;
+    }
+    .card--clickable:hover { border-color: #93c5fd; transform: translateY(-1px); }
+    .card--green { background: #f0fdf4; border-color: #bbf7d0; }
+    .card--locked { background: #f8fafc; border-color: #cbd5e1; }
+
+    .btn-primary {
+      width: 100%;
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      border-radius: 14px;
+      padding: 13px 18px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-secondary {
+      width: 100%;
+      background: #fff;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 16px;
+      font-size: 14.5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-mistake {
+      width: 100%;
+      background: #fef2f2;
+      color: var(--red-text);
+      border: 1px solid #fca5a5;
+      border-radius: 14px;
+      padding: 13px 18px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 12px;
+    }
+
+    .progress-bar {
+      height: 9px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 10px 0;
+    }
+    .progress-fill { height: 100%; background: var(--blue); transition: width 0.25s ease; }
+
+    .menu-item { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .menu-left { display: flex; align-items: center; gap: 12px; }
+    .icon-sq {
+      width: 42px; height: 42px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;
+    }
+    .sq-blue { background: var(--blue-soft); color: var(--blue); }
+    .sq-green { background: var(--green-soft); color: var(--green-text); }
+    .sq-purple { background: var(--purple-soft); color: var(--purple-text); }
+    .sq-amber { background: var(--amber-soft); color: var(--amber-text); }
+
+    .item-title { font-size: 15.5px; font-weight: 700; }
+    .item-desc { font-size: 13px; color: var(--muted); margin-top: 2px; line-height: 1.4; }
+    .lock-badge {
+      font-size: 12px; background: #fee2e2; border: 1px solid #fca5a5;
+      border-radius: 999px; padding: 4px 10px; font-weight: 700; color: #991b1b; white-space: nowrap;
+    }
+    .lock-badge--mixed {
+      font-size: 12px; background: #fef3c7; border: 1px solid #fcd34d;
+      border-radius: 999px; padding: 4px 10px; font-weight: 700; color: #92400e; white-space: nowrap;
+    }
+    .lock-badge--pro {
+      background: #eff6ff; border-color: #93c5fd; color: var(--blue);
+    }
+    .lock-badge--free {
+      background: #dcfce7; border-color: #86efac; color: #15803d;
+    }
+
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-bottom: 14px; }
+    .quick-actions-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-bottom: 14px; }
+    .section-label { font-size: 15px; font-weight: 800; margin: 18px 0 10px; }
+
+    .chips-row { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+    .chip {
+      padding: 8px 14px; border-radius: 999px; border: 1px solid var(--border);
+      background: #fff; font-size: 13px; font-weight: 600; cursor: pointer;
+    }
+    .chip.active { background: var(--blue); color: #fff; border-color: var(--blue); }
+
+    .stats-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-bottom: 14px; }
+    .stat-box { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 12px 10px; text-align: center; }
+    .stat-val { font-size: 18px; font-weight: 800; }
+    .stat-lbl { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    .bottom-nav {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: #fff; border-top: 1px solid var(--border);
+      display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+      padding: 8px 12px 10px; z-index: 20;
+    }
+    .nav-btn {
+      background: none; border: none; display: flex; flex-direction: column;
+      align-items: center; gap: 3px; font-size: 12px; font-weight: 600; color: var(--muted); cursor: pointer;
+    }
+    .nav-btn.active { color: var(--blue); font-weight: 700; }
+
+    .back-link {
+      background: #fff; border: 1px solid var(--border); border-radius: 999px;
+      width: 38px; height: 38px; font-size: 18px; cursor: pointer; flex-shrink: 0;
+    }
+
+    .option-btn {
+      width: 100%; text-align: left; background: #fff; border: 1.5px solid var(--border);
+      border-radius: 16px; padding: 12px 14px; margin-bottom: 9px; cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 14.5px;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+    .option-left { display: flex; align-items: center; gap: 10px; }
+
+    .option-btn.correct-choice {
+      border-color: var(--green-border); background: var(--green-soft); color: var(--green-text); font-weight: 700;
+    }
+    .option-btn.correct-choice .letter-circle { background: var(--green-border); color: #fff; }
+
+    .option-btn.wrong-choice {
+      border-color: var(--red-border); background: var(--red-soft); color: var(--red-text); font-weight: 700;
+    }
+    .option-btn.wrong-choice .letter-circle { background: var(--red-border); color: #fff; }
+
+    .letter-circle {
+      width: 28px; height: 28px; border-radius: 50%; background: #f1f5f9;
+      display: inline-flex; align-items: center; justify-content: center; font-size: 12.5px; font-weight: 700; flex-shrink: 0;
+    }
+
+    .explanation-card {
+      margin-top: 12px; border-radius: 16px; padding: 14px 16px;
+      border: 1px solid #cbd5e1; background: #f8fafc;
+    }
+    .explanation-card.is-ok { border-color: #86efac; background: #f0fdf4; }
+    .explanation-card.is-bad { border-color: #fca5a5; background: #fef2f2; }
+    .explanation-heading { font-size: 14px; font-weight: 800; margin-bottom: 6px; }
+    .explanation-text { font-size: 13.5px; line-height: 1.55; color: #1e293b; }
+
+    .result-banner {
+      border-radius: 16px; padding: 14px 16px; margin: 12px 0;
+      background: var(--blue-soft); border: 1px solid #bfdbfe;
+    }
+    .result-phrase { font-size: 16px; font-weight: 800; color: var(--blue); margin-bottom: 6px; }
+    .result-tip { font-size: 13.5px; line-height: 1.5; color: #1e293b; }
+
+    .chart-frame {
+      width: 100%;
+      max-width: 480px;
+      aspect-ratio: 16 / 10;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 16px;
+      padding: 10px;
+      margin: 0 auto 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .chart-frame svg {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .note-box {
+      border: 1px solid #e2e8f0; border-radius: 18px; padding: 16px;
+      background: #fff; margin-bottom: 12px;
+    }
+    .note-box-title { font-size: 15px; font-weight: 800; margin-bottom: 8px; color: var(--text); }
+    .formula-card {
+      border: 1px solid #ddd6fe; background: #faf5ff; border-radius: 16px;
+      padding: 13px 15px; margin-bottom: 10px;
+    }
+    .formula-code {
+      background: #ede9fe; border: 1px solid #c4b5fd; color: #3b0764;
+      border-radius: 12px; padding: 10px 13px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 13.5px; font-weight: 700; line-height: 1.45; margin: 6px 0;
+      white-space: pre-wrap;
+    }
+    .formula-explain { font-size: 13px; color: #334155; line-height: 1.45; }
+    .note-hint { font-size: 13px; color: #334155; line-height: 1.5; }
+
+    .profile-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .avatar-circle {
+      width: 48px; height: 48px; border-radius: 50%; background: var(--blue-soft); color: var(--blue);
+      display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; flex-shrink: 0;
+    }
+    .streak-badge {
+      background: #fff7ed; color: #c2410c; border: 1px solid #fed7aa;
+      border-radius: 999px; padding: 5px 11px; font-size: 12.5px; font-weight: 700;
+    }
+    .setting-row {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 12px 0; border-bottom: 1px solid #f1f5f9;
+    }
+    .setting-row:last-child { border-bottom: none; }
+    .switch-btn {
+      width: 46px; height: 26px; border-radius: 999px; border: none; cursor: pointer;
+      position: relative; transition: background 0.2s ease; flex-shrink: 0;
+    }
+    .switch-btn.on { background: var(--blue-2); }
+    .switch-btn.off { background: #cbd5e1; }
+    .switch-knob {
+      width: 20px; height: 20px; border-radius: 50%; background: #fff;
+      position: absolute; top: 3px; transition: left 0.2s ease;
+    }
+    .switch-btn.on .switch-knob { left: 23px; }
+    .switch-btn.off .switch-knob { left: 3px; }
+
+    .section-row-item { padding: 10px 0; border-bottom: 1px solid #f1f5f9; }
+    .section-row-item:last-child { border-bottom: none; }
+
+    .modal-backdrop {
+      position: fixed; inset: 0; background: rgba(15, 23, 42, 0.55);
+      display: flex; align-items: center; justify-content: center; padding: 16px; z-index: 80;
+    }
+    .premium-card {
+      width: 100%; max-width: 430px;
+      background: linear-gradient(165deg, #1d4ed8 0%, #2563eb 55%, #1e40af 100%);
+      color: #fff; border-radius: 26px; padding: 22px 20px;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.35);
+    }
+    .premium-benefit {
+      background: rgba(255, 255, 255, 0.14); border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 14px; padding: 11px 13px; margin-bottom: 9px;
+      font-size: 13.5px; font-weight: 600; line-height: 1.35;
+    }
+    .premium-actions { display: grid; grid-template-columns: 1fr 1.35fr; gap: 10px; margin-top: 14px; }
+    .btn-ghost-light {
+      background: rgba(255, 255, 255, 0.16); color: #fff; border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 14px; padding: 12px 14px; font-size: 14px; font-weight: 700; cursor: pointer;
+    }
+    .btn-white-action {
+      background: #fff; color: var(--blue); border: none;
+      border-radius: 14px; padding: 12px 14px; font-size: 14px; font-weight: 800; cursor: pointer;
+    }
+
+    .payment-card {
+      width: 100%; max-width: 430px; background: #fff; color: var(--text);
+      border-radius: 24px; padding: 22px 20px; box-shadow: 0 24px 60px rgba(15, 23, 42, 0.3);
+    }
+    .pay-method {
+      border: 1.5px solid var(--border); border-radius: 14px; padding: 12px 14px;
+      margin-bottom: 9px; cursor: pointer; display: flex; align-items: center; justify-content: space-between;
+      font-size: 14px; font-weight: 600;
+    }
+    .pay-method.selected { border-color: var(--blue); background: var(--blue-soft); color: var(--blue); font-weight: 700; }
+
+    .confetti-layer { position: fixed; inset: 0; pointer-events: none; z-index: 60; overflow: hidden; }
+    .confetti-piece {
+      position: absolute; top: -14px; width: 9px; height: 14px; border-radius: 2px;
+      opacity: 0.9; animation: confettiFall linear forwards;
+    }
+    @keyframes confettiFall {
+      0% { transform: translateY(-10px) rotate(0deg); opacity: 0.95; }
+      100% { transform: translateY(105vh) rotate(540deg); opacity: 0; }
+    }
+
+    .plan-item {
+      border: 1px solid var(--border); background: #fff; border-radius: 16px;
+      padding: 14px 16px; margin-bottom: 10px;
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
+    }
+    .plan-item--theory { background: #faf5ff; border-color: #e9d5ff; }
+    .plan-item--topic { background: #f0fdf4; border-color: #bbf7d0; }
+    .plan-item--review { background: #eff6ff; border-color: #bfdbfe; }
+    .plan-tag { font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 999px; display: inline-block; margin-bottom: 5px; }
+    .tag-theory { background: #e9d5ff; color: #6b21a8; }
+    .tag-topic { background: #dcfce7; color: #166534; }
+    .tag-review { background: #dbeafe; color: #1d4ed8; }
+    .plan-actions-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; align-items: center; }
+    .note-jump-btn {
+      background: #7c3aed; color: #fff; border: none; border-radius: 10px;
+      padding: 6px 12px; font-size: 12.5px; font-weight: 700; cursor: pointer;
+    }
+    .note-jump-btn:hover { background: #6d28d9; }
+    .move-btns { display: flex; gap: 6px; flex-shrink: 0; }
+    .mini-btn { border: 1px solid #cbd5e1; background: #fff; border-radius: 8px; padding: 5px 10px; font-size: 13px; font-weight: 700; cursor: pointer; }
+    .toast-msg { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; border-radius: 12px; padding: 10px 12px; font-size: 13px; margin-bottom: 10px; display: none; }
+
+    .support-warm-card {
+      border-radius: 18px; padding: 18px; background: linear-gradient(145deg, #fdf4ff 0%, #eff6ff 100%);
+      border: 1px solid #ddd6fe; margin-bottom: 14px;
+    }
+
+    .hidden { display: none !important; }
+
+    @media (max-width: 768px) {
+      .content-area { padding: 16px 14px 96px; }
+      .app-title { font-size: 20px; }
+      .quick-actions-grid { grid-template-columns: 1fr; gap: 10px; }
+      .move-btns { flex-direction: column; gap: 4px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="confetti-layer" class="confetti-layer hidden"></div>
+
+  <div class="content-area">
+    <!-- ГОЛОВНА -->
+    <section id="tab-home">
+      <div class="header-row">
+        <div>
+          <div class="app-title">НМТ Математика</div>
+          <div class="app-sub" id="home-countdown-sub">Підготовка до тестування 2026</div>
+        </div>
+        <div class="header-pills">
+          <button type="button" class="auth-pill" id="home-auth-pill" onclick="openAuthModal(false)">👤 Увійти / Реєстрація</button>
+          <button type="button" class="target-pill" id="home-target-pill" onclick="openTab('tab-profile')">🎯 ?/200</button>
+        </div>
+      </div>
+
+      <div id="guest-save-banner" class="card" style="background:#eff6ff; border-color:#bfdbfe; padding:14px 16px;">
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+          <div>
+            <div style="font-weight:700; font-size:14px; color:var(--blue);">Зберігай прогрес під своїм ніком</div>
+            <div class="item-desc">Безкоштовні матеріали доступні й без реєстрації, а для оформлення та збереження Преміум-доступу (67 грн) потрібен акаунт (нік + пароль).</div>
+          </div>
+          <button type="button" class="btn-primary" style="width:auto; padding:9px 14px; font-size:13px;" onclick="openAuthModal(false)">Створити акаунт</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div style="font-weight: 800; font-size: 18px;" id="home-greeting">Привіт!</div>
+        <div class="item-desc" style="margin-bottom: 10px;">100% щоденного прогресу = 1 повна тема за день (максимум 100%)</div>
+        <div style="display: flex; justify-content: space-between; font-size: 13.5px; font-weight: 700;">
+          <span>Щоденний прогрес</span>
+          <span style="color: var(--blue);" id="daily-progress-label">0% виконано сьогодні</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="daily-progress-bar" style="width: 0%;"></div></div>
+        <button type="button" class="btn-primary" onclick="openTab('tab-practice')">▶ Продовжити навчання</button>
+      </div>
+
+      <div class="quick-actions-grid">
+        <div class="card card--clickable" style="margin-bottom:0;" onclick="handlePlanClick()">
+          <div class="menu-item">
+            <div class="menu-left">
+              <div class="icon-sq sq-blue">📅</div>
+              <div>
+                <div class="item-title">Мій план</div>
+                <div class="item-desc">Навчання + повторення · Преміум</div>
+              </div>
+            </div>
+            <span class="lock-badge" id="plan-lock-badge">🔒 Преміум</span>
+          </div>
+        </div>
+
+        <div class="card card--clickable card--green" style="margin-bottom:0;" onclick="openSimulatorView()">
+          <div class="menu-item">
+            <div class="menu-left">
+              <div class="icon-sq sq-green">📝</div>
+              <div>
+                <div class="item-title">Симулятор НМТ</div>
+                <div class="item-desc">3 варіанти · НМТ та графіки</div>
+              </div>
+            </div>
+            <span>›</span>
+          </div>
+        </div>
+
+        <div class="card card--clickable" style="margin-bottom:0;" onclick="openSupportView()">
+          <div class="menu-item">
+            <div class="menu-left">
+              <div class="icon-sq sq-purple">💜</div>
+              <div>
+                <div class="item-title">Твоя підтримка</div>
+                <div class="item-desc">3 запитання · самопочуття</div>
+              </div>
+            </div>
+            <span>›</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-label">Основні розділи</div>
+      <div class="grid-2">
+        <div class="card card--clickable" style="margin-bottom:0;" onclick="filterAndOpenPractice('Алгебра')">
+          <div class="icon-sq sq-blue" style="margin-bottom:8px;">(x)</div>
+          <div class="item-title">Алгебра</div>
+          <div class="item-desc">Рівняння, функції, логарифми</div>
+        </div>
+        <div class="card card--clickable" style="margin-bottom:0;" onclick="filterAndOpenPractice('Геометрія')">
+          <div class="icon-sq sq-green" style="margin-bottom:8px;">△</div>
+          <div class="item-title">Геометрія</div>
+          <div class="item-desc">Фігури, стереометрія</div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card card--clickable" style="margin-bottom:0;" onclick="startQuickChallenge()">
+          <div class="icon-sq sq-amber" style="margin-bottom:8px;">⚡</div>
+          <div class="item-title">Щоденний виклик</div>
+          <div class="item-desc">10 швидких питань для розминки</div>
+        </div>
+        <div class="card card--clickable" style="margin-bottom:0;" onclick="handleNotesHubClick()">
+          <div class="icon-sq sq-amber" style="margin-bottom:8px;">📘</div>
+          <div class="item-title">Конспекти по темам</div>
+          <div class="item-desc">Окремі екрани теорії та формул</div>
+          <div style="margin-top:6px;"><span class="lock-badge" id="notes-hub-badge">🔒 Преміум</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ПРАКТИКА -->
+    <section id="tab-practice" class="hidden">
+      <div class="header-row">
+        <div class="app-title">Практика</div>
+        <span class="item-desc">16 тем · 480 унікальних задач</span>
+      </div>
+
+      <div class="chips-row">
+        <button type="button" class="chip active" id="chip-all" onclick="setTopicFilter('Усі')">Усі</button>
+        <button type="button" class="chip" id="chip-alg" onclick="setTopicFilter('Алгебра')">Алгебра</button>
+        <button type="button" class="chip" id="chip-geom" onclick="setTopicFilter('Геометрія')">Геометрія</button>
+      </div>
+
+      <div class="stats-3">
+        <div class="stat-box"><div class="stat-val">16</div><div class="stat-lbl">Тем у програмі</div></div>
+        <div class="stat-box"><div class="stat-val">480</div><div class="stat-lbl">Унікальних задач</div></div>
+        <div class="stat-box"><div class="stat-val">15 + 15</div><div class="stat-lbl">Легша / Важча</div></div>
+      </div>
+
+      <div id="topics-list"></div>
+    </section>
+
+    <!-- АНАЛІТИКА -->
+    <section id="tab-analytics" class="hidden">
+      <div class="header-row">
+        <div>
+          <div class="app-title">Аналітика</div>
+          <div class="app-sub">Прогноз НМТ та точність</div>
+        </div>
+        <span class="target-pill" id="analytics-target-pill">🎯 Ціль: ?</span>
+      </div>
+
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:10px;">
+          <span style="font-size:12px; font-weight:700; color:var(--muted);">ОЦІНКА ГОТОВНОСТІ НМТ</span>
+          <span class="target-pill" style="padding:4px 10px; font-size:12px;" id="analytics-goal-badge">• Ціль: ?</span>
+        </div>
+        <div style="display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin:8px 0; flex-wrap:wrap;">
+          <div style="font-size:32px; font-weight:800;" id="analytics-readiness-score">100 / 200</div>
+          <div style="text-align:right;">
+            <div style="font-size:13px; font-weight:700;">± 6 балів</div>
+            <div class="item-desc" style="margin:0;">інтервал довіри 95%</div>
+          </div>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="analytics-program-bar" style="width:0%;"></div></div>
+        <div style="display:flex; justify-content:space-between; font-size:13px; font-weight:700; margin-top:4px;">
+          <span id="analytics-solved-count">Виконано завдань: 0 з 480</span>
+          <span style="color:var(--blue);" id="analytics-program-pct">0% програми</span>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card" style="margin-bottom:0;">
+          <div class="item-desc" style="margin-top:0;">Середня точність</div>
+          <div style="font-size:26px; font-weight:800; margin:6px 0;" id="analytics-accuracy">0%</div>
+          <div style="font-size:12.5px; color:var(--green-text); font-weight:700;">↗ динаміка підготовки</div>
+        </div>
+        <div class="card" style="margin-bottom:0;">
+          <div class="item-desc" style="margin-top:0;">Розв'язано тем</div>
+          <div style="font-size:26px; font-weight:800; margin:6px 0;" id="analytics-topics-done">0 / 16</div>
+          <div style="font-size:12.5px; color:var(--green-text); font-weight:700;">↗ активно</div>
+        </div>
+      </div>
+
+      <div class="section-label">Точність за розділами</div>
+      <div class="card" id="analytics-sections-card"></div>
+
+      <div class="section-label">Зони для повторення</div>
+      <div class="card" id="analytics-review-zones"></div>
+    </section>
+
+    <!-- ПРОФІЛЬ -->
+    <section id="tab-profile" class="hidden">
+      <div class="header-row">
+        <div class="app-title">Профіль</div>
+      </div>
+
+      <div class="card">
+        <div class="profile-top">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div class="avatar-circle" id="profile-avatar">Г</div>
+            <div>
+              <div class="item-title" style="font-size:17px;" id="profile-nick-title">Гість</div>
+              <div class="item-desc">Підготовка до НМТ-2026 з математики · <span id="profile-plan-status">Базовий доступ</span></div>
+            </div>
+          </div>
+          <span class="streak-badge" id="profile-streak-badge">🔥 1 день</span>
+        </div>
+
+        <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap;">
+          <button type="button" class="btn-secondary" style="width:auto; padding:9px 14px; font-size:13.5px;" id="profile-auth-btn" onclick="openAuthModal(false)">
+            Увійти або зареєструватися (нік + пароль)
+          </button>
+          <button type="button" class="btn-secondary" style="width:auto; padding:9px 14px; font-size:13.5px;" onclick="openPremiumModal()">
+            💎 Преміум (67 грн)
+          </button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="item-desc" style="margin-top:0;">Цільовий бал НМТ (100–200)</div>
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; margin:6px 0 10px;">
+          <div style="font-size:24px; font-weight:800;" id="profile-target-display">? балів із 200</div>
+          <span class="lock-badge lock-badge--pro">• Максимум 200</span>
+        </div>
+        <div style="display:flex; gap:8px; max-width:340px; margin-bottom:12px;">
+          <input id="profile-target-input" type="number" min="100" max="200" placeholder="Напр. 175"
+            style="flex:1; padding:10px 12px; border-radius:12px; border:1px solid #cbd5e1; font-size:15px;" />
+          <button type="button" class="btn-primary" style="width:auto; padding:10px 18px;" onclick="saveTargetScore()">Зберегти</button>
+        </div>
+        <div style="background:#f1f5f9; border-radius:12px; padding:10px 12px; font-size:13px; display:flex; justify-content:space-between;">
+          <span>📅 Основна сесія тестування: червень</span>
+          <strong style="color:var(--blue);" id="profile-days-left">—</strong>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card" style="margin-bottom:0;">
+          <div class="item-desc" style="margin-top:0;">Виконано задач</div>
+          <div style="font-size:24px; font-weight:800; margin:4px 0;" id="profile-solved-stat">0</div>
+          <div style="font-size:12.5px; color:var(--green-text); font-weight:700;">↗ із 480 унікальних</div>
+        </div>
+        <div class="card" style="margin-bottom:0;">
+          <div class="item-desc" style="margin-top:0;">Конспектів у довіднику</div>
+          <div style="font-size:24px; font-weight:800; margin:4px 0;">16 тем</div>
+          <div style="font-size:12.5px; color:var(--green-text); font-weight:700;">↗ окремі екрани теорії</div>
+        </div>
+      </div>
+
+      <div class="section-label">Налаштування підготовки</div>
+      <div class="card">
+        <div class="setting-row">
+          <div>
+            <div class="item-title" style="font-size:14.5px;">Щоденні сповіщення</div>
+            <div class="item-desc">Нагадування про коротку практику щодня</div>
+          </div>
+          <button type="button" class="switch-btn on" id="sw-reminders" onclick="toggleSetting('reminders', this)"><span class="switch-knob"></span></button>
+        </div>
+        <div class="setting-row">
+          <div>
+            <div class="item-title" style="font-size:14.5px;">Зворотний відлік до НМТ</div>
+            <div class="item-desc">Показувати дні до основної сесії на головному екрані</div>
+          </div>
+          <button type="button" class="switch-btn on" id="sw-countdown" onclick="toggleSetting('countdown', this)"><span class="switch-knob"></span></button>
+        </div>
+        <div class="setting-row">
+          <div>
+            <div class="item-title" style="font-size:14.5px;">Офлайн-режим конспектів</div>
+            <div class="item-desc">Зберігати конспекти та формули локально у браузері</div>
+          </div>
+          <button type="button" class="switch-btn on" id="sw-offline" onclick="toggleSetting('offline', this)"><span class="switch-knob"></span></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- МІЙ ПЛАН -->
+    <section id="view-plan" class="hidden">
+      <div class="header-row">
+        <button type="button" class="back-link" onclick="openTab('tab-home')">‹</button>
+        <div style="flex:1;">
+          <div class="app-title" style="font-size:21px;">Твій персональний план</div>
+          <div class="app-sub" id="plan-goal-sub">Ціль: ? балів · 35 хв на день · 16 тем / 480 задач</div>
+        </div>
+        <span class="lock-badge lock-badge--pro">✅ Преміум</span>
+      </div>
+
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;">
+          <div>
+            <label class="item-title" style="font-size:14px; display:block; margin-bottom:6px;">Хвилин на день:</label>
+            <select id="daily-minutes-select" onchange="rebuildPlan()"
+              style="width:240px; padding:10px; border-radius:12px; border:1px solid #cbd5e1;">
+              <option value="20">20 хв / день (~2 місяці)</option>
+              <option value="35" selected>35 хв / день (~5 тижнів)</option>
+              <option value="55">55 хв / день (~3 тижні)</option>
+            </select>
+          </div>
+          <div class="item-desc" id="plan-summary-text" style="font-weight:600; max-width:560px;"></div>
+        </div>
+      </div>
+
+      <div class="toast-msg" id="plan-rule-toast"></div>
+      <div id="plan-steps-list"></div>
+    </section>
+
+    <!-- КОНСПЕКТИ ПО ТЕМАМ (ХАБ) -->
+    <section id="view-notes-hub" class="hidden">
+      <div class="header-row">
+        <button type="button" class="back-link" onclick="openTab('tab-home')">‹</button>
+        <div class="app-title" style="font-size:19px;">Конспекти по темам</div>
+        <span class="lock-badge lock-badge--pro">✅ Преміум</span>
+      </div>
+      <div class="card" style="background:#eff6ff; border-color:#bfdbfe;">
+        <div class="item-title">Довідник теорії та формул НМТ (16 окремих екранів)</div>
+        <div class="item-desc">Натисни на будь-яку тему, щоб відкрити її повний конспект на окремому екрані з формулами, ОДЗ, прикладами та поясненнями.</div>
+      </div>
+      <div id="notes-topics-list"></div>
+    </section>
+
+    <!-- ОКРЕМИЙ ЕКРАН КОНСПЕКТУ КОНКРЕТНОЇ ТЕМИ -->
+    <section id="view-single-note" class="hidden">
+      <div class="header-row">
+        <button type="button" class="back-link" id="single-note-back-btn" onclick="handleNotesHubClick()">‹</button>
+        <div style="flex:1; min-width:200px;">
+          <div class="app-sub" id="single-note-section">Розділ</div>
+          <div class="app-title" id="single-note-title" style="font-size:19px;">Конспект теми</div>
+        </div>
+        <span class="lock-badge lock-badge--pro">Конспект</span>
+      </div>
+      <div id="single-note-content"></div>
+      <div style="margin-top:12px;">
+        <button type="button" class="btn-primary" id="single-note-practice-btn">Перейти до практики цієї теми ›</button>
+      </div>
+    </section>
+
+    <!-- ДЕТАЛІ ТЕМИ -->
+    <section id="view-topic-detail" class="hidden">
+      <div class="header-row">
+        <button type="button" class="back-link" onclick="openTab('tab-practice')">‹</button>
+        <div class="app-title" id="topic-detail-title" style="font-size:18px;">Тема</div>
+        <div style="width:38px;"></div>
+      </div>
+
+      <div class="card">
+        <div class="item-title">Блоки завдань теми (30 унікальних задач)</div>
+        <div class="item-desc" id="topic-time-info" style="margin:4px 0 12px;"></div>
+        <div class="grid-2" style="margin-bottom:0;">
+          <button type="button" class="btn-primary" id="topic-easy-btn">Легша частина (1–15)</button>
+          <button type="button" class="btn-secondary" id="topic-hard-btn">Важча частина (16–30)</button>
+        </div>
+      </div>
+
+      <div class="card card--clickable" id="topic-open-note-card">
+        <div class="menu-item">
+          <div>
+            <div class="item-title">📘 Відкрити конспект теми на окремому екрані</div>
+            <div class="item-desc" id="topic-note-preview">Теорія, ОДЗ, формули з поясненнями та типові пастки НМТ</div>
+          </div>
+          <span class="lock-badge lock-badge--pro" id="topic-note-badge">🔒 Преміум</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- СИМУЛЯТОР НМТ (3 ВАРІАНТИ + ПРИМІТКА) -->
+    <section id="view-simulator" class="hidden">
+      <div class="header-row">
+        <button type="button" class="back-link" onclick="openTab('tab-home')">‹</button>
+        <div class="app-title" style="font-size:19px;">Симулятор НМТ</div>
+        <div style="width:38px;"></div>
+      </div>
+
+      <div class="card" style="background:#eff6ff; border-color:#bfdbfe;">
+        <div class="item-title" style="color:var(--blue);">ℹ️ Примітка щодо змісту та матеріалів</div>
+        <div class="item-desc" style="color:#1e293b; margin-top:4px;">
+          Завдання у симуляторі сформовані за матеріалами та програмою національного мультипредметного тесту (НМТ) з урахуванням типових форматів і задач на кшталт <strong>ЗНО-Освіта</strong>. Демонстраційні варіанти надаються безкоштовно, а авторський варіант із графіками позначено замочком (🔒).
+        </div>
+      </div>
+
+      <div id="simulator-variants-list"></div>
+    </section>
+
+    <!-- ПРОХОДЖЕННЯ ЗАВДАНЬ -->
+    <section id="view-quiz-runner" class="hidden">
+      <div class="header-row">
+        <button type="button" class="back-link" onclick="openTab('tab-practice')">‹</button>
+        <div class="app-title" id="runner-title" style="font-size:17px;">Тестування</div>
+        <span class="target-pill" id="runner-counter">1 / 15</span>
+      </div>
+
+      <div class="progress-bar"><div class="progress-fill" id="runner-progress" style="width: 7%;"></div></div>
+      <div class="card" id="runner-card"></div>
+
+      <div class="grid-2" style="margin-bottom:0; max-width:460px;">
+        <button type="button" class="btn-secondary" onclick="prevRunnerTask()">Назад</button>
+        <button type="button" class="btn-primary" id="runner-next-btn" onclick="nextRunnerTask()">Далі</button>
+      </div>
+    </section>
+
+    <!-- ТВОЯ ПІДТРИМКА -->
+    <section id="view-support" class="hidden">
+      <div class="header-row">
+        <button type="button" class="back-link" onclick="openTab('tab-home')">‹</button>
+        <div class="app-title" style="font-size:19px;">Твоя підтримка</div>
+        <div style="width:38px;"></div>
+      </div>
+      <div class="card" id="support-body"></div>
+    </section>
+  </div>
+
+  <!-- МОДАЛКА ПРЕМІУМ-ПРОПОЗИЦІЇ -->
+  <div id="premium-modal" class="modal-backdrop hidden">
+    <div class="premium-card">
+      <div style="font-size:20px; font-weight:800; margin-bottom:4px;">Преміум-доступ до НМТ</div>
+      <div style="font-size:13.5px; opacity:0.92; margin-bottom:14px; line-height:1.45;">
+        Повний пакет підготовки для впевненого результату — усе відкрито за <b>67 грн</b>:
+      </div>
+
+      <div class="premium-benefit">✓ Складний блок логарифмів (16–30) та всі наступні теми (5–16)</div>
+      <div class="premium-benefit">✓ Авторський варіант симулятора «Графіки та візуальні задачі»</div>
+      <div class="premium-benefit">✓ Окремі екрани конспектів по всіх 16 темах з формулами та теорією</div>
+      <div class="premium-benefit">✓ Розширений персональний план із регулярним повторенням та аналітика</div>
+
+      <div class="premium-actions">
+        <button type="button" class="btn-ghost-light" onclick="closePremiumModal()">Назад</button>
+        <button type="button" class="btn-white-action" onclick="handleProceedToPayment()">Перейти до оплати</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- МОДАЛКА ОПЛАТИ (67 ГРН) -->
+  <div id="payment-modal" class="modal-backdrop hidden">
+    <div class="payment-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+        <div style="font-size:19px; font-weight:800;">Оплата Преміум-доступу</div>
+        <span class="target-pill" style="font-size:15px;">67 грн</span>
+      </div>
+      <div class="item-desc" style="margin-bottom:14px;">
+        Акаунт: <strong id="payment-user-nick">—</strong> · Повний пакет активується одразу після підтвердження.
+      </div>
+
+      <div id="pay-methods">
+        <div class="pay-method selected" onclick="selectPayMethod(this, 'Visa / Mastercard')">
+          <span>💳 Банківська картка (Visa / Mastercard)</span>
+          <span>●</span>
+        </div>
+        <div class="pay-method" onclick="selectPayMethod(this, 'Apple Pay / Google Pay')">
+          <span>📱 Apple Pay / Google Pay</span>
+          <span>○</span>
+        </div>
+        <div class="pay-method" onclick="selectPayMethod(this, 'LiqPay / WayForPay')">
+          <span>⚡ LiqPay / WayForPay</span>
+          <span>○</span>
+        </div>
+      </div>
+
+      <div style="font-size:12px; color:var(--muted); margin:10px 0 14px;">
+        Обраний спосіб: <strong id="selected-pay-label">Visa / Mastercard</strong> · Сума до сплати: <strong>67 грн</strong>
+      </div>
+
+      <button type="button" class="btn-primary" style="margin-bottom:8px;" onclick="confirmTestPayment()">
+        Підтвердити оплату 67 грн (тестова активація)
+      </button>
+      <button type="button" class="btn-secondary" onclick="closePaymentModal()">Назад</button>
+    </div>
+  </div>
+
+  <!-- МОДАЛКА РЕЄСТРАЦІЇ / ВХОДУ (НІК + ПАРОЛЬ) -->
+  <div id="auth-modal" class="modal-backdrop hidden">
+    <div class="payment-card">
+      <div style="font-size:19px; font-weight:800; margin-bottom:4px;">Реєстрація або вхід</div>
+      <div id="auth-require-note" class="item-desc" style="margin-bottom:14px; color:#1e293b;">
+        Введи нікнейм і пароль, щоб зберігати прогрес, цільовий бал та Преміум.
+      </div>
+
+      <label style="font-size:13px; font-weight:700; display:block; margin-bottom:4px;">Нікнейм</label>
+      <input id="auth-nick-input" type="text" placeholder="Напр. alisa_nmt"
+        style="width:100%; padding:10px 12px; border-radius:12px; border:1px solid #cbd5e1; margin-bottom:10px; font-size:14.5px;" />
+
+      <label style="font-size:13px; font-weight:700; display:block; margin-bottom:4px;">Пароль</label>
+      <input id="auth-pass-input" type="password" placeholder="Мінімум 4 символи"
+        style="width:100%; padding:10px 12px; border-radius:12px; border:1px solid #cbd5e1; margin-bottom:14px; font-size:14.5px;" />
+
+      <button type="button" class="btn-primary" style="margin-bottom:8px;" onclick="submitAuthForm()">
+        Зареєструватися / Увійти
+      </button>
+      <div style="display:flex; gap:8px;">
+        <button type="button" class="btn-secondary" onclick="closeAuthModal()">Скасувати</button>
+        <button type="button" class="btn-secondary" onclick="logoutUser()">Вийти</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- НИЖНЄ МЕНЮ -->
+  <nav class="bottom-nav">
+    <button type="button" class="nav-btn active" id="nav-home" onclick="openTab('tab-home')">
+      <span>🏠</span><span>Головна</span>
+    </button>
+    <button type="button" class="nav-btn" id="nav-practice" onclick="openTab('tab-practice')">
+      <span>📖</span><span>Практика</span>
+    </button>
+    <button type="button" class="nav-btn" id="nav-analytics" onclick="openTab('tab-analytics')">
+      <span>📊</span><span>Аналітика</span>
+    </button>
+    <button type="button" class="nav-btn" id="nav-profile" onclick="openTab('tab-profile')">
+      <span>👤</span><span>Профіль</span>
+    </button>
+  </nav>
+
+  <script>
+    const STORAGE_KEY = "nmt_math_2026_complete_v4";
+
+    function todayKey() {
+      const d = new Date();
+      return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+    }
+
+    function defaultUserData(nick = null) {
+      return {
+        nick,
+        isPremium: false,
+        targetScore: null,
+        todayDate: todayKey(),
+        todaySolvedCount: 0,
+        totalSolvedCount: 0,
+        correctCount: 0,
+        answeredCount: 0,
+        completedTopicIds: [],
+        topicStats: {},
+        streakDays: 1,
+        settings: { reminders: true, countdown: true, offline: true }
+      };
+    }
+
+    let appStore = {
+      activeUser: null,
+      users: {},
+      guestData: defaultUserData(null)
+    };
+
+    let pendingPaymentAfterAuth = false;
+
+    function loadStore() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          appStore = {
+            activeUser: parsed.activeUser || null,
+            users: parsed.users || {},
+            guestData: { ...defaultUserData(null), ...(parsed.guestData || {}) }
+          };
+        }
+      } catch (e) {}
+      syncDayForActiveData();
+    }
+
+    function getActiveData() {
+      if (appStore.activeUser && appStore.users[appStore.activeUser]) {
+        return appStore.users[appStore.activeUser].data;
+      }
+      return appStore.guestData;
+    }
+
+    function syncDayForActiveData() {
+      const d = getActiveData();
+      const t = todayKey();
+      if (d.todayDate !== t) {
+        d.todayDate = t;
+        d.todaySolvedCount = 0;
+      }
+    }
+
+    function saveStore() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(appStore));
+      } catch (e) {}
+    }
+
+    let currentFilter = "Усі";
+    let selectedPayMethod = "Visa / Mastercard";
+
+    function buildUniqueBlock(topicId, part, startNum, items) {
+      if (items.length !== 15) {
+        throw new Error(`Тема ${topicId} (${part}) повинна мати рівно 15 унікальних задач, зараз: ${items.length}`);
+      }
+      return items.map((q, idx) => ({
+        id: `t${topicId}_${part}_${idx + 1}`,
+        num: startNum + idx,
+        text: q[0],
+        options: q[1],
+        correct: q[2],
+        exp: q[3]
+      }));
+    }
+
+    function buildFullTopicTasks(topicId, topicTitle, secName, easyBase, hardBase) {
+      const easy = easyBase.map((item, idx) => [
+        `[${secName} · ${topicTitle}] ${item[0]}`,
+        item[1],
+        item[2],
+        item[3]
+      ]);
+      const hard = hardBase.map((item, idx) => [
+        `[${secName} · ${topicTitle}] ${item[0]}`,
+        item[1],
+        item[2],
+        item[3]
+      ]);
+      return {
+        easy: buildUniqueBlock(topicId, "easy", 1, easy),
+        hard: buildUniqueBlock(topicId, "hard", 16, hard)
+      };
+    }
+
+    const baseTopics1To4 = [
+      {
+        id: 1, sec: "Алгебра", title: "Дійсні числа та дії з ними", diff: "1/3", mins: 35, group: "algebra",
+        note: {
+          def: "Дійсні числа об'єднують раціональні та ірраціональні числа. Кожному дійсному числу відповідає точка на координатній прямій. Модуль |a| — це відстань від початку відліку (0) до точки a, тому модуль ніколи не буває від'ємним.",
+          odz: "У дробових виразах знаменник не може дорівнювати нулю (b ≠ 0). Ділення на 0 у математиці не визначене.",
+          formulas: [
+            { f: "|−a| = |a|,   |a| ≥ 0", e: "Протилежні числа мають однаковий модуль; модуль завжди невід'ємний." },
+            { f: "(a/b) : (c/d) = (a/b) · (d/c),   (a/b) · (c/d) = (ac)/(bd)", e: "При діленні дробів множимо ділене на дріб, обернений до дільника (c, d ≠ 0)." },
+            { f: "(−1)^(2k) = 1,   (−1)^(2k+1) = −1   (k ∈ ℤ)", e: "Від'ємне число в парному степені дає «+», у непарному — «−»." },
+            { f: "a − (−b) = a + b,   −a − b = −(a + b)", e: "Розкриття дужок із урахуванням знака перед ними." }
+          ],
+          tip: "На НМТ часто підловлюють на знаках при множенні двох від'ємних чисел та на переведенні мішаних дробів у неправильні перед множенням/діленням."
+        },
+        easyRaw: [
+          ["Обчисліть: −14 + 23.", ["−37", "−9", "9", "37", "14"], "В", "Додаємо числа з різними знаками: 23 − 14 = 9."],
+          ["Знайдіть значення виразу |−19|.", ["−19", "0", "1", "19", "38"], "Г", "Модуль числа −19 дорівнює 19."],
+          ["Обчисліть добуток: −8 · (−6).", ["−48", "−14", "14", "48", "−2"], "Г", "Добуток двох від'ємних чисел є додатним: 8 · 6 = 48."],
+          ["Обчисліть: −42 : 7.", ["−6", "6", "−7", "7", "−35"], "А", "Ділимо від'ємне число на додатне: результат від'ємний, −42 : 7 = −6."],
+          ["Яке з чисел найменше?", ["−1,4", "−2,1", "−0,9", "0", "−2,05"], "Б", "На координатній прямій лівіше розташоване −2,1."],
+          ["Обчисліть: 3,5 − 6,2.", ["−2,7", "2,7", "−9,7", "9,7", "−3,3"], "А", "6,2 − 3,5 = 2,7; оскільки 6,2 > 3,5 і має знак «−», маємо −2,7."],
+          ["Знайдіть частку: 3/4 : 9/8.", ["27/32", "2/3", "3/2", "12/36", "1/6"], "Б", "(3/4) · (8/9) = (1·2)/(1·3) = 2/3."],
+          ["Обчисліть: (−1)⁵ + (−1)⁶.", ["−2", "2", "0", "1", "−1"], "В", "(−1)⁵ = −1, (−1)⁶ = 1; сума дорівнює 0."],
+          ["Обчисліть: 12 − (18 − 25).", ["19", "−31", "5", "−19", "31"], "А", "18 − 25 = −7; 12 − (−7) = 19."],
+          ["Яке з чисел є ірраціональним?", ["0,25", "−7", "√3", "2/3", "−1,5"], "В", "√3 не можна подати у вигляді скінченного чи нескінченного періодичного дробу."],
+          ["Обчисліть: 0,4 · (−0,5).", ["−0,2", "0,2", "−2", "0,02", "−0,02"], "А", "4 · 5 = 20, два знаки після коми ⇒ −0,2."],
+          ["Знайдіть суму: −5/6 + 1/3.", ["−1/2", "1/2", "−4/9", "−2/3", "4/9"], "А", "−5/6 + 2/6 = −3/6 = −1/2."],
+          ["Обчисліть: 25 − 3 · 8.", ["176", "1", "−1", "19", "−19"], "Б", "Спочатку множення: 3 · 8 = 24, потім віднімання: 25 − 24 = 1."],
+          ["Порівняйте числа a = −0,3 та b = −0,35.", ["a > b", "a < b", "a = b", "Порівняти неможливо", "a ≥ b"], "А", "−0,3 розташоване правіше від −0,35, тому −0,3 > −0,35."],
+          ["Обчисліть: (−2)³ · 3.", ["−24", "24", "−18", "18", "−12"], "А", "(−2)³ = −8; −8 · 3 = −24."]
+        ],
+        hardRaw: [
+          ["Обчисліть: (1,5 − 2,3) : (−0,4) + 1,2.", ["3,2", "−0,8", "−3,2", "0,8", "2,8"], "А", "(−0,8) : (−0,4) = 2; 2 + 1,2 = 3,2."],
+          ["Скільки цілих чисел лежить між −4,3 та 2,8?", ["6", "7", "8", "5", "9"], "Б", "Цілі числа: −4, −3, −2, −1, 0, 1, 2 — усього 7 чисел."],
+          ["Обчисліть: (2/3 + 1/6) · 12 − 5.", ["5", "10", "0", "15", "7"], "А", "(4/6 + 1/6) · 12 − 5 = (5/6) · 12 − 5 = 10 − 5 = 5."],
+          ["Знайдіть значення виразу |3 − 7| − |2 − 9|.", ["−3", "3", "11", "−11", "2"], "А", "|−4| − |−7| = 4 − 7 = −3."],
+          ["Обчисліть: (0,25 + 1/3) : (1 − 5/12).", ["1", "7/12", "12/7", "2", "5/7"], "А", "(1/4 + 1/3) = 7/12; 1 − 5/12 = 7/12; (7/12) : (7/12) = 1."],
+          ["Якщо x < 0, то чому дорівнює вираз |x| + x?", ["2x", "−2x", "0", "x²", "−x"], "В", "При x < 0 маємо |x| = −x, тому −x + x = 0."],
+          ["Обчисліть: (−0,6)² − 0,4 · (−0,5).", ["0,56", "0,16", "−0,16", "0,36", "0,76"], "А", "0,36 − (−0,2) = 0,36 + 0,2 = 0,56."],
+          ["Яку цифру має одиниця числа 7⁴?", ["7", "9", "3", "1", "4"], "Г", "7¹→7, 7²→9, 7³→3, 7⁴→1."],
+          ["Знайдіть середнє арифметичне чисел −4, 0, 6, 10.", ["2", "3", "4", "12", "−2"], "Б", "(−4 + 0 + 6 + 10) / 4 = 12 / 4 = 3."],
+          ["Обчисліть: (3,6 · 4,5) / 2,7.", ["6", "0,6", "60", "4,5", "5,4"], "А", "3,6 · 4,5 = 16,2; 16,2 / 2,7 = 6."],
+          ["При якому значенні x вираз 15 − 3x дорівнює −6?", ["3", "7", "−7", "−3", "9"], "Б", "−3x = −21 ⇒ x = 7."],
+          ["Обчисліть: 1/2 − 1/3 + 1/6.", ["1/3", "1/2", "0", "2/3", "1/6"], "А", "(3 − 2 + 1)/6 = 2/6 = 1/3."],
+          ["Яке число треба додати до −17,5, щоб отримати −8,2?", ["9,3", "−9,3", "25,7", "−25,7", "8,7"], "А", "−8,2 − (−17,5) = 9,3."],
+          ["Обчисліть: (5 − 8) · (4 − 9) : (−3).", ["5", "−5", "15", "−15", "3"], "Б", "(−3) · (−5) : (−3) = 15 : (−3) = −5."],
+          ["Знайдіть значення виразу 100 − 0,01 · 2500.", ["75", "97,5", "50", "125", "25"], "А", "0,01 · 2500 = 25; 100 − 25 = 75."]
+        ]
+      },
+      {
+        id: 2, sec: "Алгебра", title: "Відношення, пропорції та відсотки", diff: "1/3", mins: 35, group: "algebra",
+        note: {
+          def: "Відношення a : b показує, у скільки разів a більше за b або яку частину становить. Пропорція a : b = c : d — це рівність двох відношень. Відсоток — це сота частина числа (1% = 0,01).",
+          odz: "Знаменники та дільники пропорції не можуть дорівнювати нулю (b ≠ 0, d ≠ 0); відсотковий приріст у задачах має враховувати початкове значення.",
+          formulas: [
+            { f: "a / b = c / d   ⇔   a · d = b · c", e: "Основна властивість пропорції: добуток крайніх членів дорівнює добутку середніх." },
+            { f: "p% від числа A  =  A · (p / 100)", e: "Щоб знайти відсоток від числа, множимо число на десятковий дріб." },
+            { f: "Число за його частиною (p% = m):  A = m / (p / 100)", e: "Щоб знайти ціле за його відсотком, ділимо значення на десятковий дріб." },
+            { f: "Збільшення на p%: A · (1 + p/100);   Зменшення на p%: A · (1 − p/100)", e: "Зручно для послідовних змін ціни, курсу валют або кількості." }
+          ],
+          tip: "У задачах на зміну ціни ніколи не додавай і не віднімай відсотки напряму — завжди множ на відповідні коефіцієнти."
+        },
+        easyRaw: [
+          ["Знайдіть 15% від 200 грн.", ["15 грн", "30 грн", "45 грн", "170 грн", "230 грн"], "Б", "200 · 0,15 = 30 грн."],
+          ["Знайдіть число, 25% якого дорівнюють 40.", ["10", "100", "160", "65", "120"], "В", "40 : 0,25 = 160."],
+          ["Розв'яжіть пропорцію: x / 6 = 10 / 15.", ["3", "4", "5", "9", "12"], "Б", "15x = 60 ⇒ x = 4."],
+          ["У класі 12 дівчат і 18 хлопців. Яку частину класу становлять дівчата?", ["2/5", "3/5", "2/3", "1/2", "3/4"], "А", "Усього 30 учнів; 12 / 30 = 2/5."],
+          ["Ціна футболки 400 грн. Її знизили на 10%. Яка нова ціна?", ["390 грн", "360 грн", "440 грн", "40 грн", "320 грн"], "Б", "400 · (1 − 0,1) = 360 грн."],
+          ["Скільки відсотків становить 24 від 80?", ["20%", "25%", "30%", "35%", "40%"], "В", "(24 / 80) · 100% = 0,3 · 100% = 30%."],
+          ["Маса сплаву 500 г, з них 120 г — мідь. Який відсоток міді у сплаві?", ["12%", "24%", "20%", "36%", "18%"], "Б", "(120 / 500) · 100% = 24%."],
+          ["Відрізок завдовжки 48 см поділили у відношенні 3 : 5. Знайдіть більшу частину.", ["18 см", "24 см", "30 см", "32 см", "36 см"], "В", "3 + 5 = 8 частин; 1 частина = 6 см; більша = 5 · 6 = 30 см."],
+          ["Зарплата зросла з 20 000 грн до 23 000 грн. На скільки відсотків вона зросла?", ["10%", "12%", "15%", "20%", "3%"], "В", "(3000 / 20000) · 100% = 15%."],
+          ["Знайдіть x з пропорції: 8 : x = 4 : 9.", ["16", "18", "12", "4,5", "36"], "Б", "4x = 72 ⇒ x = 18."],
+          ["Книга коштує 320 грн. Скільки коштуватиме вона після подорожчання на 25%?", ["345 грн", "400 грн", "240 грн", "380 грн", "420 грн"], "Б", "320 · 1,25 = 400 грн."],
+          ["У школі 600 учнів, 45% — дівчата. Скільки дівчат у школі?", ["240", "270", "330", "180", "250"], "Б", "600 · 0,45 = 270."],
+          ["Відношення довжини прямокутника до ширини 7 : 4. Ширина 12 см. Знайдіть довжину.", ["21 см", "28 см", "15 см", "19 см", "24 см"], "А", "12 : 4 = 3 см на частину; довжина = 7 · 3 = 21 см."],
+          ["Після знижки 30% товар коштує 700 грн. Якою була початкова ціна?", ["910 грн", "1000 грн", "1050 грн", "900 грн", "850 грн"], "Б", "0,7 · ціна = 700 ⇒ ціна = 1000 грн."],
+          ["На скільки відсотків 50 більше за 40?", ["20%", "25%", "10%", "15%", "50%"], "Б", "(50 − 40) / 40 · 100% = 10/40 · 100% = 25%."]
+        ],
+        hardRaw: [
+          ["Ціну товару спочатку підвищили на 20%, а потім знизили на 20%. Як змінилася ціна порівняно з початковою?", ["Не змінилася", "Зросла на 4%", "Зменшилася на 4%", "Зменшилася на 2%", "Зросла на 2%"], "В", "1,2 · 0,8 = 0,96 ⇒ зменшилася на 4%."],
+          ["До 200 г 15%-го розчину солі долили 100 г води. Якою стала концентрація солі?", ["10%", "7,5%", "12%", "8%", "5%"], "А", "Солі 200 · 0,15 = 30 г; маса розчину стала 300 г; 30 / 300 = 10%."],
+          ["Три бригади виконують замовлення за 12 днів. За скільки днів виконають те саме замовлення 4 такі самі бригади?", ["9 днів", "16 днів", "8 днів", "10 днів", "6 днів"], "А", "Обернена пропорційність: 3 · 12 / 4 = 9 днів."],
+          ["Курс долара зріс з $1 = 40 грн до $1 = 42 грн. На скільки відсотків зріс курс?", ["2%", "5%", "4%", "6%", "2,5%"], "Б", "(42 − 40) / 40 · 100% = 2/40 · 100% = 5%."],
+          ["У суміші сухофруктів яблука, груші та курага відносяться як 5 : 3 : 2. На скільки грамів груш менше, ніж яблук, якщо маса суміші 1 кг?", ["200 г", "150 г", "250 г", "300 г", "100 г"], "А", "1000 г / 10 частин = 100 г; різниця 5 − 3 = 2 частини ⇒ 200 г."],
+          ["Ціна акції впала на 50%, а потім зросла на 50%. Початкова ціна була $80. Якою стала ціна?", ["$80", "$60", "$40", "$100", "$70"], "Б", "80 · 0,5 = $40; 40 · 1,5 = $60."],
+          ["У першому бідоні у 3 рази більше молока, ніж у другому. Якщо з першого перелити 10 л у другий, молока стане порівну. Скільки літрів у першому спочатку?", ["30 л", "20 л", "15 л", "24 л", "10 л"], "А", "3x − 10 = x + 10 ⇒ 2x = 20 ⇒ x = 10; у першому 30 л."],
+          ["Знижка на квиток для студентів становить 35%. Повний квиток коштує 200 грн. Скільки коштують 3 студентські квитки?", ["390 грн", "420 грн", "360 грн", "450 грн", "300 грн"], "А", "1 квиток = 200 · 0,65 = 130 грн; 3 квитки = 390 грн."],
+          ["Число a становить 40% від b, а b становить 50% від c. Який відсоток від c становить a?", ["20%", "10%", "25%", "90%", "15%"], "А", "a = 0,4b = 0,4 · 0,5c = 0,2c ⇒ 20%."],
+          ["Автомобіль проїхав 60% шляху, і йому залишилося ще 80 км. Яка загальна довжина шляху?", ["140 км", "200 км", "240 км", "160 км", "180 км"], "Б", "40% шляху = 80 км ⇒ 100% шляху = 80 : 0,4 = 200 км."],
+          ["Цукор при сушінні втрачає 80% своєї маси. Скільки свіжих ягід потрібно, щоб отримати 12 кг сушених?", ["60 кг", "48 кг", "96 кг", "24 кг", "72 кг"], "А", "Залишається 20% маси: 12 : 0,2 = 60 кг."],
+          ["Якщо (2x + 1) відноситься до 5 так само, як 7 до 5, знайдіть x.", ["3", "3,5", "6", "2,5", "4"], "А", "2x + 1 = 7 ⇒ 2x = 6 ⇒ x = 3."],
+          ["Вклад у банку $1000 щороку збільшується на 10% (складний відсоток). Якою буде сума через 2 роки?", ["$1200", "$1210", "$1100", "$1220", "$1150"], "Б", "1000 · 1,1² = 1000 · 1,21 = $1210."],
+          ["Відсоткове відношення двох чисел дорівнює 125%. Перше число 25. Знайдіть друге.", ["20", "31,25", "15", "30", "10"], "А", "25 = 1,25 · b ⇒ b = 25 / 1,25 = 20."],
+          ["У магазині акція «3 за ціною 2». Одна одиниця коштує 150 грн. Яка середня ціна однієї одиниці при купівлі 3 штук?", ["150 грн", "100 грн", "120 грн", "75 грн", "90 грн"], "Б", "За 3 штуки платимо 2 · 150 = 300 грн; 300 / 3 = 100 грн."]
+        ]
+      },
+      {
+        id: 3, sec: "Алгебра", title: "Раціональні, ірраціональні та степеневі вирази", diff: "2/3", mins: 35, group: "algebra",
+        note: {
+          def: "Раціональні вирази містять додавання, віднімання, множення та ділення на ненульові вирази. Степеневі та ірраціональні вирази працюють із цілими і дробовими показниками та коренями.",
+          odz: "Знаменник ≠ 0; під коренем парного степеня та в основі дробового степеня a^(m/n) (n парне) має бути a ≥ 0; при від'ємному степені основа ≠ 0.",
+          formulas: [
+            { f: "a^m · a^n = a^(m+n),   a^m / a^n = a^(m−n),   (a^m)^n = a^(mn)", e: "Основні властивості степенів для однакової основи." },
+            { f: "a^(−n) = 1 / a^n   (a ≠ 0),   a^0 = 1   (a ≠ 0)", e: "Від'ємний показник переводить основу в знаменник; нульовий степінь дорівнює 1." },
+            { f: "√(a²) = |a|,   (√a)² = a   (a ≥ 0),   a^(m/n) = ⁿ√(a^m)", e: "Квадратний корінь із квадрата числа дає модуль, а не просто число." },
+            { f: "(a ± b)² = a² ± 2ab + b²,   a² − b² = (a − b)(a + b)", e: "Формули скороченого множення для спрощення дробів і коренів." }
+          ],
+          tip: "Найчастіша помилка на НМТ: написати √(x²) = x замість |x| або забути, що (a + b)² ≠ a² + b²."
+        },
+        easyRaw: [
+          ["Спростіть вираз: a⁴ · a³.", ["a¹²", "a⁷", "a", "2a⁷", "a⁶⁴"], "Б", "Показники додаються: 4 + 3 = 7 ⇒ a⁷."],
+          ["Спростіть вираз: x⁹ : x³.", ["x³", "x⁶", "x¹²", "x²⁷", "3x³"], "Б", "Показники віднімаються: 9 − 3 = 6 ⇒ x⁶."],
+          ["Обчисліть: (2³)².", ["2⁵", "2⁶", "2⁹", "32", "12"], "Б", "2^(3·2) = 2⁶ = 64."],
+          ["Обчисліть: 5⁻².", ["−10", "−25", "1/25", "1/10", "25"], "В", "5⁻² = 1 / 5² = 1/25."],
+          ["Обчисліть: √49 + √16.", ["√65", "11", "65", "53", "9"], "Б", "7 + 4 = 11."],
+          ["Спростіть: (3x²)³.", ["9x⁶", "27x⁶", "27x⁵", "3x⁶", "9x⁵"], "Б", "3³ · (x²)³ = 27x⁶."],
+          ["Обчисліть: √(3 · 12).", ["36", "6", "15", "4", "12"], "Б", "√(3 · 12) = √36 = 6."],
+          ["Спростіть: (a² − 9) / (a − 3) при a ≠ 3.", ["a − 3", "a + 3", "a² + 3", "a + 9", "1"], "Б", "(a−3)(a+3)/(a−3) = a + 3."],
+          ["Обчисліть: 8^(1/3).", ["2", "4", "8/3", "24", "1/2"], "А", "Кубічний корінь з 8 дорівнює 2."],
+          ["Спростіть: √18 − √2.", ["√16", "2√2", "4√2", "3√2", "√20"], "Б", "3√2 − √2 = 2√2."],
+          ["Обчисліть: (7⁰ + 3⁻¹) · 3.", ["4", "3", "10/3", "1", "6"], "А", "(1 + 1/3) · 3 = (4/3) · 3 = 4."],
+          ["Подайте у вигляді степеня з основою a: (a⁵ · a⁻²) / a.", ["a²", "a³", "a⁴", "a⁸", "a"], "А", "a^(5 − 2 − 1) = a²."],
+          ["Обчисліть: (√5 − 1)(√5 + 1).", ["4", "6", "2√5", "25", "5"], "А", "(√5)² − 1² = 5 − 1 = 4."],
+          ["Знайдіть значення виразу √(a²) при a = −6.", ["−6", "6", "36", "0", "12"], "Б", "√((−6)²) = |−6| = 6."],
+          ["Спростіть дріб: (6x³y²) / (3xy).", ["2x²y", "2x⁴y³", "3x²y", "2x²y²", "9x²y"], "А", "6/3 = 2, x³/x = x², y²/y = y ⇒ 2x²y."]
+        ],
+        hardRaw: [
+          ["Обчисліть: (√7 − √3)² + 2√21.", ["10", "4 + 2√21", "10 + 4√21", "4", "7"], "А", "7 − 2√21 + 3 + 2√21 = 10."],
+          ["Спростіть вираз: (1 / (x − 2) − 1 / (x + 2)) · (x² − 4) при x ≠ ±2.", ["4", "2x", "−4", "x", "2"], "А", "(4 / (x² − 4)) · (x² − 4) = 4."],
+          ["Обчисліть: (27^(2/3) · 4^(−1/2)) / (9^(1/2)).", ["1,5", "3", "4,5", "0,75", "2"], "А", "(9 · 0,5) / 3 = 4,5 / 3 = 1,5."],
+          ["Порівняйте числа: A = 2√7 та B = 3√3.", ["A > B", "A < B", "A = B", "A = 2B", "Неможливо визначити"], "А", "A² = 28, B² = 27; оскільки 28 > 27, то 2√7 > 3√3."],
+          ["Спростіть: √(9 − 6x + x²) при x < 3.", ["3 − x", "x − 3", "3 + x", "−3 − x", "x² − 9"], "А", "√((3 − x)²) = |3 − x| = 3 − x, бо x < 3."],
+          ["Обчисліть: (a + 1/a)² при a + 1/a = 5.", ["25", "23", "27", "10", "15"], "А", "За умовою a + 1/a = 5, тому квадрат цього виразу дорівнює 5² = 25."],
+          ["Знайдіть значення виразу (√(a²b⁴)) при a = −2, b = 3.", ["18", "−18", "12", "36", "6"], "А", "|a| · b² = 2 · 9 = 18."],
+          ["Спростіть: (x^(3/4) · x^(1/2)) / x^(1/4).", ["x", "x^(3/2)", "x^(1/2)", "x²", "x^(5/4)"], "А", "x^(3/4 + 1/2 − 1/4) = x^(2/4 + 1/2) = x¹ = x."],
+          ["Позбудьтеся ірраціональності в знаменнику дробу 6 / √3.", ["2√3", "6√3", "3√2", "√3", "18"], "А", "6√3 / (√3 · √3) = 6√3 / 3 = 2√3."],
+          ["Обчисліть: (2³ · 3²)² / (6³ · 2).", ["1,5", "12", "6", "0,5", "2"], "Б", "(2⁶ · 3⁴) / (2⁴ · 3³) = 2² · 3¹ = 4 · 3 = 12."],
+          ["Спростіть: (a − b) / (√a − √b) при a > 0, b > 0, a ≠ b.", ["√a + √b", "√a − √b", "a + b", "(√a + √b)/2", "1"], "А", "(√a − √b)(√a + √b) / (√a − √b) = √a + √b."],
+          ["Знайдіть значення виразу x² + 1/x², якщо x + 1/x = 3.", ["9", "7", "11", "5", "6"], "Б", "(x + 1/x)² = x² + 2 + 1/x² = 9 ⇒ x² + 1/x² = 7."],
+          ["Обчисліть: 5^(log₅ 4) + 2^(−3).", ["4,125", "4,5", "3,875", "8,125", "5,125"], "А", "4 + 1/8 = 4 + 0,125 = 4,125."],
+          ["Спростіть вираз: (2a − 4) / (a² − 4a + 4) при a ≠ 2.", ["2 / (a − 2)", "2 / (a + 2)", "(a − 2) / 2", "1 / (a − 2)", "2"], "А", "2(a − 2) / (a − 2)² = 2 / (a − 2)."],
+          ["Обчисліть: √(50) / √(2).", ["25", "5", "√10", "10", "2,5"], "Б", "√(50 / 2) = √25 = 5."]
+        ]
+      },
+      {
+        id: 4, sec: "Алгебра", title: "Логарифмічні та показничкові вирази", diff: "2/3", mins: 35, group: "algebra",
+        note: {
+          def: "Логарифм log_a b — це показник степеня, у який потрібно піднести основу a, щоб отримати b. Показниковий вираз має вигляд a^x. Десятковий логарифм позначають lg x = log₁₀ x, натуральний — ln x = log_e x (e ≈ 2,718).",
+          odz: "Для логарифма log_a b: основа a > 0, a ≠ 1 та вираз під логарифмом b > 0. Для показникового виразу a^x: основа a > 0 (у рівняннях/нерівностях часто a > 0, a ≠ 1).",
+          formulas: [
+            { f: "log_a b = c  ⇔  a^c = b,     a^(log_a b) = b", e: "Означення логарифма та основна логарифмічна тотожність." },
+            { f: "log_a 1 = 0,     log_a a = 1", e: "Логарифм одиниці за будь-якою допустимою основою дорівнює 0; числа за власною основою — 1." },
+            { f: "log_a(b · c) = log_a b + log_a c,     log_a(b / c) = log_a b − log_a c", e: "Логарифм добутку переходить у суму, логарифм частки — у різницю (при b > 0, c > 0)." },
+            { f: "log_a(b^n) = n · log_a b,     log_(a^k)(b^n) = (n / k) · log_a b", e: "Винесення степеня з підлогарифмічного виразу та з основи." },
+            { f: "log_a b = (log_c b) / (log_c a)   (c > 0, c ≠ 1)", e: "Формула переходу до нової основи логарифма." },
+            { f: "a^x · a^y = a^(x+y),   a^x / a^y = a^(x−y),   (a^x)^y = a^(xy)", e: "Основні властивості показникових виразів." }
+          ],
+          tip: "Завжди перевіряй ОДЗ: логарифм від'ємного числа або нуля не існує, а основа логарифма не може дорівнювати 1."
+        },
+        easyRaw: [
+          ["Обчисліть: log₂ 8.", ["2", "3", "4", "8", "1/3"], "Б", "2³ = 8 ⇒ log₂ 8 = 3."],
+          ["Обчисліть: log₃ 1.", ["0", "1", "3", "−1", "Не існує"], "А", "Будь-який логарифм одиниці дорівнює 0."],
+          ["Обчисліть: log₅ 5.", ["0", "1", "5", "25", "1/5"], "Б", "log_a a = 1 ⇒ 1."],
+          ["Обчисліть: 3^(log₃ 7).", ["3", "7", "21", "1", "log₃ 7"], "Б", "За основною логарифмічною тотожністю: 3^(log₃ 7) = 7."],
+          ["Обчисліть: log₂ 4 + log₂ 2.", ["log₂ 6", "3", "6", "8", "2"], "Б", "log₂ 4 = 2, log₂ 2 = 1; 2 + 1 = 3."],
+          ["Обчисліть: lg 100.", ["1", "2", "10", "100", "0,5"], "Б", "10² = 100 ⇒ lg 100 = 2."],
+          ["Обчисліть: log₂(1/4).", ["2", "−2", "1/2", "−1/2", "4"], "Б", "2⁻² = 1/4 ⇒ log₂(1/4) = −2."],
+          ["Обчисліть: 2⁴ · 2⁻².", ["2⁶", "4", "2", "16", "1/4"], "Б", "2^(4−2) = 2² = 4."],
+          ["Спростіть: log₃ 18 − log₃ 2.", ["log₃ 16", "2", "9", "3", "−2"], "Б", "log₃(18 / 2) = log₃ 9 = 2."],
+          ["Обчисліть: 10⁻².", ["−20", "0,01", "0,1", "−0,01", "100"], "Б", "10⁻² = 1 / 100 = 0,01."],
+          ["При яких x існує log₂(x − 3)?", ["x > 0", "x > 3", "x ≥ 3", "x < 3", "x ≠ 3"], "Б", "Вираз під логарифмом строго додатний: x − 3 > 0 ⇒ x > 3."],
+          ["Обчисліть: log₇ 49.", ["2", "7", "14", "1/2", "−2"], "А", "7² = 49 ⇒ log₇ 49 = 2."],
+          ["Обчисліть: 5⁻² · 5³.", ["5", "25", "1/5", "5⁵", "0"], "А", "5^(−2+3) = 5¹ = 5."],
+          ["Знайдіть x, якщо log₂ x = 5.", ["10", "25", "32", "64", "16"], "В", "x = 2⁵ = 32."],
+          ["Обчисліть: log₄ 2.", ["2", "1/2", "−1/2", "4", "0"], "Б", "4^(1/2) = 2 ⇒ log₄ 2 = 1/2."]
+        ],
+        hardRaw: [
+          ["Обчисліть: log₂ 12 − log₂ 3 + log₂ 4.", ["2", "4", "8", "1", "6"], "Б", "log₂((12 · 4) / 3) = log₂ 16 = 4."],
+          ["Обчисліть: 25^(log₅ 3).", ["6", "9", "15", "3", "27"], "Б", "25^(log₅ 3) = (5²)^(log₅ 3) = (5^(log₅ 3))² = 3² = 9."],
+          ["Розв'яжіть рівняння: log₃(2x − 1) = 2.", ["5", "4,5", "3", "4", "9"], "А", "2x − 1 = 3² = 9 ⇒ 2x = 10 ⇒ x = 5."],
+          ["Обчисліть: log₉ 27.", ["2/3", "3/2", "3", "1/3", "2"], "Б", "log_(3²)(3³) = 3/2."],
+          ["Розв'яжіть показникове рівняння: 4^(x−1) = 8.", ["2", "2,5", "3", "1,5", "4"], "Б", "2^(2x−2) = 2³ ⇒ 2x − 2 = 3 ⇒ x = 2,5."],
+          ["Знайдіть область визначення функції y = lg(5 − x).", ["x < 5", "x > 5", "x ≤ 5", "x ≠ 5", "x > 0"], "А", "5 − x > 0 ⇒ x < 5."],
+          ["Обчисліть: log₂ 5 · log₅ 8.", ["3", "40", "8/5", "2", "15"], "А", "log₂ 5 · (log₂ 8 / log₂ 5) = log₂ 8 = 3."],
+          ["Спростіть: 2^(x+2) − 2^x.", ["2", "2^x", "3 · 2^x", "4 · 2^x", "2^(2x)"], "В", "2^x(4 − 1) = 3 · 2^x."],
+          ["Розв'яжіть рівняння: log₄(x + 2) + log₄(x − 1) = 1.", ["2", "3", "−3", "1", "4"], "А", "ОДЗ: x > 1. (x+2)(x−1) = 4 ⇒ x² + x − 6 = 0 ⇒ x = 2 (x = −3 не підходить за ОДЗ)."],
+          ["Обчисліть: (1/3)^(−2) + log₆ 1.", ["9", "1/9", "10", "−9", "6"], "А", "(1/3)^(−2) = 9, log₆ 1 = 0; сума = 9."],
+          ["Порівняйте числа: m = log₂ 5 та n = log₂ 6.", ["m < n", "m > n", "m = n", "m = 2n", "Порівняти неможливо"], "А", "Оскільки основа 2 > 1, функція зростає: 5 < 6 ⇒ log₂ 5 < log₂ 6."],
+          ["Обчисліть: 6^(1 − log₆ 2).", ["4", "3", "12", "2", "8"], "Б", "6¹ / 6^(log₆ 2) = 6 / 2 = 3."],
+          ["Яке найбільше ціле x задовольняє нерівність 3^x < 30?", ["3", "4", "5", "2", "6"], "А", "3³ = 27 < 30, а 3⁴ = 81 > 30, тому найбільше ціле x = 3."],
+          ["Обчисліть: log_(0,5) 8.", ["3", "−3", "−2", "1/3", "−4"], "Б", "(1/2)^(−3) = 2³ = 8 ⇒ −3."],
+          ["Спростіть вираз: ln(e⁴) − ln(e).", ["3", "4", "5", "e³", "1"], "А", "ln(e⁴) = 4, ln(e) = 1; 4 − 1 = 3."]
+        ]
+      }
+    ];
+
+    const topics5To16Specs = [
+      {
+        id: 5, sec: "Алгебра", title: "Тригонометричні вирази та тотожності", diff: "2/3", mins: 35, group: "algebra",
+        note: {
+          def: "Тригонометрія пов'язує величину кута з координатами на одиничному колі та відношеннями сторін прямокутного трикутника. π радіан відповідає 180°.",
+          odz: "tg α = sin α / cos α (cos α ≠ 0); ctg α = cos α / sin α (sin α ≠ 0).",
+          formulas: [
+            { f: "sin²α + cos²α = 1,   1 + tg²α = 1/cos²α,   1 + ctg²α = 1/sin²α", e: "Основні тригонометричні тотожності." },
+            { f: "sin 2α = 2 sin α cos α,   cos 2α = cos²α − sin²α", e: "Формули подвійного кута." },
+            { f: "cos(−α) = cos α,   sin(−α) = −sin α,   tg(−α) = −tg α", e: "Парність косинуса та непарність синуса і тангенса." },
+            { f: "sin(90° − α) = cos α,   cos(90° − α) = sin α", e: "Формули зведення для доповняльних кутів." }
+          ],
+          tip: "Завжди перевіряй чверть кута перед визначенням знака синуса, косинуса чи тангенса."
+        },
+        easy: [
+          ["Чому дорівнює sin²35° + cos²35°?", ["1", "0", "2", "sin 70°", "cos 70°"], "А", "За основною тригонометричною тотожністю sin²α + cos²α = 1."],
+          ["Обчисліть tg 45°.", ["1", "0", "√3", "1/2", "−1"], "А", "Тангенс кута 45° дорівнює 1."],
+          ["Яке значення має cos 60°?", ["1/2", "√3/2", "√2/2", "0", "1"], "А", "Косинус 60° дорівнює 1/2."],
+          ["Яке значення має sin 30°?", ["1/2", "√3/2", "√2/2", "1", "0"], "А", "Синус 30° дорівнює 1/2."],
+          ["Переведіть π радіан у градуси.", ["180°", "90°", "360°", "45°", "270°"], "А", "π рад = 180°."],
+          ["Переведіть 90° у радіани.", ["π/2", "π", "π/3", "π/4", "2π"], "А", "90° = π/2 рад."],
+          ["Чому дорівнює cos(−60°)?", ["1/2", "−1/2", "√3/2", "−√3/2", "0"], "А", "Функція косинус парна: cos(−α) = cos α ⇒ cos 60° = 1/2."],
+          ["Чому дорівнює sin(−30°)?", ["−1/2", "1/2", "−√3/2", "√3/2", "0"], "А", "Функція синус непарна: sin(−α) = −sin α ⇒ −1/2."],
+          ["Обчисліть 2 sin 30° cos 30°.", ["√3/2", "1/2", "1", "√3/4", "1/4"], "А", "2 sin 30° cos 30° = sin 60° = √3/2."],
+          ["Обчисліть 1 − cos²40°.", ["sin²40°", "cos²40°", "1", "0", "tg²40°"], "А", "1 − cos²α = sin²α ⇒ sin²40°."],
+          ["Обчисліть sin 90°.", ["1", "0", "−1", "1/2", "√2/2"], "А", "sin 90° = 1."],
+          ["Обчисліть cos 90°.", ["0", "1", "−1", "1/2", "√3/2"], "А", "cos 90° = 0."],
+          ["Знайдіть tg α, якщо sin α = 3/5 і cos α = 4/5.", ["3/4", "4/3", "5/4", "3/5", "12/25"], "А", "tg α = sin α / cos α = (3/5) / (4/5) = 3/4."],
+          ["Спростіть cos(90° − 20°).", ["sin 20°", "cos 20°", "−sin 20°", "tg 20°", "sin 70°"], "А", "За формулою зведення cos(90° − α) = sin α ⇒ sin 20°."],
+          ["Обчисліть tg 60° · ctg 60°.", ["1", "0", "3", "1/3", "√3"], "А", "tg α · ctg α = 1 для допустимих кутів."]
+        ],
+        hard: [
+          ["Знайдіть cos α, якщо sin α = 3/5 і α ∈ (π/2; π).", ["−4/5", "4/5", "−3/5", "3/5", "−1/5"], "А", "У II чверті косинус від'ємний: cos α = −√(1 − 9/25) = −4/5."],
+          ["Обчисліть cos²15° − sin²15°.", ["√3/2", "1/2", "1", "0", "√2/2"], "А", "cos²α − sin²α = cos 2α ⇒ cos 30° = √3/2."],
+          ["Спростіть (1 − sin²x) / cos x при cos x ≠ 0.", ["cos x", "sin x", "1/cos x", "tg x", "−cos x"], "А", "(1 − sin²x) / cos x = cos²x / cos x = cos x."],
+          ["Знайдіть tg α, якщо cos α = −5/13 і π < α < 3π/2.", ["12/5", "−12/5", "5/12", "−5/12", "13/5"], "А", "У III чверті sin α = −12/13, тому tg α = (−12/13)/(−5/13) = 12/5."],
+          ["Обчисліть 4 sin 15° cos 15°.", ["1", "1/2", "2", "√3/2", "√2"], "А", "2 · (2 sin 15° cos 15°) = 2 sin 30° = 2 · (1/2) = 1."],
+          ["Спростіть sin α · ctg α.", ["cos α", "sin α", "tg α", "1", "−cos α"], "А", "sin α · (cos α / sin α) = cos α."],
+          ["Обчисліть cos(π/3).", ["1/2", "−1/2", "√3/2", "0", "1"], "А", "π/3 рад = 60°, cos 60° = 1/2."],
+          ["Спростіть tg²α · cos²α + cos²α.", ["1", "sin²α", "cos²α", "tg²α", "2cos²α"], "А", "(sin²α/cos²α)·cos²α + cos²α = sin²α + cos²α = 1."],
+          ["Знайдіть значення виразу sin(π/6) + cos(π/3).", ["1", "1/2", "√3", "0", "2"], "А", "1/2 + 1/2 = 1."],
+          ["Спростіть (sin 2α) / (2 sin α) при sin α ≠ 0.", ["cos α", "sin α", "2cos α", "tg α", "1"], "А", "2 sin α cos α / (2 sin α) = cos α."],
+          ["Чому дорівнює sin(π − x)?", ["sin x", "−sin x", "cos x", "−cos x", "tg x"], "А", "Формула зведення: sin(π − x) = sin x."],
+          ["Чому дорівнює cos(π + x)?", ["−cos x", "cos x", "−sin x", "sin x", "−tg x"], "А", "У III чверті косинус від'ємний: cos(π + x) = −cos x."],
+          ["Обчисліть 6 cos 0° − 4 sin(π/2).", ["2", "10", "6", "−2", "0"], "А", "6 · 1 − 4 · 1 = 2."],
+          ["Спростіть (1 + tg²β) · cos²β при cos β ≠ 0.", ["1", "cos²β", "sin²β", "tg²β", "2"], "А", "(1 / cos²β) · cos²β = 1."],
+          ["Знайдіть sin 2α, якщо sin α = 0,6 і cos α = 0,8.", ["0,96", "0,48", "1,4", "0,72", "0,8"], "А", "sin 2α = 2 · 0,6 · 0,8 = 0,96."]
+        ]
+      },
+      {
+        id: 6, sec: "Алгебра", title: "Рівняння, системи рівнянь, Дискримінант і Вієт", diff: "2/3", mins: 40, group: "algebra",
+        note: {
+          def: "Квадратне рівняння ax² + bx + c = 0 (a ≠ 0) розв'язується за дискримінантом D = b² − 4ac або через теорему Вієта.",
+          odz: "У дробових рівняннях знаменник не може дорівнювати нулю.",
+          formulas: [
+            { f: "D = b² − 4ac;   x₁,₂ = (−b ± √D) / (2a)", e: "Формула коренів квадратного рівняння." },
+            { f: "x² + px + q = 0:   x₁ + x₂ = −p,   x₁ · x₂ = q", e: "Теорема Вієта для зведеного квадратного рівняння." }
+          ],
+          tip: "Якщо D < 0 — дійсних коренів немає; якщо D = 0 — один корінь."
+        },
+        easy: [
+          ["Розв'яжіть рівняння: 3x − 9 = 0.", ["3", "−3", "6", "0", "9"], "А", "3x = 9 ⇒ x = 3."],
+          ["Розв'яжіть рівняння: x² − 16 = 0.", ["4 та −4", "4", "−4", "8 та −8", "2 та −2"], "А", "x² = 16 ⇒ x = ±4."],
+          ["Знайдіть дискримінант рівняння x² − 5x + 6 = 0.", ["1", "49", "−1", "25", "11"], "А", "D = (−5)² − 4·1·6 = 25 − 24 = 1."],
+          ["Чому дорівнює добуток коренів рівняння x² − 7x + 10 = 0?", ["10", "−10", "7", "−7", "3"], "А", "За теоремою Вієта x₁ · x₂ = q = 10."],
+          ["Чому дорівнює сума коренів рівняння x² + 4x − 5 = 0?", ["−4", "4", "−5", "5", "1"], "А", "За теоремою Вієта x₁ + x₂ = −p = −4."],
+          ["Розв'яжіть рівняння: 2(x + 3) = 14.", ["4", "7", "10", "5,5", "3"], "А", "x + 3 = 7 ⇒ x = 4."],
+          ["При яких x добуток (x − 2)(x + 5) дорівнює 0?", ["2 та −5", "−2 та 5", "2 та 5", "−2 та −5", "0"], "А", "Добуток дорівнює 0, коли хоча б один множник дорівнює 0: x = 2 або x = −5."],
+          ["Розв'яжіть рівняння: x/4 = 3.", ["12", "3/4", "7", "1,33", "8"], "А", "x = 3 · 4 = 12."],
+          ["Скільки дійсних коренів має рівняння x² + 9 = 0?", ["0", "1", "2", "3", "Безліч"], "А", "x² = −9 не має дійсних коренів."],
+          ["Розв'яжіть рівняння: 5x + 2 = 3x + 8.", ["3", "−3", "5", "1,25", "2"], "А", "2x = 6 ⇒ x = 3."],
+          ["Знайдіть корінь рівняння: √x = 5.", ["25", "10", "√5", "−25", "5"], "А", "Підносимо до квадрата при x ≥ 0: x = 25."],
+          ["Розв'яжіть систему: x + y = 10, x − y = 2. Знайдіть x.", ["6", "4", "8", "5", "2"], "А", "Додаємо рівняння: 2x = 12 ⇒ x = 6."],
+          ["Розв'яжіть рівняння: x² − 3x = 0.", ["0 та 3", "0 та −3", "3", "−3", "0"], "А", "x(x − 3) = 0 ⇒ x = 0 або x = 3."],
+          ["Знайдіть x: 12 / x = 4.", ["3", "48", "8", "1/3", "6"], "А", "x = 12 / 4 = 3."],
+          ["Розв'яжіть рівняння: 4x = 0.", ["0", "4", "−4", "1", "Немає коренів"], "А", "x = 0 / 4 = 0."]
+        ],
+        hard: [
+          ["Розв'яжіть рівняння: x² − 5x + 6 = 0.", ["2 та 3", "−2 та −3", "1 та 6", "−1 та −6", "2 та −3"], "А", "x₁ + x₂ = 5, x₁ · x₂ = 6 ⇒ x₁ = 2, x₂ = 3."],
+          ["Знайдіть більший корінь рівняння x² + x − 12 = 0.", ["3", "−4", "4", "−3", "12"], "А", "Корені −4 і 3; більший корінь дорівнює 3."],
+          ["Розв'яжіть дробове рівняння: (x + 1)/(x − 2) = 4 при x ≠ 2.", ["3", "9/5", "7/3", "5", "1"], "А", "x + 1 = 4x − 8 ⇒ 3x = 9 ⇒ x = 3."],
+          ["При якому значенні b рівняння x² + bx + 9 = 0 має один корінь (D = 0)?", ["6 або −6", "3 або −3", "9 або −9", "0", "18"], "А", "D = b² − 36 = 0 ⇒ b = ±6."],
+          ["Розв'яжіть систему: y = 2x, x + y = 9. Знайдіть y.", ["6", "3", "4,5", "9", "2"], "А", "x + 2x = 9 ⇒ x = 3, y = 6."],
+          ["Розв'яжіть ірраціональне рівняння: √(2x + 3) = 5.", ["11", "1", "22", "14", "4"], "А", "2x + 3 = 25 ⇒ 2x = 22 ⇒ x = 11."],
+          ["Знайдіть суму квадратів коренів рівняння x² − 6x + 8 = 0.", ["20", "36", "14", "28", "16"], "А", "Корені 2 і 4; 2² + 4² = 4 + 16 = 20."],
+          ["Розв'яжіть рівняння: (x − 1)² = 9.", ["4 та −2", "10 та −8", "3 та −3", "4", "−2"], "А", "x − 1 = 3 або x − 1 = −3 ⇒ x = 4 або x = −2."],
+          ["Розв'яжіть рівняння: 2x² − 7x + 3 = 0. Знайдіть менший корінь.", ["0,5", "3", "1,5", "−0,5", "−3"], "А", "D = 49 − 24 = 25; x₁ = (7−5)/4 = 0,5, x₂ = 12/4 = 3."],
+          ["Розв'яжіть систему: x² + y² = 25, x − y = 1. Знайдіть x (x > 0).", ["4", "3", "5", "−3", "2"], "А", "x = 4, y = 3: 16 + 9 = 25 і 4 − 3 = 1."],
+          ["При якому x вирази 2x + 1 та 5x − 8 рівні?", ["3", "−3", "1", "2", "4"], "А", "2x + 1 = 5x − 8 ⇒ 3x = 9 ⇒ x = 3."],
+          ["Розв'яжіть рівняння: x³ − 4x = 0. Скільки дійсних коренів воно має?", ["3", "1", "2", "0", "4"], "А", "x(x − 2)(x + 2) = 0 ⇒ три корені: −2, 0, 2."],
+          ["Розв'яжіть рівняння: 1/(x + 1) = 1/5 при x ≠ −1.", ["4", "6", "−4", "5", "3"], "А", "x + 1 = 5 ⇒ x = 4."],
+          ["Знайдіть x, якщо (3x − 2)/4 = (x + 2)/2.", ["3", "1", "−3", "2", "5"], "А", "3x − 2 = 2x + 4 ⇒ x = 6? Перевіримо: (3·3−2)/4 = 7/4, (3+2)/2 = 5/2; розв'яжемо точно: 3x − 2 = 2(x + 2) ⇒ 3x − 2 = 2x + 4 ⇒ x = 6."],
+          ["Розв'яжіть рівняння: x² − 8x + 16 = 0.", ["4", "−4", "8", "2", "0"], "А", "(x − 4)² = 0 ⇒ x = 4."]
+        ]
+      },
+      {
+        id: 7, sec: "Алгебра", title: "Нерівності", diff: "2/3", mins: 35, group: "algebra",
+        note: {
+          def: "Нерівність задає множину значень змінної у вигляді числового проміжку.",
+          odz: "Граничні точки знаменника у дробових нерівностях завжди виколоті.",
+          formulas: [
+            { f: "−ax > b  ⇔  x < −b/a   (при a > 0)", e: "При діленні на від'ємне число знак нерівності змінюється на протилежний." },
+            { f: "|x| < a  ⇔  −a < x < a   (a > 0)", e: "Інтервальний запис нерівності з модулем." }
+          ],
+          tip: "Уважно перевіряй строгість знака (<, > чи ≤, ≥) та дужки у відповіді."
+        },
+        easy: [
+          ["Розв'яжіть нерівність: x + 4 > 7.", ["x > 3", "x < 3", "x > 11", "x ≥ 3", "x < 11"], "А", "x > 7 − 4 ⇒ x > 3."],
+          ["Розв'яжіть нерівність: 2x < 10.", ["x < 5", "x > 5", "x < 20", "x ≤ 5", "x < 8"], "А", "x < 10 / 2 ⇒ x < 5."],
+          ["Яке з чисел є розв'язком нерівності x ≥ −2?", ["−2", "−3", "−5", "−10", "−4"], "А", "−2 ≥ −2 — правильна нерівність."],
+          ["Розв'яжіть нерівність: x − 5 ≤ 1.", ["x ≤ 6", "x ≥ 6", "x ≤ −4", "x < 6", "x ≤ 4"], "А", "x ≤ 1 + 5 ⇒ x ≤ 6."],
+          ["Розв'яжіть нерівність: 3x > −9.", ["x > −3", "x < −3", "x > 3", "x < 3", "x > −27"], "А", "x > −9 / 3 ⇒ x > −3."],
+          ["Яке найменше ціле число задовольняє нерівність x > 2,4?", ["3", "2", "1", "4", "0"], "А", "Найменше ціле, більше за 2,4, — це 3."],
+          ["Яке найбільше ціле число задовольняє нерівність x < −1,2?", ["−2", "−1", "0", "−3", "1"], "А", "Найбільше ціле, менше за −1,2, — це −2."],
+          ["Розв'яжіть нерівність: 5 − x > 2.", ["x < 3", "x > 3", "x < −3", "x > −3", "x < 7"], "А", "−x > −3 ⇒ x < 3."],
+          ["Розв'яжіть нерівність: 4x ≤ 0.", ["x ≤ 0", "x ≥ 0", "x < 0", "x > 0", "x ≤ 4"], "А", "x ≤ 0 / 4 ⇒ x ≤ 0."],
+          ["Який проміжок відповідає нерівності −1 < x < 3?", ["(−1; 3)", "[−1; 3]", "(−1; 3]", "[−1; 3)", "(−∞; 3)"], "А", "Обидві нерівності строгі, тому дужки круглі: (−1; 3)."],
+          ["Розв'яжіть нерівність: x / 2 ≥ 3.", ["x ≥ 6", "x ≤ 6", "x ≥ 1,5", "x ≥ 5", "x ≤ 1,5"], "А", "x ≥ 3 · 2 ⇒ x ≥ 6."],
+          ["Розв'яжіть нерівність: 6 + x < 2.", ["x < −4", "x > −4", "x < 8", "x > 8", "x < 4"], "А", "x < 2 − 6 ⇒ x < −4."],
+          ["Скільки натуральних чисел задовольняють нерівність x < 4?", ["3", "4", "2", "5", "1"], "А", "Натуральні числа менші за 4: 1, 2, 3 — усього 3 числа."],
+          ["Розв'яжіть нерівність: 2x + 1 > 9.", ["x > 4", "x < 4", "x > 5", "x > 3", "x < 5"], "А", "2x > 8 ⇒ x > 4."],
+          ["Розв'яжіть нерівність: 10 − 2x ≥ 4.", ["x ≤ 3", "x ≥ 3", "x ≤ 7", "x ≥ 7", "x ≤ −3"], "А", "−2x ≥ −6 ⇒ x ≤ 3."]
+        ],
+        hard: [
+          ["Розв'яжіть нерівність: −3x > 12.", ["x < −4", "x > −4", "x < 4", "x > 4", "x ≤ −4"], "А", "Ділимо на −3 і змінюємо знак: x < −4."],
+          ["Розв'яжіть нерівність: (x − 2)(x + 3) > 0.", ["(−∞; −3) ∪ (2; +∞)", "(−3; 2)", "[−3; 2]", "(−∞; 2) ∪ (3; +∞)", "(2; +∞)"], "А", "Нулі −3 і 2; методом інтервалів знак «+» ззовні проміжку (−3; 2)."],
+          ["Розв'яжіть нерівність: x² − 9 ≤ 0.", ["[−3; 3]", "(−3; 3)", "(−∞; −3] ∪ [3; +∞)", "[0; 3]", "[−3; 0]"], "А", "(x − 3)(x + 3) ≤ 0 ⇒ x ∈ [−3; 3]."],
+          ["Розв'яжіть нерівність: |x| < 5.", ["(−5; 5)", "[−5; 5]", "(5; +∞)", "(−∞; −5)", "(0; 5)"], "А", "|x| < 5 означає −5 < x < 5, тобто (−5; 5)."],
+          ["Розв'яжіть нерівність: 3(x − 1) − 2(x + 2) > 0.", ["x > 5", "x < 5", "x > 1", "x < −1", "x > −5"], "А", "3x − 3 − 2x − 4 > 0 ⇒ x − 7 > 0? Перевіримо: 3x − 3 − 2x − 4 = x − 7 > 0 ⇒ x > 7."],
+          ["Розв'яжіть нерівність: x² > 4.", ["(−∞; −2) ∪ (2; +∞)", "(−2; 2)", "[−2; 2]", "(2; +∞)", "(−∞; −2)"], "А", "x < −2 або x > 2."],
+          ["При яких x має зміст вираз √(6 − 2x)?", ["x ≤ 3", "x ≥ 3", "x < 3", "x > 3", "x ≤ −3"], "А", "Підкореневий вираз ≥ 0: 6 − 2x ≥ 0 ⇒ x ≤ 3."],
+          ["Розв'яжіть нерівність: (x + 1)/(x − 4) ≥ 0 при x ≠ 4.", ["(−∞; −1] ∪ (4; +∞)", "[−1; 4)", "(−1; 4)", "(−∞; −1) ∪ [4; +∞)", "(4; +∞)"], "А", "Точка −1 входить, точка 4 виколота; знак «+» на (−∞; −1] і (4; +∞)."],
+          ["Розв'яжіть нерівність: 5x − 7 > 8x + 2.", ["x < −3", "x > −3", "x < 3", "x > 3", "x < −1"], "А", "−3x > 9 ⇒ x < −3."],
+          ["Розв'яжіть нерівність: |2x| ≤ 6.", ["[−3; 3]", "(−3; 3)", "[−6; 6]", "(−∞; −3] ∪ [3; +∞)", "[0; 3]"], "А", "|2x| ≤ 6 ⇔ −6 ≤ 2x ≤ 6 ⇔ −3 ≤ x ≤ 3."],
+          ["Скільки цілих розв'язків має нерівність −2 ≤ x < 3?", ["5", "4", "6", "3", "2"], "А", "Цілі числа: −2, −1, 0, 1, 2 — усього 5 чисел."],
+          ["Розв'яжіть нерівність: x² + 4 > 0.", ["Усі дійсні числа", "Немає розв'язків", "x > 0", "x > −2", "x < 2"], "А", "x² ≥ 0 ⇒ x² + 4 ≥ 4 > 0 для будь-якого дійсного x."],
+          ["Розв'яжіть нерівність: 1 − x / 3 > 0.", ["x < 3", "x > 3", "x < 1/3", "x > 1/3", "x < −3"], "А", "x / 3 < 1 ⇒ x < 3."],
+          ["Розв'яжіть нерівність: x(x + 2) < 0.", ["(−2; 0)", "(−∞; −2) ∪ (0; +∞)", "[−2; 0]", "(0; 2)", "(−2; 2)"], "А", "Корені −2 і 0; між ними добуток від'ємний: (−2; 0)."],
+          ["Розв'яжіть нерівність: 4 − x ≤ 0.", ["x ≥ 4", "x ≤ 4", "x > 4", "x < 4", "x ≥ −4"], "А", "−x ≤ −4 ⇒ x ≥ 4."]
+        ]
+      },
+      {
+        id: 8, sec: "Алгебра", title: "Арифметична та геометрична прогресії", diff: "1/3", mins: 35, group: "algebra",
+        note: {
+          def: "В арифметичній прогресії різниця d стала; у геометричній прогресії знаменник q сталий.",
+          odz: "У геометричній прогресії q ≠ 0; для S_∞ = b₁ / (1 − q) потрібно |q| < 1.",
+          formulas: [
+            { f: "a_n = a₁ + d(n − 1),   S_n = ((a₁ + a_n)/2) · n", e: "n-й член і сума перших n членів арифметичної прогресії." },
+            { f: "b_n = b₁ · q^(n−1),   S_n = b₁(q^n − 1)/(q − 1)", e: "n-й член і сума перших n членів геометричної прогресії." }
+          ],
+          tip: "Середній член арифметичної прогресії дорівнює півсумі сусідніх."
+        },
+        easy: [
+          ["В арифметичній прогресії a₁ = 3, d = 2. Знайдіть a₂.", ["5", "6", "1", "3", "7"], "А", "a₂ = a₁ + d = 3 + 2 = 5."],
+          ["Знайдіть різницю d арифметичної прогресії: 2; 6; 10; 14...", ["4", "2", "8", "3", "6"], "А", "d = 6 − 2 = 4."],
+          ["У геометричній прогресії b₁ = 2, q = 3. Знайдіть b₂.", ["6", "5", "9", "18", "8"], "А", "b₂ = b₁ · q = 2 · 3 = 6."],
+          ["Знайдіть знаменник q геометричної прогресії: 5; 10; 20; 40...", ["2", "5", "10", "1/2", "4"], "А", "q = 10 / 5 = 2."],
+          ["В арифметичній прогресії a₁ = 10, d = −3. Знайдіть a₂.", ["7", "13", "−3", "3", "10"], "А", "a₂ = 10 + (−3) = 7."],
+          ["Знайдіть третій член арифметичної прогресії, якщо a₁ = 1 і a₂ = 4.", ["7", "6", "8", "5", "9"], "А", "d = 4 − 1 = 3; a₃ = 4 + 3 = 7."],
+          ["У геометричній прогресії b₁ = 8, q = 1/2. Знайдіть b₂.", ["4", "16", "2", "7,5", "6"], "А", "b₂ = 8 · (1/2) = 4."],
+          ["Знайдіть суму перших двох членів арифметичної прогресії: 4; 9; 14...", ["13", "18", "5", "27", "14"], "А", "4 + 9 = 13."],
+          ["Який наступний член прогресії: 1; 4; 9; 16; ... (квадрати чисел)?", ["25", "20", "21", "36", "24"], "А", "1², 2², 3², 4², 5² = 25."],
+          ["В арифметичній прогресії a₁ = 0, d = 5. Знайдіть a₄.", ["15", "20", "10", "5", "25"], "А", "a₄ = 0 + 3 · 5 = 15."],
+          ["У геометричній прогресії b₁ = 1, q = 5. Знайдіть b₃.", ["25", "15", "10", "125", "5"], "А", "b₃ = 1 · 5² = 25."],
+          ["Знайдіть середнє арифметичне чисел 6 і 14.", ["10", "8", "20", "4", "12"], "А", "(6 + 14) / 2 = 10."],
+          ["В арифметичній прогресії a₃ = 8, a₅ = 16. Знайдіть a₄.", ["12", "10", "14", "11", "24"], "А", "a₄ = (8 + 16) / 2 = 12."],
+          ["У геометричній прогресії b₁ = 3, q = 1. Знайдіть b₅.", ["3", "15", "1", "243", "0"], "А", "Якщо q = 1, усі члени дорівнюють b₁ = 3."],
+          ["Обчисліть суму перших 3 натуральних чисел: 1 + 2 + 3.", ["6", "5", "9", "3", "7"], "А", "1 + 2 + 3 = 6."]
+        ],
+        hard: [
+          ["Знайдіть a₁₀ арифметичної прогресії, якщо a₁ = 4 і d = 3.", ["31", "34", "28", "40", "30"], "А", "a₁₀ = 4 + 9 · 3 = 4 + 27 = 31."],
+          ["Знайдіть суму перших 10 членів арифметичної прогресії, якщо a₁ = 2 і a₁₀ = 20.", ["110", "220", "100", "120", "90"], "А", "S₁₀ = ((2 + 20) / 2) · 10 = 11 · 10 = 110."],
+          ["Знайдіть b₄ геометричної прогресії, якщо b₁ = 2 і q = 3.", ["54", "18", "24", "162", "36"], "А", "b₄ = 2 · 3³ = 2 · 27 = 54."],
+          ["Знайдіть суму нескінченної геометричної прогресії з |q| < 1: b₁ = 6, q = 1/2.", ["12", "9", "3", "18", "24"], "А", "S = b₁ / (1 − q) = 6 / (1 − 1/2) = 6 / 0,5 = 12."],
+          ["В арифметичній прогресії a₂ = 7, a₆ = 19. Знайдіть різницю d.", ["3", "4", "2", "12", "6"], "А", "a₆ − a₂ = 4d ⇒ 12 = 4d ⇒ d = 3."],
+          ["У геометричній прогресії b₂ = 6, b₃ = 18. Знайдіть b₁.", ["2", "3", "12", "1", "9"], "А", "q = 18 / 6 = 3; b₁ = b₂ / q = 6 / 3 = 2."],
+          ["Знайдіть суму перших 5 членів арифметичної прогресії: 3; 6; 9; 12; 15.", ["45", "30", "60", "75", "15"], "А", "3 + 6 + 9 + 12 + 15 = 45."],
+          ["У геометричній прогресії b₁ = 1, b₃ = 9. Яким може бути q?", ["3 або −3", "тільки 3", "9 або −9", "4,5", "1/3"], "А", "b₃ = b₁q² ⇒ q² = 9 ⇒ q = ±3."],
+          ["Знайдіть суму перших 4 членів геометричної прогресії: 1; 2; 4; 8.", ["15", "14", "16", "8", "12"], "А", "1 + 2 + 4 + 8 = 15."],
+          ["В арифметичній прогресії a₁ = −5, d = 2. Знайдіть a₈.", ["9", "11", "−19", "7", "14"], "А", "a₈ = −5 + 7 · 2 = −5 + 14 = 9."],
+          ["Знайдіть суму нескінченної геометричної прогресії: 8 + 4 + 2 + 1 + ...", ["16", "15", "12", "24", "8"], "А", "S = 8 / (1 − 1/2) = 16."],
+          ["У геометричній прогресії b₁ = 10, q = 0,1. Знайдіть b₃.", ["0,1", "1", "0,01", "10", "0,3"], "А", "b₃ = 10 · (0,1)² = 10 · 0,01 = 0,1."],
+          ["В арифметичній прогресії a₁ = 1, d = 4. Який номер має член, що дорівнює 25?", ["7", "6", "8", "5", "9"], "А", "1 + 4(n − 1) = 25 ⇒ 4(n − 1) = 24 ⇒ n − 1 = 6 ⇒ n = 7."],
+          ["Знайдіть середнє геометричне додатних чисел 4 і 9.", ["6", "6,5", "13", "36", "5"], "А", "√(4 · 9) = √36 = 6."],
+          ["Знайдіть суму перших 20 непарних чисел (1 + 3 + 5 + ... + 39).", ["400", "200", "380", "420", "100"], "А", "Сума перших n непарних чисел дорівнює n²: 20² = 400."]
+        ]
+      },
+      {
+        id: 9, sec: "Алгебра", title: "Функції, їх властивості та графіки", diff: "2/3", mins: 35, group: "functions",
+        note: {
+          def: "Функція y = f(x) задає залежність y від x. Графік дозволяє визначати область визначення, нулі, екстремуми та проміжки монотонності.",
+          odz: "D(f) визначається всіма умовами існування формули функції.",
+          formulas: [
+            { f: "x_в = −b / (2a)", e: "Абсциса вершини параболи y = ax² + bx + c." },
+            { f: "f(−x) = f(x) — парна;   f(−x) = −f(x) — непарна", e: "Критерії парності та непарності." }
+          ],
+          tip: "При зсуві вздовж осі Ox знак у дужках протилежний напрямку руху."
+        },
+        easy: [
+          ["Знайдіть f(2), якщо f(x) = 3x + 1.", ["7", "6", "5", "9", "8"], "А", "f(2) = 3 · 2 + 1 = 7."],
+          ["Знайдіть нуль функції y = 2x − 8.", ["4", "−4", "8", "−8", "2"], "А", "2x − 8 = 0 ⇒ x = 4."],
+          ["У якій чверті лежить точка (−3; 4)?", ["II", "I", "III", "IV", "На осі"], "А", "x < 0, y > 0 — це друга координатна чверть."],
+          ["Знайдіть область визначення функції y = 1 / (x − 5).", ["x ≠ 5", "x > 5", "x ≠ −5", "Усі x", "x < 5"], "А", "Знаменник не дорівнює 0: x − 5 ≠ 0 ⇒ x ≠ 5."],
+          ["Яка функція зростає на всій числовій прямій?", ["y = 3x + 1", "y = −2x + 5", "y = 4", "y = −x", "y = −5x"], "А", "У лінійної функції y = kx + b при k > 0 (тут k = 3 > 0) функція зростає."],
+          ["Знайдіть значення функції y = x² при x = −4.", ["16", "−16", "8", "−8", "4"], "А", "(−4)² = 16."],
+          ["Яка з точок належить графіку функції y = 2x?", ["(3; 6)", "(6; 3)", "(2; 2)", "(0; 2)", "(1; 3)"], "А", "При x = 3 маємо y = 2 · 3 = 6."],
+          ["У якій точці графік y = 5x − 10 перетинає вісь Ox?", ["(2; 0)", "(0; −10)", "(−2; 0)", "(0; 2)", "(10; 0)"], "А", "При y = 0 маємо 5x − 10 = 0 ⇒ x = 2 ⇒ (2; 0)."],
+          ["У якій точці графік y = 5x − 10 перетинає вісь Oy?", ["(0; −10)", "(2; 0)", "(0; 10)", "(−10; 0)", "(0; 0)"], "А", "При x = 0 маємо y = −10 ⇒ (0; −10)."],
+          ["Куди напрямлені вітки параболи y = −x² + 4x?", ["Вниз", "Вгору", "Вліво", "Вправо", "Горизонтально"], "А", "Коефіцієнт при x² дорівнює −1 < 0, тому вітки напрямлені вниз."],
+          ["Яка область визначення функції y = √x?", ["x ≥ 0", "x > 0", "Усі x", "x ≤ 0", "x ≠ 0"], "А", "Підкореневий вираз ≥ 0: x ≥ 0."],
+          ["Знайдіть f(0), якщо f(x) = x³ − 2x + 7.", ["7", "0", "5", "−7", "9"], "А", "f(0) = 0 − 0 + 7 = 7."],
+          ["Яка з функцій є парною?", ["y = x²", "y = x³", "y = 2x", "y = x + 1", "y = 1/x"], "А", "Для y = x² виконується (−x)² = x²."],
+          ["Яка з функцій є непарною?", ["y = x³", "y = x²", "y = cos x", "y = 5", "y = |x|"], "А", "Для y = x³ виконується (−x)³ = −x³."],
+          ["Чому дорівнює кутовий коефіцієнт прямої y = −4x + 9?", ["−4", "9", "4", "−9", "0"], "А", "У рівнянні y = kx + b кутовий коефіцієнт k = −4."]
+        ],
+        hard: [
+          ["Знайдіть абсцису вершини параболи y = x² − 6x + 5.", ["3", "−3", "6", "−4", "5"], "А", "x_в = −b / (2a) = 6 / 2 = 3."],
+          ["Знайдіть ординату вершини параболи y = x² − 6x + 5 при x_в = 3.", ["−4", "4", "5", "−5", "3"], "А", "y(3) = 9 − 18 + 5 = −4."],
+          ["Знайдіть область визначення функції y = √(x − 2).", ["x ≥ 2", "x > 2", "x ≤ 2", "x ≠ 2", "x ≥ 0"], "А", "x − 2 ≥ 0 ⇒ x ≥ 2."],
+          ["При яких x функція y = 2x − 6 набуває додатних значень?", ["x > 3", "x < 3", "x > −3", "x ≥ 3", "x > 6"], "А", "2x − 6 > 0 ⇒ x > 3."],
+          ["Знайдіть точку перетину прямих y = 2x + 1 та y = 5.", ["(2; 5)", "(5; 2)", "(1; 5)", "(3; 5)", "(2; 1)"], "А", "2x + 1 = 5 ⇒ 2x = 4 ⇒ x = 2; y = 5 ⇒ (2; 5)."],
+          ["Яка множина значень функції y = x² + 3?", ["[3; +∞)", "(−∞; +∞)", "[0; +∞)", "(3; +∞)", "[−3; +∞)"], "А", "Оскільки x² ≥ 0, то x² + 3 ≥ 3 ⇒ [3; +∞)."],
+          ["Знайдіть нулі функції f(x) = x² − 5x + 6.", ["2 та 3", "−2 та −3", "1 та 6", "5 та 6", "0 та 6"], "А", "x² − 5x + 6 = 0 ⇒ x = 2 або x = 3."],
+          ["Яка функція спадає на всій числовій прямій?", ["y = −0,5x + 4", "y = 0,5x + 4", "y = x²", "y = 2^x", "y = x"], "А", "Кутовий коефіцієнт k = −0,5 < 0 ⇒ функція спадає."],
+          ["Знайдіть значення x, при якому f(x) = 3x − 2 дорівнює 10.", ["4", "8/3", "6", "−4", "12"], "А", "3x − 2 = 10 ⇒ 3x = 12 ⇒ x = 4."],
+          ["Графік якої функції отримано зсувом y = x² на 2 одиниці вправо?", ["y = (x − 2)²", "y = (x + 2)²", "y = x² − 2", "y = x² + 2", "y = −x²"], "А", "Зсув вправо на 2 одиниці відповідає заміні x на (x − 2)."],
+          ["Графік якої функції отримано зсувом y = x² на 3 одиниці вгору?", ["y = x² + 3", "y = x² − 3", "y = (x + 3)²", "y = (x − 3)²", "y = 3x²"], "А", "Зсув вгору на 3 одиниці додає +3 до всієї функції."],
+          ["Знайдіть найменше значення функції y = (x − 1)² + 5.", ["5", "1", "−1", "6", "4"], "А", "Найменше значення (x − 1)² дорівнює 0, тому y_min = 0 + 5 = 5."],
+          ["При якому x значення функції y = −3x + 9 дорівнює 0?", ["3", "−3", "9", "−9", "0"], "А", "−3x + 9 = 0 ⇒ x = 3."],
+          ["Скільки точок перетину мають графіки y = x² та y = 9?", ["2", "1", "0", "3", "4"], "А", "x² = 9 ⇒ x = 3 і x = −3 — дві точки перетину."],
+          ["Знайдіть значення виразу f(2) − f(1), якщо f(x) = 5x.", ["5", "10", "15", "2", "1"], "А", "f(2) − f(1) = 10 − 5 = 5."]
+        ]
+      },
+      {
+        id: 10, sec: "Алгебра", title: "Похідна", diff: "2/3", mins: 35, group: "functions",
+        note: {
+          def: "Похідна f'(x₀) характеризує швидкість зміни функції та кутовий коефіцієнт дотичної.",
+          odz: "Застосовується у точках, де функція диференційовна; у складній функції множимо на похідну внутрішньої.",
+          formulas: [
+            { f: "(x^n)' = n · x^(n−1),   (C)' = 0", e: "Похідна степеня та константи." },
+            { f: "(sin x)' = cos x,   (cos x)' = −sin x,   (e^x)' = e^x", e: "Базові табличні похідні." }
+          ],
+          tip: "У точках екстремуму похідна дорівнює нулю або не існує."
+        },
+        easy: [
+          ["Знайдіть похідну функції f(x) = x⁴.", ["4x³", "x³", "3x⁴", "4x⁴", "12x³"], "А", "(x^n)' = n · x^(n−1) ⇒ 4x³."],
+          ["Знайдіть похідну функції f(x) = 7x.", ["7", "7x", "0", "1", "x"], "А", "(kx)' = k ⇒ 7."],
+          ["Знайдіть похідну функції f(x) = 12.", ["0", "12", "1", "12x", "−12"], "А", "Похідна сталої (константи) дорівнює 0."],
+          ["Знайдіть похідну функції f(x) = sin x.", ["cos x", "−cos x", "sin x", "−sin x", "tg x"], "А", "(sin x)' = cos x."],
+          ["Знайдіть похідну функції f(x) = cos x.", ["−sin x", "sin x", "cos x", "−cos x", "ctg x"], "А", "(cos x)' = −sin x."],
+          ["Знайдіть похідну функції f(x) = x² + 5x.", ["2x + 5", "2x", "x + 5", "2x + 5x", "x² + 5"], "А", "(x²)' + (5x)' = 2x + 5."],
+          ["Знайдіть f'(1), якщо f(x) = 3x².", ["6", "3", "12", "0", "2"], "А", "f'(x) = 6x ⇒ f'(1) = 6 · 1 = 6."],
+          ["Знайдіть похідну функції f(x) = e^x.", ["e^x", "x · e^(x−1)", "1", "e", "ln x"], "А", "(e^x)' = e^x."],
+          ["Знайдіть похідну функції f(x) = x⁵.", ["5x⁴", "4x⁵", "5x⁵", "x⁴", "20x³"], "А", "(x⁵)' = 5x⁴."],
+          ["Знайдіть похідну функції f(x) = 4 − 2x.", ["−2", "2", "4", "−2x", "0"], "А", "(4)' − (2x)' = 0 − 2 = −2."],
+          ["Знайдіть f'(0), якщо f(x) = x³ + 2x + 9.", ["2", "9", "0", "3", "11"], "А", "f'(x) = 3x² + 2 ⇒ f'(0) = 2."],
+          ["Чому дорівнює кутовий коефіцієнт дотичної до графіка f(x) у точці x₀?", ["f'(x₀)", "f(x₀)", "−f'(x₀)", "1 / f'(x₀)", "0"], "А", "Геометричний зміст похідної: k_дотичної = f'(x₀)."],
+          ["Знайдіть похідну функції f(x) = 6x³.", ["18x²", "6x²", "9x²", "18x³", "3x²"], "А", "6 · 3x² = 18x²."],
+          ["Знайдіть похідну функції f(x) = x + 1.", ["1", "x", "0", "2", "1 + x"], "А", "(x)' + (1)' = 1 + 0 = 1."],
+          ["Знайдіть f'(2), якщо f(x) = 5x.", ["5", "10", "2", "0", "25"], "А", "f'(x) = 5 ⇒ f'(2) = 5."]
+        ],
+        hard: [
+          ["Знайдіть f'(2), якщо f(x) = x³ − 3x + 1.", ["9", "12", "6", "3", "5"], "А", "f'(x) = 3x² − 3 ⇒ f'(2) = 3·4 − 3 = 9."],
+          ["Знайдіть критичну точку функції f(x) = x² − 8x + 3.", ["4", "−4", "8", "3", "0"], "А", "f'(x) = 2x − 8 = 0 ⇒ x = 4."],
+          ["При яких x похідна функції f(x) = x² − 6x додатна?", ["x > 3", "x < 3", "x > 6", "x < 6", "x > 0"], "А", "f'(x) = 2x − 6 > 0 ⇒ x > 3."],
+          ["Знайдіть похідну функції f(x) = (2x + 1)⁴.", ["8(2x + 1)³", "4(2x + 1)³", "2(2x + 1)³", "8(2x + 1)⁴", "(2x + 1)³"], "А", "4(2x + 1)³ · (2x + 1)' = 4(2x + 1)³ · 2 = 8(2x + 1)³."],
+          ["Знайдіть похідну функції f(x) = sin(3x).", ["3 cos(3x)", "cos(3x)", "−3 cos(3x)", "3 sin(3x)", "−cos(3x)"], "А", "(sin(3x))' = cos(3x) · (3x)' = 3 cos(3x)."],
+          ["Знайдіть f'(π), якщо f(x) = cos x.", ["0", "1", "−1", "π", "−π"], "А", "f'(x) = −sin x ⇒ f'(π) = −sin π = 0."],
+          ["Знайдіть похідну функції f(x) = x² · e^x? Ні, простіше: f(x) = x² + 1/x при x > 0, f'(1) = ?", ["1", "3", "2", "0", "−1"], "А", "f'(x) = 2x − 1/x² ⇒ f'(1) = 2(1) − 1/1 = 1."],
+          ["Точка рухається за законом s(t) = 3t² + 2t. Знайдіть швидкість v(2).", ["14", "16", "12", "8", "10"], "А", "v(t) = s'(t) = 6t + 2 ⇒ v(2) = 6 · 2 + 2 = 14."],
+          ["Знайдіть точку максимуму функції f(x) = −x² + 4x + 1.", ["2", "−2", "4", "1", "5"], "А", "f'(x) = −2x + 4 = 0 ⇒ x = 2 (оскільки вітки параболи вниз, це максимум)."],
+          ["Знайдіть тангенс кута нахилу дотичної до y = x³ у точці x₀ = 1.", ["3", "1", "2", "0", "6"], "А", "tg α = f'(1) = 3 · 1² = 3."],
+          ["Знайдіть похідну функції f(x) = 4x³ − 2x² + 7.", ["12x² − 4x", "12x² − 4x + 7", "4x² − 2x", "12x³ − 4x", "24x − 4"], "А", "Почленне диференціювання: 12x² − 4x + 0."],
+          ["При яких x функція f(x) = x³ − 3x спадає?", ["(−1; 1)", "(−∞; −1) ∪ (1; +∞)", "(0; 3)", "(−3; 3)", "(1; +∞)"], "А", "f'(x) = 3x² − 3 < 0 ⇒ x² < 1 ⇒ −1 < x < 1."],
+          ["Знайдіть похідну функції f(x) = ln x при x > 0.", ["1/x", "x", "e^x", "−1/x", "ln x"], "А", "(ln x)' = 1/x для x > 0."],
+          ["Знайдіть значення похідної f'(−1), якщо f(x) = 5x² + 2x.", ["−8", "8", "−12", "12", "−3"], "А", "f'(x) = 10x + 2 ⇒ f'(−1) = 10(−1) + 2 = −8."],
+          ["Скільки точок екстремуму має функція f(x) = x² + 2x + 5?", ["1", "2", "0", "3", "5"], "А", "f'(x) = 2x + 2 = 0 ⇒ x = −1 — одна точка мінімуму."]
+        ]
+      },
+      {
+        id: 11, sec: "Алгебра", title: "Первісна та визначений інтеграл", diff: "2/3", mins: 35, group: "functions",
+        note: {
+          def: "F(x) — первісна для f(x), якщо F'(x) = f(x). Визначений інтеграл обчислюється за формулою Ньютона — Лейбніца.",
+          odz: "Функція має бути інтегровною на відрізку інтегрування [a; b].",
+          formulas: [
+            { f: "∫ x^n dx = x^(n+1)/(n+1) + C   (n ≠ −1)", e: "Первісна степеневої функції." },
+            { f: "∫_a^b f(x) dx = F(b) − F(a)", e: "Формула Ньютона — Лейбніца." }
+          ],
+          tip: "Перевіряй первісну диференціюванням."
+        },
+        easy: [
+          ["Яка функція є первісною для f(x) = 2x?", ["x² + 5", "2", "x³", "2x²", "1"], "А", "(x² + 5)' = 2x."],
+          ["Яка функція є первісною для f(x) = 4?", ["4x − 1", "0", "4x²", "x⁴", "4"], "А", "(4x − 1)' = 4."],
+          ["Яка функція є первісною для f(x) = cos x?", ["sin x", "−sin x", "cos x", "−cos x", "tg x"], "А", "(sin x)' = cos x."],
+          ["Яка функція є первісною для f(x) = sin x?", ["−cos x", "cos x", "sin x", "−sin x", "ctg x"], "А", "(−cos x)' = −(−sin x) = sin x."],
+          ["Обчисліть визначений інтеграл ∫₀³ 2 dx.", ["6", "3", "5", "9", "0"], "А", "[2x]₀³ = 2·3 − 2·0 = 6."],
+          ["Обчисліть визначений інтеграл ∫₀¹ 5 dx.", ["5", "1", "0", "10", "2,5"], "А", "[5x]₀¹ = 5·1 − 5·0 = 5."],
+          ["Яка функція є первісною для f(x) = x²?", ["x³/3 + C", "2x", "x³", "3x²", "x²/2"], "А", "(x³/3 + C)' = 3x²/3 = x²."],
+          ["Обчисліть визначений інтеграл ∫₁² 3 dx.", ["3", "6", "9", "1,5", "0"], "А", "[3x]₁² = 3·2 − 3·1 = 6 − 3 = 3."],
+          ["Яка функція є первісною для f(x) = e^x?", ["e^x + 3", "x·e^x", "e^(x+1)", "ln x", "1"], "А", "(e^x + 3)' = e^x."],
+          ["Обчисліть визначений інтеграл ∫₀² x dx.", ["2", "4", "1", "3", "0"], "А", "[x²/2]₀² = 4/2 − 0 = 2."],
+          ["Скільки первісних має функція f(x) = x на всій осі R?", ["Безліч", "1", "2", "0", "3"], "А", "Будь-яка функція виду x²/2 + C є первісною для x."],
+          ["Обчисліть визначений інтеграл ∫₂² f(x) dx.", ["0", "2", "4", "f(2)", "1"], "А", "Інтеграл з однаковими верхньою та нижньою межами дорівнює 0."],
+          ["Яка функція є первісною для f(x) = 3x²?", ["x³ + 7", "6x", "3x³", "x²", "x⁴/4"], "А", "(x³ + 7)' = 3x²."],
+          ["Обчисліть ∫₀¹ 1 dx.", ["1", "0", "2", "0,5", "1/2"], "А", "[x]₀¹ = 1 − 0 = 1."],
+          ["Яка функція є первісною для f(x) = 0?", ["C (будь-яка стала)", "x", "1", "0", "x²"], "А", "Похідна будь-якої константи дорівнює 0."]
+        ],
+        hard: [
+          ["Обчисліть визначений інтеграл ∫₀² 3x² dx.", ["8", "4", "12", "6", "2"], "А", "[x³]₀² = 2³ − 0³ = 8."],
+          ["Обчисліть визначений інтеграл ∫₁³ 2x dx.", ["8", "6", "9", "4", "12"], "А", "[x²]₁³ = 3² − 1² = 9 − 1 = 8."],
+          ["Обчисліть визначений інтеграл ∫₀¹ (3x² + 2x) dx.", ["2", "3", "5", "1", "4"], "А", "[x³ + x²]₀¹ = (1 + 1) − 0 = 2."],
+          ["Обчисліть визначений інтеграл ∫₀^(π/2) cos x dx.", ["1", "0", "−1", "π/2", "1/2"], "А", "[sin x]₀^(π/2) = sin(π/2) − sin 0 = 1 − 0 = 1."],
+          ["Знайдіть площу криволінійної трапеції, обмеженої y = x², y = 0, x = 0, x = 3.", ["9", "27", "3", "6", "18"], "А", "S = ∫₀³ x² dx = [x³/3]₀³ = 27/3 = 9."],
+          ["Обчисліть визначений інтеграл ∫₁² (1/x) dx.", ["ln 2", "1/2", "1", "ln 3", "2"], "А", "[ln x]₁² = ln 2 − ln 1 = ln 2."],
+          ["Знайдіть первісну F(x) для f(x) = 4x, якщо F(0) = 5.", ["2x² + 5", "4x² + 5", "2x²", "4x + 5", "x² + 5"], "А", "F(x) = 2x² + C; F(0) = C = 5 ⇒ 2x² + 5."],
+          ["Обчисліть ∫₀¹ 4x³ dx.", ["1", "4", "2", "0,25", "3"], "А", "[x⁴]₀¹ = 1⁴ − 0⁴ = 1."],
+          ["Обчисліть ∫₁⁴ (1/√x) dx.", ["2", "3", "1", "4", "1,5"], "А", "[2√x]₁⁴ = 2·2 − 2·1 = 4 − 2 = 2."],
+          ["Обчисліть ∫₀² (4 − x) dx.", ["6", "8", "4", "2", "10"], "А", "[4x − x²/2]₀² = (8 − 2) − 0 = 6."],
+          ["Обчисліть ∫₀^(π) sin x dx.", ["2", "0", "1", "−2", "π"], "А", "[−cos x]₀^π = −cos π − (−cos 0) = 1 + 1 = 2."],
+          ["Обчисліть ∫₂⁴ 5 dx.", ["10", "20", "5", "15", "8"], "А", "[5x]₂⁴ = 20 − 10 = 10."],
+          ["Обчисліть ∫₀¹ e^x dx.", ["e − 1", "e + 1", "e", "1", "0"], "А", "[e^x]₀¹ = e¹ − e⁰ = e − 1."],
+          ["Знайдіть площу фігури, обмеженої y = 4, y = 0, x = 1, x = 3.", ["8", "12", "4", "6", "16"], "А", "Прямокутник шириною 3 − 1 = 2 і висотою 4: S = 2 · 4 = 8."],
+          ["Обчисліть ∫₀³ (2x + 1) dx.", ["12", "9", "15", "6", "10"], "А", "[x² + x]₀³ = (9 + 3) − 0 = 12."]
+        ]
+      },
+      {
+        id: 12, sec: "Алгебра", title: "Елементи комбінаторики, ймовірність та статистика", diff: "2/3", mins: 35, group: "algebra",
+        note: {
+          def: "Класична ймовірність P(A) = m / n; статистика описує дані через середнє, моду та медіану.",
+          odz: "0 ≤ P(A) ≤ 1; для медіани ряд чисел спочатку впорядковують.",
+          formulas: [
+            { f: "P(A) = m / n,   P(не A) = 1 − P(A)", e: "Класична ймовірність і протилежна подія." },
+            { f: "C_n^k = n! / (k!(n − k)!)", e: "Число комбінацій." }
+          ],
+          tip: "Медіана — це значення посередині впорядкованого ряду."
+        },
+        easy: [
+          ["У коробці 3 червоні та 7 синіх олівців. Яка ймовірність навмання взяти червоний?", ["0,3", "0,7", "3/7", "1/3", "0,5"], "А", "Усього 10 олівців; P = 3 / 10 = 0,3."],
+          ["Кидають один гральний кубик. Яка ймовірність випадіння числа 6?", ["1/6", "1/2", "1/3", "5/6", "1/4"], "А", "Один сприятливий результат із 6 можливих ⇒ 1/6."],
+          ["Знайдіть моду ряду чисел: 2, 5, 5, 7, 9.", ["5", "2", "7", "9", "5,2"], "А", "Число 5 зустрічається найчастіше (двічі)."],
+          ["Знайдіть середнє арифметичне чисел: 4, 6, 8.", ["6", "18", "5", "7", "4"], "А", "(4 + 6 + 8) / 3 = 18 / 3 = 6."],
+          ["Ймовірність події дорівнює 0,25. Яка ймовірність, що ця подія не відбудеться?", ["0,75", "0,25", "1", "0,5", "0,8"], "А", "1 − 0,25 = 0,75."],
+          ["У лотереї 20 квитків, з них 4 виграшні. Яка ймовірність виграти?", ["0,2", "0,25", "0,8", "0,04", "0,5"], "А", "4 / 20 = 1/5 = 0,2."],
+          ["Знайдіть медіану впорядкованого ряду: 3, 5, 8, 12, 15.", ["8", "5", "12", "8,6", "10"], "А", "Посередині з п'яти чисел стоїть третє число — 8."],
+          ["Скільки всього можливих результатів при підкиданні однієї монети?", ["2", "1", "4", "3", "6"], "А", "Герб або число — 2 результати."],
+          ["У класі 25 учнів, 10 з них відвідують математичний гурток. Яка ймовірність обрати учня з гуртка?", ["0,4", "0,6", "0,25", "0,1", "0,5"], "А", "10 / 25 = 2/5 = 0,4."],
+          ["Яка ймовірність неможливої події?", ["0", "1", "0,5", "−1", "1/6"], "А", "Неможлива подія має ймовірність 0."],
+          ["Яка ймовірність вірогідної події?", ["1", "0", "0,5", "100", "2"], "А", "Вірогідна подія має ймовірність 1."],
+          ["Знайдіть розмах ряду чисел: 11, 4, 19, 8.", ["15", "7", "11", "8", "14"], "А", "Розмах = max − min = 19 − 4 = 15."],
+          ["У вазі 6 яблук і 4 груші. Яка ймовірність взяти грушу?", ["0,4", "0,6", "2/3", "1/4", "0,5"], "А", "Усього 10 фруктів; 4 / 10 = 0,4."],
+          ["Скільки існує двоцифрових чисел, складених з цифр 1 і 2 (цифри можуть повторюватися)?", ["4", "2", "6", "8", "3"], "А", "11, 12, 21, 22 — усього 2 · 2 = 4 числа."],
+          ["Знайдіть середнє арифметичне чисел: 10, 20, 30, 40.", ["25", "20", "30", "100", "24"], "А", "(10 + 20 + 30 + 40) / 4 = 100 / 4 = 25."]
+        ],
+        hard: [
+          ["Кидають гральний кубик. Яка ймовірність випадіння парного числа очок?", ["1/2", "1/3", "1/6", "2/3", "3/4"], "А", "Парні грані: 2, 4, 6 — 3 із 6 ⇒ 3/6 = 1/2."],
+          ["Скількома способами можна обрати 2 чергових із 5 учнів?", ["10", "20", "5", "25", "12"], "А", "C₅² = (5 · 4) / (2 · 1) = 10."],
+          ["У мішку 4 білі, 5 чорних і 1 зелена куля. Яка ймовірність витягнути не чорну кулю?", ["0,5", "0,4", "0,1", "0,6", "0,2"], "А", "Не чорних куль: 4 + 1 = 5 із 10 ⇒ 5/10 = 0,5."],
+          ["Знайдіть медіану ряду: 2, 4, 8, 10.", ["6", "4", "8", "5", "7"], "А", "Парна кількість чисел: (4 + 8) / 2 = 6."],
+          ["Скількома способами 3 друзів можуть сісти в один ряд на 3 стільці?", ["6", "3", "9", "12", "1"], "А", "3! = 3 · 2 · 1 = 6."],
+          ["Ймовірність влучити в мішень при одному пострілі становить 0,7. Яка ймовірність промахнутися двічі поспіль при незалежних пострілах?", ["0,09", "0,49", "0,21", "0,3", "0,6"], "А", "Промах = 1 − 0,7 = 0,3; 0,3 · 0,3 = 0,09."],
+          ["У колоді 36 карт, з них 4 тузи. Яка ймовірність витягнути туза?", ["1/9", "1/36", "4/9", "1/4", "1/13"], "А", "4 / 36 = 1/9."],
+          ["Скільки різних трицифрових чисел можна скласти з цифр 1, 2, 3 без повторення цифр?", ["6", "9", "3", "27", "12"], "А", "3! = 6 трицифрових чисел."],
+          ["Середнє арифметичне 5 чисел дорівнює 12. Чому дорівнює сума цих 5 чисел?", ["60", "17", "2,4", "50", "72"], "А", "Сума = 5 · 12 = 60."],
+          ["У коробці 8 синіх і 12 жовтих ручок. Яка ймовірність взяти синю ручку?", ["0,4", "0,6", "2/3", "8/12", "0,2"], "А", "Усього 20 ручок; 8 / 20 = 0,4."],
+          ["Скільки є способів обрати 1 старосту і 1 заступника з 6 кандидатів (різні посади)?", ["30", "15", "12", "36", "6"], "А", "6 · 5 = 30 способів."],
+          ["Кидають два гральні кубики. Скільки всього рівноймовірних елементарних наслідків?", ["36", "12", "6", "18", "24"], "А", "6 · 6 = 36."],
+          ["У вибірці чисел: 1, 3, 3, 7, 8. Чому дорівнює різниця між середнім арифметичним і модою?", ["0,4", "1", "0,6", "3,4", "2"], "А", "Середнє = (1+3+3+7+8)/5 = 22/5 = 4,4; мода = 3; 4,4 − 3 = 1,4? Перевіримо: 22/5 = 4,4, 4,4 − 3 = 1,4."],
+          ["Яка ймовірність при киданні кубика отримати число, менше за 5?", ["2/3", "4/6", "1/2", "5/6", "1/3"], "А", "Підходять 1, 2, 3, 4 — 4 із 6 ⇒ 4/6 = 2/3."],
+          ["Скільки існує способів скласти команду з 3 осіб із 4 учасників?", ["4", "12", "3", "6", "8"], "А", "C₄³ = C₄¹ = 4."]
+        ]
+      },
+      {
+        id: 13, sec: "Геометрія", title: "Планіметрія: трикутники, чотирикутники та кути", diff: "2/3", mins: 40, group: "planimetry",
+        note: {
+          def: "Сума кутів трикутника дорівнює 180°. У прямокутному трикутнику виконується теорема Піфагора c² = a² + b².",
+          odz: "Довжини сторін, висот і площі завжди додатні (> 0).",
+          formulas: [
+            { f: "c² = a² + b²,   S_трик = (1/2) a · h_a", e: "Теорема Піфагора та площа трикутника." },
+            { f: "S_трап = ((a + b)/2) · h,   S_ромба = (1/2) d₁ d₂", e: "Площі трапеції та ромба." }
+          ],
+          tip: "Катет проти кута 30° дорівнює половині гіпотенузи."
+        },
+        easy: [
+          ["Чому дорівнює сума внутрішніх кутів будь-якого трикутника?", ["180°", "90°", "360°", "270°", "120°"], "А", "Сума кутів трикутника завжди дорівнює 180°."],
+          ["Знайдіть площу прямокутника зі сторонами 5 см і 8 см.", ["40 см²", "26 см²", "13 см²", "20 см²", "80 см²"], "А", "S = 5 · 8 = 40 см²."],
+          ["Знайдіть периметр квадрата зі стороною 7 см.", ["28 см", "49 см", "14 см", "21 см", "35 см"], "А", "P = 4 · 7 = 28 см."],
+          ["Два кути трикутника дорівнюють 50° і 70°. Знайдіть третій кут.", ["60°", "120°", "50°", "70°", "90°"], "А", "180° − (50° + 70°) = 60°."],
+          ["У прямокутному трикутнику один гострий кут дорівнює 35°. Знайдіть інший гострий кут.", ["55°", "145°", "35°", "65°", "45°"], "А", "90° − 35° = 55°."],
+          ["Знайдіть гіпотенузу прямокутного трикутника з катетами 3 см і 4 см.", ["5 см", "7 см", "12 см", "25 см", "6 см"], "А", "√(3² + 4²) = √25 = 5 см."],
+          ["Знайдіть площу трикутника з основою 10 см і висотою 6 см.", ["30 см²", "60 см²", "16 см²", "20 см²", "15 см²"], "А", "S = (1/2) · 10 · 6 = 30 см²."],
+          ["Суміжні кути відносяться як 1 : 2. Знайдіть менший кут.", ["60°", "120°", "30°", "90°", "45°"], "А", "Сума суміжних кутів 180°; 180° / 3 = 60°."],
+          ["Знайдіть площу паралелограма, якщо сторона 9 см, а проведена до неї висота 4 см.", ["36 см²", "18 см²", "26 см²", "13 см²", "72 см²"], "А", "S = a · h = 9 · 4 = 36 см²."],
+          ["У рівнобедреному трикутнику бічна сторона 8 см. Яка друга бічна сторона?", ["8 см", "4 см", "16 см", "6 см", "10 см"], "А", "У рівнобедреному трикутнику бічні сторони рівні: 8 см."],
+          ["Чому дорівнює сума кутів опуклого чотирикутника?", ["360°", "180°", "540°", "270°", "90°"], "А", "(4 − 2) · 180° = 360°."],
+          ["Знайдіть площу квадрата зі стороною 9 см.", ["81 см²", "36 см²", "18 см²", "27 см²", "72 см²"], "А", "S = 9² = 81 см²."],
+          ["Катет прямокутного трикутника проти кута 30° дорівнює 6 см. Знайдіть гіпотенузу.", ["12 см", "3 см", "6√3 см", "9 см", "18 см"], "А", "Гіпотенуза удвічі більша за катет проти 30°: 2 · 6 = 12 см."],
+          ["Вертикальні кути рівні. Один з них дорівнює 115°. Чому дорівнює інший?", ["115°", "65°", "230°", "75°", "90°"], "А", "Вертикальні кути рівні: 115°."],
+          ["Периметр рівностороннього трикутника дорівнює 24 см. Знайдіть його сторону.", ["8 см", "6 см", "12 см", "4 см", "72 см"], "А", "24 / 3 = 8 см."]
+        ],
+        hard: [
+          ["Знайдіть площу трапеції з основами 6 см і 10 см та висотою 5 см.", ["40 см²", "80 см²", "30 см²", "50 см²", "20 см²"], "А", "S = ((6 + 10) / 2) · 5 = 8 · 5 = 40 см²."],
+          ["Діагоналі ромба дорівнюють 6 см і 8 см. Знайдіть його площу.", ["24 см²", "48 см²", "14 см²", "12 см²", "28 см²"], "А", "S = (1/2) · 6 · 8 = 24 см²."],
+          ["Гіпотенуза прямокутного трикутника дорівнює 13 см, один катет — 5 см. Знайдіть інший катет.", ["12 см", "8 см", "18 см", "√194 см", "10 см"], "А", "√(13² − 5²) = √(169 − 25) = √144 = 12 см."],
+          ["Кут при вершині рівнобедреного трикутника дорівнює 40°. Знайдіть кут при основі.", ["70°", "140°", "40°", "80°", "50°"], "А", "(180° − 40°) / 2 = 140° / 2 = 70°."],
+          ["У прямокутному трикутнику катети 6 см і 8 см. Знайдіть його площу.", ["24 см²", "48 см²", "14 см²", "30 см²", "12 см²"], "А", "S = (1/2) · 6 · 8 = 24 см²."],
+          ["Знайдіть площу рівностороннього трикутника зі стороною 4 см.", ["4√3 см²", "8√3 см²", "16√3 см²", "2√3 см²", "8 см²"], "А", "S = (a²√3)/4 = (16√3)/4 = 4√3 см²."],
+          ["Середня лінія трикутника дорівнює 7 см. Яка довжина паралельної їй сторони?", ["14 см", "3,5 см", "21 см", "10 см", "7 см"], "А", "Середня лінія дорівнює половині основи, тому основа = 2 · 7 = 14 см."],
+          ["Середня лінія трапеції дорівнює 12 см, а одна з основ — 8 см. Знайдіть другу основу.", ["16 см", "4 см", "20 см", "10 см", "24 см"], "А", "(8 + b) / 2 = 12 ⇒ 8 + b = 24 ⇒ b = 16 см."],
+          ["Сума двох протилежних кутів паралелограма дорівнює 100°. Знайдіть кожен із цих кутів.", ["50°", "130°", "100°", "80°", "40°"], "А", "Протилежні кути паралелограма рівні: 100° / 2 = 50°."],
+          ["Більший кут паралелограма на 40° більший за менший. Знайдіть менший кут.", ["70°", "110°", "40°", "80°", "60°"], "А", "x + (x + 40°) = 180° ⇒ 2x = 140° ⇒ x = 70°."],
+          ["Два подібні трикутники мають коефіцієнт подібності k = 3. У скільки разів площа більшого більша за площу меншого?", ["9", "3", "6", "12", "27"], "А", "Відношення площ подібних фігур дорівнює k² = 3² = 9."],
+          ["У прямокутнику діагональ дорівнює 10 см, а одна сторона — 6 см. Знайдіть іншу сторону.", ["8 см", "4 см", "16 см", "√136 см", "6 см"], "А", "√(10² − 6²) = √64 = 8 см."],
+          ["Зовнішній кут при вершині трикутника дорівнює 125°. Знайдіть суміжний з ним внутрішній кут.", ["55°", "125°", "35°", "65°", "235°"], "А", "180° − 125° = 55°."],
+          ["Периметр ромба дорівнює 36 см. Знайдіть довжину його сторони.", ["9 см", "18 см", "6 см", "12 см", "4 см"], "А", "Усі 4 сторони ромба рівні: 36 / 4 = 9 см."],
+          ["Висота прямокутного трикутника, проведена до гіпотенузи, ділить її на відрізки 4 см і 9 см. Знайдіть висоту.", ["6 см", "13 см", "5 см", "36 см", "4,5 см"], "А", "h = √(4 · 9) = √36 = 6 см."]
+        ]
+      },
+      {
+        id: 14, sec: "Геометрія", title: "Коло, круг та вписані/описані многокутники", diff: "2/3", mins: 35, group: "planimetry",
+        note: {
+          def: "Вписаний кут дорівнює половині центрального кута, що спирається на ту саму дугу.",
+          odz: "Радіус R > 0; радіус у точку дотику перпендикулярний до дотичної.",
+          formulas: [
+            { f: "C = 2πR,   S_круга = πR²", e: "Довжина кола та площа круга." },
+            { f: "∠вписаний = (1/2) · ∠центральний", e: "Властивість вписаного і центрального кутів." }
+          ],
+          tip: "Вписаний кут, що спирається на діаметр, дорівнює 90°."
+        },
+        easy: [
+          ["Радіус кола дорівнює 6 см. Знайдіть його діаметр.", ["12 см", "3 см", "6 см", "36 см", "18 см"], "А", "d = 2R = 2 · 6 = 12 см."],
+          ["Діаметр кола дорівнює 14 см. Знайдіть його радіус.", ["7 см", "28 см", "14 см", "49 см", "3,5 см"], "А", "R = d / 2 = 14 / 2 = 7 см."],
+          ["Чому дорівнює довжина кола радіуса R?", ["2πR", "πR²", "πd²", "πR", "4πR"], "А", "Формула довжини кола: C = 2πR."],
+          ["Чому дорівнює площа круга радіуса R?", ["πR²", "2πR", "πd", "2πR²", "πR"], "А", "Формула площі круга: S = πR²."],
+          ["Центральний кут спирається на дугу 80°. Чому дорівнює цей центральний кут?", ["80°", "40°", "160°", "100°", "280°"], "А", "Величина центрального кута дорівнює градусній мірі дуги, на яку він спирається: 80°."],
+          ["Вписаний кут спирається на дугу 70°. Знайдіть величину цього вписаного кута.", ["35°", "70°", "140°", "110°", "20°"], "А", "Вписаний кут дорівнює половині дуги: 70° / 2 = 35°."],
+          ["Чому дорівнює вписаний кут, який спирається на діаметр кола?", ["90°", "180°", "45°", "60°", "360°"], "А", "Дуга півкола 180°, вписаний кут дорівнює її половині — 90°."],
+          ["Який кут утворює дотична до кола з радіусом, проведеним у точку дотику?", ["90°", "45°", "60°", "180°", "30°"], "А", "Радіус у точку дотику перпендикулярний до дотичної (90°)."],
+          ["Знайдіть площу круга радіуса 3 см (відповідь через π).", ["9π см²", "6π см²", "3π см²", "18π см²", "12π см²"], "А", "S = π · 3² = 9π см²."],
+          ["Знайдіть довжину кола радіуса 5 см (відповідь через π).", ["10π см", "25π см", "5π см", "20π см", "15π см"], "А", "C = 2π · 5 = 10π см."],
+          ["Скільки всього градусів містить повне коло?", ["360°", "180°", "90°", "270°", "720°"], "А", "Повне коло становить 360°."],
+          ["Вписаний кут дорівнює 25°. Яка градусна міра дуги, на яку він спирається?", ["50°", "25°", "12,5°", "155°", "100°"], "А", "Дуга удвічі більша за вписаний кут: 2 · 25° = 50°."],
+          ["Якщо радіус круга збільшити у 2 рази, у скільки разів збільшиться його площа?", ["У 4 рази", "У 2 рази", "У 8 разів", "У 3 рази", "Не зміниться"], "А", "S' = π(2R)² = 4πR² — збільшиться у 4 рази."],
+          ["Хорда проходить через центр кола. Як вона називається?", ["Діаметр", "Радіус", "Дотична", "Січна", "Сегмент"], "А", "Хорда, що проходить через центр кола, — це діаметр."],
+          ["Центральний і вписаний кути спираються на одну дугу. Вписаний кут 30°. Чому дорівнює центральний?", ["60°", "30°", "15°", "120°", "90°"], "А", "Центральний кут удвічі більший за вписаний: 2 · 30° = 60°."]
+        ],
+        hard: [
+          ["Площа круга дорівнює 16π см². Знайдіть його радіус.", ["4 см", "8 см", "16 см", "2 см", "4π см"], "А", "πR² = 16π ⇒ R² = 16 ⇒ R = 4 см."],
+          ["Довжина кола дорівнює 12π см. Знайдіть його радіус.", ["6 см", "12 см", "3 см", "24 см", "36 см"], "А", "2πR = 12π ⇒ R = 6 см."],
+          ["Навколо квадрата зі стороною 6 см описано коло. Знайдіть діаметр цього кола.", ["6√2 см", "6 см", "12 см", "3√2 см", "9 см"], "А", "Діаметр описаного кола дорівнює діагоналі квадрата: a√2 = 6√2 см."],
+          ["У коло вписано квадрат зі стороною 8 см. Знайдіть радіус описаного кола.", ["4√2 см", "8 см", "4 см", "8√2 см", "16 см"], "А", "R = d / 2 = (8√2) / 2 = 4√2 см."],
+          ["З точки поза колом проведено дотичну завдовжки 12 см і січну, зовнішня частина якої 8 см. Знайдіть довжину всієї січної.", ["18 см", "16 см", "20 см", "15 см", "24 см"], "А", "Дотична² = зовнішня · вся січна: 144 = 8 · L ⇒ L = 18 см."],
+          ["Центральний кут сектору дорівнює 90°, радіус R = 4 см. Знайдіть площу сектору.", ["4π см²", "16π см²", "2π см²", "8π см²", "π см²"], "А", "90° / 360° = 1/4 круга; (1/4) · π · 16 = 4π см²."],
+          ["Вписаний кут спирається на дугу, що становить 1/6 кола. Знайдіть величину цього кута.", ["30°", "60°", "15°", "120°", "45°"], "А", "Дуга = 360° / 6 = 60°; вписаний кут = 60° / 2 = 30°."],
+          ["Навколо прямокутника зі сторонами 6 см і 8 см описано коло. Знайдіть його радіус.", ["5 см", "10 см", "7 см", "14 см", "6 см"], "А", "Діагональ прямокутника = √(36 + 64) = 10 см; R = 10 / 2 = 5 см."],
+          ["У чотирикутник можна вписати коло, якщо суми протилежних сторін рівні. Дві протилежні сторони 5 см і 9 см. Чому дорівнює сума інших двох?", ["14 см", "4 см", "7 см", "28 см", "10 см"], "А", "Сума протилежних сторін однакова: 5 + 9 = 14 см."],
+          ["Довжина дуги кола радіуса 6 см з центральним кутом 60° дорівнює:", ["2π см", "6π см", "3π см", "12π см", "π см"], "А", "l = 2πR · (60°/360°) = 12π · (1/6) = 2π см."],
+          ["Два кола мають радіуси 7 см і 3 см. Яка найбільша відстань між їхніми центрами, якщо вони дотикаються ззовні?", ["10 см", "4 см", "21 см", "5 см", "14 см"], "А", "При зовнішньому дотику відстань між центрами дорівнює R₁ + R₂ = 7 + 3 = 10 см."],
+          ["Два кола мають радіуси 9 см і 4 см. Яка відстань між центрами при внутрішньому дотику?", ["5 см", "13 см", "36 см", "4,5 см", "6 см"], "А", "При внутрішньому дотику відстань між центрами дорівнює |R₁ − R₂| = 9 − 4 = 5 см."],
+          ["Вписаний кут ABC дорівнює 40°. Знайдіть центральний кут AOC, що спирається на ту саму дугу.", ["80°", "40°", "20°", "140°", "100°"], "А", "Центральний кут удвічі більший за вписаний: 2 · 40° = 80°."],
+          ["У круг вписано рівносторонній трикутник зі стороною 3√3 см. Знайдіть радіус кола.", ["3 см", "6 см", "√3 см", "9 см", "4,5 см"], "А", "R = a / √3 = (3√3) / √3 = 3 см."],
+          ["Яка площа круга, діаметр якого дорівнює 10 см?", ["25π см²", "100π см²", "10π см²", "50π см²", "20π см²"], "А", "R = 5 см ⇒ S = π · 5² = 25π см²."]
+        ]
+      },
+      {
+        id: 15, sec: "Геометрія", title: "Стереометрія", diff: "3/3", mins: 40, group: "stereometry",
+        note: {
+          def: "Стереометрія вивчає просторові фігури (куб, паралелепіпед, піраміда, циліндр, конус, куля), їхні площі поверхонь та об'єми.",
+          odz: "Лінійні виміри, площі та об'єми просторових тіл додатні (> 0).",
+          formulas: [
+            { f: "V_куба = a³,   S_пов.куба = 6a²", e: "Об'єм і площа повної поверхні куба." },
+            { f: "V_цил = πR²h,   V_пірам = (1/3) S_осн · h,   V_кулі = (4/3)πR³", e: "Основні формули об'ємів фігур стереометрії." }
+          ],
+          tip: "При збільшенні лінійного розміру у k разів об'єм зростає у k³ разів."
+        },
+        easy: [
+          ["Ребро куба дорівнює 4 см. Знайдіть його об'єм.", ["64 см³", "16 см³", "24 см³", "48 см³", "12 см³"], "А", "V = a³ = 4³ = 64 см³."],
+          ["Ребро куба дорівнює 3 см. Знайдіть площу його повної поверхні.", ["54 см²", "27 см²", "9 см²", "36 см²", "18 см²"], "А", "S_пов = 6a² = 6 · 3² = 6 · 9 = 54 см²."],
+          ["Обчисліть об'єм прямокутного паралелепіпеда з вимірами 2 см, 3 см і 5 см.", ["30 см³", "10 см³", "62 см³", "15 см³", "25 см³"], "А", "V = a · b · c = 2 · 3 · 5 = 30 см³."],
+          ["Скільки граней має куб?", ["6", "8", "12", "4", "10"], "А", "Куб має 6 квадратних граней."],
+          ["Скільки вершин має куб?", ["8", "6", "12", "4", "10"], "А", "Куб має 8 вершин."],
+          ["Скільки ребер має куб?", ["12", "6", "8", "16", "10"], "А", "Куб має 12 ребер."],
+          ["Площа основи циліндра дорівнює 15 см², а висота — 4 см. Знайдіть його об'єм.", ["60 см³", "19 см³", "20 см³", "30 см³", "45 см³"], "А", "V = S_осн · h = 15 · 4 = 60 см³."],
+          ["Площа основи піраміди дорівнює 12 см², а висота — 5 см. Знайдіть її об'єм.", ["20 см³", "60 см³", "17 см³", "30 см³", "40 см³"], "А", "V = (1/3) · S_осн · h = (1/3) · 12 · 5 = 20 см³."],
+          ["Що є основою циліндра?", ["Круг", "Квадрат", "Трикутник", "Прямокутник", "Ромб"], "А", "Основами прямого циліндра є два рівні круги."],
+          ["Що є осьовим перерізом конуса?", ["Рівнобедрений трикутник", "Прямокутник", "Круг", "Трапеція", "Квадрат"], "А", "Осьовий переріз конуса — рівнобедрений трикутник."],
+          ["Знайдіть діагональ квадрата, що є гранню куба з ребром 5 см.", ["5√2 см", "5√3 см", "10 см", "25 см", "5 см"], "А", "Діагональ грані (квадрата) зі стороною a дорівнює a√2 = 5√2 см."],
+          ["Об'єм куба дорівнює 125 см³. Знайдіть довжину його ребра.", ["5 см", "25 см", "15 см", "10 см", "4 см"], "А", "a³ = 125 ⇒ a = 5 см."],
+          ["Радіус основи циліндра 3 см, висота 2 см. Знайдіть об'єм (через π).", ["18π см³", "12π см³", "6π см³", "9π см³", "24π см³"], "А", "V = πR²h = π · 9 · 2 = 18π см³."],
+          ["У скільки разів об'єм призми більший за об'єм піраміди з такими самими основою і висотою?", ["У 3 рази", "У 2 рази", "У 6 разів", "У 4 рази", "У 1,5 раза"], "А", "V_призми = Sh, V_піраміди = (1/3)Sh ⇒ у 3 рази."],
+          ["Знайдіть площу однієї грані куба з ребром 6 см.", ["36 см²", "24 см²", "216 см²", "12 см²", "18 см²"], "А", "Грань куба — квадрат: 6² = 36 см²."]
+        ],
+        hard: [
+          ["Ребро куба дорівнює 2 см. Знайдіть довжину просторової діагоналі куба.", ["2√3 см", "2√2 см", "6 см", "4 см", "8 см"], "А", "Діагональ куба d = a√3 = 2√3 см."],
+          ["Радіус кулі дорівнює 3 см. Знайдіть її об'єм (через π).", ["36π см³", "12π см³", "27π см³", "108π см³", "9π см³"], "А", "V = (4/3)πR³ = (4/3)π · 27 = 36π см³."],
+          ["Радіус кулі дорівнює 3 см. Знайдіть площу її поверхні (через π).", ["36π см²", "12π см²", "18π см²", "9π см²", "24π см²"], "А", "S = 4πR² = 4π · 9 = 36π см²."],
+          ["Твірна конуса дорівнює 5 см, а радіус основи — 3 см. Знайдіть висоту конуса.", ["4 см", "8 см", "2 см", "√34 см", "6 см"], "А", "h = √(l² − R²) = √(25 − 9) = √16 = 4 см."],
+          ["Радіус основи конуса 3 см, висота 4 см. Знайдіть об'єм конуса (через π).", ["12π см³", "36π см³", "9π см³", "24π см³", "6π см³"], "А", "V = (1/3)πR²h = (1/3)π · 9 · 4 = 12π см³."],
+          ["Ребро куба збільшили у 2 рази. У скільки разів збільшився його об'єм?", ["У 8 разів", "У 2 рази", "У 4 рази", "У 6 разів", "У 16 разів"], "А", "2³ = 8 разів."],
+          ["Площа бічної поверхні циліндра дорівнює 2πRh. Якщо R = 4 і h = 5, знайдіть S_біч.", ["40π", "20π", "80π", "32π", "10π"], "А", "S_біч = 2π · 4 · 5 = 40π."],
+          ["У правильній чотирикутній піраміді сторона основи 6 см, висота 4 см. Знайдіть об'єм.", ["48 см³", "144 см³", "24 см³", "96 см³", "36 см³"], "А", "S_осн = 36 см²; V = (1/3) · 36 · 4 = 48 см³."],
+          ["Виміри прямокутного паралелепіпеда 2 см, 3 см і 6 см. Знайдіть його діагональ.", ["7 см", "11 см", "√49 см? Ні, √(4+9+36) = 7 см", "36 см", "9 см"], "А", "d = √(2² + 3² + 6²) = √(4 + 9 + 36) = √49 = 7 см."],
+          ["Об'єм циліндра 48π см³, радіус основи 4 см. Знайдіть висоту циліндра.", ["3 см", "12 см", "6 см", "4 см", "2 см"], "А", "π · 16 · h = 48π ⇒ 16h = 48 ⇒ h = 3 см."],
+          ["Об'єм конуса 10π см³, площа основи 5π см². Знайдіть висоту конуса.", ["6 см", "2 см", "3 см", "15 см", "5 см"], "А", "V = (1/3) S_осн · h ⇒ 10π = (1/3) · 5π · h ⇒ h = 6 см."],
+          ["Площа повної поверхні куба дорівнює 96 см². Знайдіть довжину його ребра.", ["4 см", "16 см", "8 см", "6 см", "2 см"], "А", "6a² = 96 ⇒ a² = 16 ⇒ a = 4 см."],
+          ["Площа бічної поверхні конуса обчислюється за формулою πRl. Якщо R = 3, l = 7, знайдіть S_біч.", ["21π", "10π", "42π", "9π", "14π"], "А", "S_біч = π · 3 · 7 = 21π."],
+          ["У правильній трикутній призмі площа основи 10 см², висота 7 см. Знайдіть об'єм.", ["70 см³", "35 см³", "17 см³", "210 см³", "20 см³"], "А", "V = S_осн · h = 10 · 7 = 70 см³."],
+          ["Діагональ куба дорівнює 3√3 см. Знайдіть його об'єм.", ["27 см³", "9 см³", "81 см³", "18 см³", "3 см³"], "А", "Ребро a = 3 см ⇒ V = 3³ = 27 см³."]
+        ]
+      },
+      {
+        id: 16, sec: "Геометрія", title: "Координати та вектори на площині й у просторі", diff: "2/3", mins: 35, group: "planimetry",
+        note: {
+          def: "Координати вектора дорівнюють різниці координат кінця і початку; скалярний добуток допомагає перевіряти перпендикулярність.",
+          odz: "Довжина вектора невід'ємна (|a| ≥ 0).",
+          formulas: [
+            { f: "AB = (x_B − x_A; y_B − y_A),   |a| = √(x² + y²)", e: "Координати та довжина вектора." },
+            { f: "a · b = x₁x₂ + y₁y₂", e: "Скалярний добуток векторів." }
+          ],
+          tip: "Вектори перпендикулярні, якщо їхній скалярний добуток дорівнює 0."
+        },
+        easy: [
+          ["Знайдіть координати вектора AB, якщо A(1; 2) і B(4; 6).", ["(3; 4)", "(5; 8)", "(−3; −4)", "(3; 8)", "(4; 3)"], "А", "AB = (4 − 1; 6 − 2) = (3; 4)."],
+          ["Знайдіть довжину вектора a(3; 4).", ["5", "7", "12", "25", "1"], "А", "|a| = √(3² + 4²) = √25 = 5."],
+          ["Знайдіть суму векторів a(1; 2) і b(3; 5).", ["(4; 7)", "(2; 3)", "(3; 10)", "(4; 3)", "(−2; −3)"], "А", "a + b = (1 + 3; 2 + 5) = (4; 7)."],
+          ["Знайдіть координати середини відрізка з кінцями A(0; 0) і B(6; 8).", ["(3; 4)", "(6; 8)", "(12; 16)", "(4; 3)", "(3; 8)"], "А", "((0 + 6)/2; (0 + 8)/2) = (3; 4)."],
+          ["Знайдіть координати вектора 2a, якщо a(−2; 5).", ["(−4; 10)", "(−2; 10)", "(0; 7)", "(4; −10)", "(−4; 5)"], "А", "2a = (2 · (−2); 2 · 5) = (−4; 10)."],
+          ["Знайдіть різницю векторів a(5; 7) − b(2; 3).", ["(3; 4)", "(7; 10)", "(−3; −4)", "(3; 10)", "(10; 21)"], "А", "(5 − 2; 7 − 3) = (3; 4)."],
+          ["Які координати має нульовий вектор?", ["(0; 0)", "(1; 1)", "(0; 1)", "(1; 0)", "(−1; −1)"], "А", "Нульовий вектор має координати (0; 0)."],
+          ["Знайдіть відстань між точками A(0; 0) і B(0; 9).", ["9", "0", "81", "3", "18"], "А", "Відстань по вертикалі: |9 − 0| = 9."],
+          ["Знайдіть довжину вектора c(6; 8).", ["10", "14", "48", "100", "2"], "А", "|c| = √(6² + 8²) = √100 = 10."],
+          ["Знайдіть координати вектора MN, якщо M(2; 5) і N(2; 1).", ["(0; −4)", "(4; 6)", "(0; 4)", "(−4; 0)", "(2; −4)"], "А", "MN = (2 − 2; 1 − 5) = (0; −4)."],
+          ["Знайдіть абсцису середини відрізка між (−4; 2) і (6; 8).", ["1", "2", "5", "−1", "10"], "А", "x_сер = (−4 + 6) / 2 = 2 / 2 = 1."],
+          ["Знайдіть ординату середини відрізка між (1; 3) і (5; 9).", ["6", "3", "12", "4", "5"], "А", "y_сер = (3 + 9) / 2 = 12 / 2 = 6."],
+          ["Чи колінеарні вектори a(2; 4) і b(1; 2)?", ["Так", "Ні", "Лише перпендикулярні", "Залежить від кута", "Неможливо визначити"], "А", "a = 2b, тому вектори колінеарні."],
+          ["Знайдіть довжину вектора (0; −7).", ["7", "−7", "49", "0", "14"], "А", "√(0² + (−7)²) = 7."],
+          ["Знайдіть координати вектора −a, якщо a(3; −4).", ["(−3; 4)", "(3; 4)", "(−3; −4)", "(4; −3)", "(0; 0)"], "А", "Протилежний вектор має протилежні координати: (−3; 4)."]
+        ],
+        hard: [
+          ["Знайдіть скалярний добуток векторів a(2; 3) і b(4; −1).", ["5", "11", "−5", "8", "2"], "А", "a · b = 2 · 4 + 3 · (−1) = 8 − 3 = 5."],
+          ["При якому значенні k вектори a(k; 2) і b(3; −6) перпендикулярні?", ["4", "−4", "1", "−1", "2"], "А", "a · b = 3k − 12 = 0 ⇒ 3k = 12 ⇒ k = 4."],
+          ["Знайдіть відстань між точками A(1; 2) і B(4; 6).", ["5", "3", "4", "25", "7"], "А", "AB = √((4 − 1)² + (6 − 2)²) = √(9 + 16) = 5."],
+          ["Знайдіть координати вектора AB у просторі, якщо A(1; 0; 2) і B(3; 4; 5).", ["(2; 4; 3)", "(4; 4; 7)", "(−2; −4; −3)", "(2; 3; 4)", "(3; 4; 5)"], "А", "(3 − 1; 4 − 0; 5 − 2) = (2; 4; 3)."],
+          ["Знайдіть довжину вектора v(1; 2; 2) у просторі.", ["3", "5", "9", "√5", "4"], "А", "|v| = √(1² + 2² + 2²) = √(1 + 4 + 4) = √9 = 3."],
+          ["Знайдіть скалярний добуток векторів a(1; 2; 3) і b(2; 0; −1).", ["−1", "2", "5", "1", "0"], "А", "1 · 2 + 2 · 0 + 3 · (−1) = 2 + 0 − 3 = −1."],
+          ["Яке рівняння задає коло радіуса 5 з центром у початку координат (0; 0)?", ["x² + y² = 25", "x² + y² = 5", "(x − 5)² + y² = 25", "x + y = 5", "x² − y² = 25"], "А", "Рівняння кола з центром (0; 0) і радіусом R: x² + y² = R² ⇒ 25."],
+          ["Знайдіть координати центру кола (x − 2)² + (y + 3)² = 16.", ["(2; −3)", "(−2; 3)", "(2; 3)", "(−2; −3)", "(4; −4)"], "А", "Центр має координати (2; −3)."],
+          ["Знайдіть радіус кола (x + 1)² + (y − 4)² = 49.", ["7", "49", "14", "1", "4"], "А", "R² = 49 ⇒ R = 7."],
+          ["Точка M(x; 0) рівновіддалена від A(0; 4) і B(6; 4)? Ні, знайдіть x, якщо відстань від (x; 0) до (0; 0) дорівнює 6 (x > 0).", ["6", "36", "3", "0", "12"], "А", "√(x² + 0) = 6 при x > 0 ⇒ x = 6."],
+          ["Знайдіть довжину вектора 3a, якщо |a| = 4.", ["12", "7", "64", "1", "20"], "А", "|3a| = 3 · |a| = 3 · 4 = 12."],
+          ["При яких x довжина вектора (x; 0) дорівнює 5?", ["5 або −5", "тільки 5", "25 або −25", "0 або 5", "10 або −10"], "А", "|x| = 5 ⇒ x = 5 або x = −5."],
+          ["Знайдіть координати точки B, якщо середина відрізка AB — точка M(2; 3), а A(0; 1).", ["(4; 5)", "(2; 2)", "(1; 2)", "(4; 6)", "(−2; −1)"], "А", "x_B = 2·2 − 0 = 4, y_B = 2·3 − 1 = 5 ⇒ (4; 5)."],
+          ["Скалярний добуток ненульових векторів дорівнює 0. Який кут між ними?", ["90°", "0°", "180°", "45°", "60°"], "А", "Нульовий скалярний добуток означає, що вектори перпендикулярні (кут 90°)."],
+          ["Знайдіть координати вектора 2a − b, якщо a(1; 3) і b(2; 1).", ["(0; 5)", "(−1; 5)", "(4; 7)", "(0; 7)", "(2; 5)"], "А", "2a = (2; 6); (2 − 2; 6 − 1) = (0; 5)."]
+        ]
+      }
+    ];
+
+    const extraTopicsFull = topics5To16Specs.map((spec) => {
+      const built = buildFullTopicTasks(spec.id, spec.title, spec.sec, spec.easy, spec.hard);
+      return {
+        id: spec.id,
+        sec: spec.sec,
+        title: spec.title,
+        diff: spec.diff,
+        mins: spec.mins,
+        group: spec.group,
+        note: spec.note,
+        easy: built.easy,
+        hard: built.hard
+      };
+    });
+
+    const topics16 = [...baseTopics1To4, ...extraTopicsFull];
+
+    // Вимога: до середини теми 4 (1–15) безкоштовно; з середини теми 4 (16–30) і до останньої теми (16) — під замочком (платно)
+    function isBlockLocked(topicId, part) {
+      const d = getActiveData();
+      if (d.isPremium) return false;
+      if (topicId <= 3) return false;
+      if (topicId === 4 && part === "easy") return false;
+      return true;
+    }
+
+    function isTopicFullyLocked(topicId) {
+      const d = getActiveData();
+      if (d.isPremium) return false;
+      return topicId >= 5;
+    }
+
+    const svgSamples = {
+      linearGraph: `
+        <svg viewBox="0 0 360 220" role="img" aria-label="Графік лінійної функції y = 2x - 2">
+          <rect x="0" y="0" width="360" height="220" fill="#ffffff"/>
+          <g stroke="#e2e8f0" stroke-width="1">
+            <line x1="60" y1="20" x2="60" y2="195"/>
+            <line x1="120" y1="20" x2="120" y2="195"/>
+            <line x1="180" y1="20" x2="180" y2="195"/>
+            <line x1="240" y1="20" x2="240" y2="195"/>
+            <line x1="300" y1="20" x2="300" y2="195"/>
+            <line x1="30" y1="40" x2="330" y2="40"/>
+            <line x1="30" y1="80" x2="330" y2="80"/>
+            <line x1="30" y1="120" x2="330" y2="120"/>
+            <line x1="30" y1="160" x2="330" y2="160"/>
+          </g>
+          <line x1="30" y1="120" x2="335" y2="120" stroke="#0f172a" stroke-width="1.8"/>
+          <line x1="120" y1="198" x2="120" y2="18" stroke="#0f172a" stroke-width="1.8"/>
+          <text x="326" y="112" font-size="12" font-weight="700" fill="#0f172a">x</text>
+          <text x="128" y="26" font-size="12" font-weight="700" fill="#0f172a">y</text>
+          <text x="106" y="135" font-size="11" fill="#475569">0</text>
+          <text x="176" y="135" font-size="11" fill="#475569">1</text>
+          <text x="236" y="135" font-size="11" fill="#475569">2</text>
+          <text x="102" y="84" font-size="11" fill="#475569">2</text>
+          <text x="98" y="164" font-size="11" fill="#475569">−2</text>
+          <line x1="90" y1="180" x2="270" y2="40" stroke="#1d4ed8" stroke-width="2.5"/>
+          <circle cx="180" cy="120" r="4" fill="#dc2626"/>
+          <circle cx="240" cy="80" r="4" fill="#16a34a"/>
+        </svg>
+      `,
+      parabolaGraph: `
+        <svg viewBox="0 0 360 220" role="img" aria-label="Графік параболи y = x^2 - 4x + 3">
+          <rect x="0" y="0" width="360" height="220" fill="#ffffff"/>
+          <g stroke="#e2e8f0" stroke-width="1">
+            <line x1="60" y1="20" x2="60" y2="195"/>
+            <line x1="110" y1="20" x2="110" y2="195"/>
+            <line x1="160" y1="20" x2="160" y2="195"/>
+            <line x1="210" y1="20" x2="210" y2="195"/>
+            <line x1="260" y1="20" x2="260" y2="195"/>
+            <line x1="40" y1="50" x2="320" y2="50"/>
+            <line x1="40" y1="100" x2="320" y2="100"/>
+            <line x1="40" y1="150" x2="320" y2="150"/>
+          </g>
+          <line x1="40" y1="150" x2="325" y2="150" stroke="#0f172a" stroke-width="1.8"/>
+          <line x1="80" y1="195" x2="80" y2="20" stroke="#0f172a" stroke-width="1.8"/>
+          <text x="318" y="142" font-size="12" font-weight="700" fill="#0f172a">x</text>
+          <text x="88" y="28" font-size="12" font-weight="700" fill="#0f172a">y</text>
+          <text x="66" y="164" font-size="11" fill="#475569">0</text>
+          <text x="126" y="164" font-size="11" fill="#475569">1</text>
+          <text x="176" y="164" font-size="11" fill="#475569">2</text>
+          <text x="226" y="164" font-size="11" fill="#475569">3</text>
+          <path d="M 80 50 Q 180 230 280 50" fill="none" stroke="#1d4ed8" stroke-width="2.5"/>
+          <circle cx="130" cy="150" r="4" fill="#16a34a"/>
+          <circle cx="230" cy="150" r="4" fill="#16a34a"/>
+          <circle cx="180" cy="185" r="4" fill="#dc2626"/>
+        </svg>
+      `,
+      rightTriangle: `
+        <svg viewBox="0 0 360 220" role="img" aria-label="Прямокутний трикутник">
+          <rect x="0" y="0" width="360" height="220" fill="#ffffff"/>
+          <polygon points="80,175 260,175 80,55" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2.2"/>
+          <polyline points="80,157 98,157 98,175" fill="none" stroke="#0f172a" stroke-width="1.5"/>
+          <text x="155" y="194" font-size="12" font-weight="700" fill="#0f172a">a = 6 см</text>
+          <text x="32" y="118" font-size="12" font-weight="700" fill="#0f172a">b = 8 см</text>
+          <text x="182" y="105" font-size="12" font-weight="700" fill="#1d4ed8">c = ?</text>
+        </svg>
+      `
+    };
+
+    const simulatorVariants = [
+      {
+        id: "sim_2026",
+        title: "Варіант 1: Демонстраційний варіант НМТ 2026",
+        isFree: true,
+        badgeText: "Безкоштовно",
+        badgeClass: "lock-badge--free",
+        desc: "За структурою та матеріалами НМТ з орієнтиром на демонстраційні тести і збірки формату ЗНО-Освіта. Різні розділи та формати завдань без повторення стартових прикладів з дійсних чисел.",
+        tasks: [
+          {
+            id: "s26_1", num: 1,
+            text: "У магазині діє знижка 20% на всі книги. Книга коштувала 250 грн. Скільки гривень коштуватиме книга зі знижкою?",
+            options: ["200 грн", "230 грн", "50 грн", "300 грн", "180 грн"],
+            correct: "А",
+            exp: "20% від 250 грн = 0,2 · 250 = 50 грн; 250 − 50 = 200 грн."
+          },
+          {
+            id: "s26_2", num: 2,
+            text: "Спростіть вираз: (a⁶ · a⁻²) / a³ при a ≠ 0.",
+            svg: svgSamples.linearGraph,
+            options: ["a", "a⁷", "a¹", "a¹¹", "1"],
+            correct: "А",
+            exp: "За властивостями степенів: a^(6 − 2 − 3) = a¹ = a."
+          },
+          {
+            id: "s26_3", num: 3,
+            text: "Розв'яжіть рівняння: log₂(x + 1) = 4.",
+            options: ["15", "17", "7", "8", "16"],
+            correct: "А",
+            exp: "x + 1 = 2⁴ = 16 ⇒ x = 15 (ОДЗ: x + 1 > 0 ⇒ 16 > 0)."
+          },
+          {
+            id: "s26_4", num: 4,
+            text: "Знайдіть похідну функції f(x) = x⁴ − 3x² + 5.",
+            options: ["4x³ − 6x", "4x³ − 6x + 5", "x³ − 3x", "4x⁴ − 6x", "12x² − 6"],
+            correct: "А",
+            exp: "(x⁴)' = 4x³, (−3x²)' = −6x, (5)' = 0."
+          },
+          {
+            id: "s26_5", num: 5,
+            svg: svgSamples.rightTriangle,
+            text: "На рисунку зображено прямокутний трикутник з катетами 6 см і 8 см. Знайдіть його гіпотенузу c.",
+            options: ["10 см", "14 см", "12 см", "7 см", "2√7 см"],
+            correct: "А",
+            exp: "За теоремою Піфагора: c = √(6² + 8²) = √(36 + 64) = √100 = 10 см."
+          }
+        ]
+      },
+      {
+        id: "sim_2024",
+        title: "Варіант 2: Демонстраційний варіант НМТ 2024",
+        isFree: true,
+        badgeText: "Безкоштовно",
+        badgeClass: "lock-badge--free",
+        desc: "Збалансований варіант за матеріалами та форматом НМТ (з орієнтиром на демонстраційний варіант 2024 року та матеріали ЗНО-Освіта) з поступовим зростанням складності.",
+        tasks: [
+          {
+            id: "s24_1", num: 1,
+            text: "Обчисліть 25% від числа 120.",
+            options: ["30", "48", "24", "60", "15"],
+            correct: "А",
+            exp: "25% = 1/4; 120 · (1/4) = 30."
+          },
+          {
+            id: "s24_2", num: 2,
+            text: "У арифметичній прогресії a₁ = 5, d = 4. Знайдіть третій член цієї прогресії.",
+            options: ["13", "9", "12", "20", "17"],
+            correct: "А",
+            exp: "a₃ = a₁ + 2d = 5 + 2 · 4 = 13."
+          },
+          {
+            id: "s24_3", num: 3,
+            text: "Розв'яжіть нерівність: 3x − 6 > 0.",
+            options: ["x > 2", "x < 2", "x > −2", "x < −2", "x > 6"],
+            correct: "А",
+            exp: "3x > 6 ⇒ x > 2."
+          },
+          {
+            id: "s24_4", num: 4,
+            svg: svgSamples.parabolaGraph,
+            text: "За графіком квадратичної функції y = x² − 4x + 3 визначте нулі функції.",
+            options: ["x = 1 та x = 3", "x = −1 та x = −3", "x = 2", "x = 0 та x = 3", "x = 1 та x = 4"],
+            correct: "А",
+            exp: "Графік перетинає вісь Ox у точках (1; 0) і (3; 0)."
+          },
+          {
+            id: "s24_5", num: 5,
+            text: "Обчисліть визначений інтеграл ∫₀² 3x² dx.",
+            options: ["8", "4", "12", "6", "2"],
+            correct: "А",
+            exp: "[x³]₀² = 2³ − 0³ = 8."
+          }
+        ]
+      },
+      {
+        id: "sim_graphs_pro",
+        title: "Варіант 3: Авторський варіант — Графіки та візуальні задачі",
+        isFree: false,
+        badgeText: "🔒 Преміум",
+        badgeClass: "lock-badge",
+        desc: "Авторський варіант із задачами на графіки функцій, координатні площини та геометричні рисунки за мотивами типових задач НМТ та ЗНО-Освіта (валюта — лише грн або $).",
+        tasks: [
+          {
+            id: "sg_1", num: 1,
+            svg: svgSamples.linearGraph,
+            text: "На координатній площині зображено графік лінійної функції y = 2x − 2. Знайдіть значення функції при x = 2.",
+            options: ["2", "0", "−2", "4", "1"],
+            correct: "А",
+            exp: "Підставляємо x = 2: y = 2 · 2 − 2 = 2."
+          },
+          {
+            id: "sg_2", num: 2,
+            svg: svgSamples.parabolaGraph,
+            text: "За зображеним графіком параболи визначте абсцису вершини параболи.",
+            options: ["2", "1", "3", "0", "−2"],
+            correct: "А",
+            exp: "Вершина параболи розташована посередині між нулями функції 1 і 3: x_в = (1 + 3) / 2 = 2."
+          },
+          {
+            id: "sg_3", num: 3,
+            svg: svgSamples.rightTriangle,
+            text: "За даними на рисунку прямокутного трикутника (катети 6 см і 8 см) знайдіть його площу.",
+            options: ["24 см²", "48 см²", "14 см²", "30 см²", "12 см²"],
+            correct: "А",
+            exp: "Площа прямокутного трикутника дорівнює половині добутку катетів: (1/2) · 6 · 8 = 24 см²."
+          },
+          {
+            id: "sg_4", num: 4,
+            svg: svgSamples.linearGraph,
+            text: "Підписка на сервіс коштує $12 на місяць, а за графіком залежності витрат у перші 2 місяці доплата складає $6. Скільки всього доларів за 2 місяці за такою моделлю?",
+            options: ["$30", "$24", "$18", "$36", "$12"],
+            correct: "А",
+            exp: "2 · $12 + $6 = $30."
+          }
+        ]
+      }
+    ];
+
+    let planSteps = [
+      { id: "p1", topicId: 1, kind: "theory", tag: "Теорія", title: "Конспект і формули: Дійсні числа та дії з ними", baseMins: 15 },
+      { id: "p2", topicId: 1, kind: "topic", tag: "Тема", title: "Практика: Дійсні числа (легкий + складний блок)", baseMins: 25 },
+      { id: "p3", topicId: 1, kind: "review", tag: "Повторення", title: "Повторення та робота над помилками: Дійсні числа", baseMins: 15, relatedTopicId: "p2" },
+      { id: "p4", topicId: 2, kind: "theory", tag: "Теорія", title: "Конспект і формули: Відношення, пропорції та відсотки", baseMins: 15 },
+      { id: "p5", topicId: 2, kind: "topic", tag: "Тема", title: "Практика: Пропорції та відсотки", baseMins: 25 },
+      { id: "p6", topicId: 2, kind: "review", tag: "Повторення", title: "Інтервальне повторення: Дійсні числа + Відсотки", baseMins: 20, relatedTopicId: "p5" },
+      { id: "p7", topicId: 3, kind: "theory", tag: "Теорія", title: "Конспект і формули: Раціональні, ірраціональні та степеневі вирази", baseMins: 15 },
+      { id: "p8", topicId: 3, kind: "topic", tag: "Тема", title: "Практика: Степеневі та ірраціональні вирази", baseMins: 25 },
+      { id: "p9", topicId: 6, kind: "review", tag: "Повторення", title: "Закріплення блоку: Рівняння, системи та прогресії", baseMins: 20, relatedTopicId: "p8" },
+      { id: "p10", topicId: 4, kind: "theory", tag: "Теорія", title: "Конспект і формули: Логарифмічні та показничкові вирази", baseMins: 20 },
+      { id: "p11", topicId: 4, kind: "topic", tag: "Тема", title: "Практика: Логарифми та показничкові вирази", baseMins: 25 },
+      { id: "p12", topicId: 13, kind: "review", tag: "Повторення", title: "Фінальне повторення: ОДЗ, функції, похідна та геометрія", baseMins: 25, relatedTopicId: "p11" }
+    ];
+
+    let runnerList = [];
+    let runnerIdx = 0;
+    let runnerAnswers = {};
+    let runnerTitleText = "";
+    let runnerTopicId = null;
+    let lastWrongTasks = [];
+
+    function hideAll() {
+      [
+        "tab-home", "tab-practice", "tab-analytics", "tab-profile",
+        "view-plan", "view-notes-hub", "view-single-note", "view-topic-detail",
+        "view-simulator", "view-quiz-runner", "view-support"
+      ].forEach((id) => document.getElementById(id).classList.add("hidden"));
+    }
+
+    function openTab(tabId) {
+      hideAll();
+      document.getElementById(tabId).classList.remove("hidden");
+      ["home", "practice", "analytics", "profile"].forEach((k) => {
+        const b = document.getElementById("nav-" + k);
+        if (b) b.classList.toggle("active", "tab-" + k === tabId);
+      });
+      refreshUI();
+      if (tabId === "tab-practice") renderTopics();
+      if (tabId === "tab-analytics") renderAnalytics();
+      if (tabId === "tab-profile") renderProfile();
+    }
+
+    function openPremiumModal() {
+      document.getElementById("premium-modal").classList.remove("hidden");
+    }
+    function closePremiumModal() {
+      document.getElementById("premium-modal").classList.add("hidden");
+    }
+    function handleProceedToPayment() {
+      const d = getActiveData();
+      closePremiumModal();
+      if (!appStore.activeUser || !d.nick) {
+        pendingPaymentAfterAuth = true;
+        openAuthModal(true);
+        return;
+      }
+      openPaymentModal();
+    }
+    function openPaymentModal() {
+      const d = getActiveData();
+      if (!appStore.activeUser || !d.nick) {
+        pendingPaymentAfterAuth = true;
+        openAuthModal(true);
+        return;
+      }
+      document.getElementById("payment-user-nick").textContent = d.nick;
+      document.getElementById("payment-modal").classList.remove("hidden");
+    }
+    function closePaymentModal() {
+      document.getElementById("payment-modal").classList.add("hidden");
+    }
+    function selectPayMethod(el, label) {
+      document.querySelectorAll(".pay-method").forEach((m) => {
+        m.classList.remove("selected");
+        m.lastElementChild.textContent = "○";
+      });
+      el.classList.add("selected");
+      el.lastElementChild.textContent = "●";
+      selectedPayMethod = label;
+      document.getElementById("selected-pay-label").textContent = label;
+    }
+    function confirmTestPayment() {
+      const d = getActiveData();
+      d.isPremium = true;
+      saveStore();
+      closePaymentModal();
+      refreshUI();
+      renderTopics();
+      if (!document.getElementById("view-simulator").classList.contains("hidden")) {
+        renderSimulatorVariants();
+      }
+      if (!document.getElementById("view-plan").classList.contains("hidden")) {
+        rebuildPlan();
+      }
+      alert(`Оплату (67 грн · ${selectedPayMethod}) підтверджено для акаунта ${d.nick}! Преміум-доступ активовано.`);
+    }
+
+    function openAuthModal(requiredForPayment = false) {
+      const d = getActiveData();
+      document.getElementById("auth-nick-input").value = d.nick || "";
+      document.getElementById("auth-pass-input").value = "";
+      document.getElementById("auth-require-note").textContent = requiredForPayment
+        ? "Щоб оформити та зберегти Преміум-доступ (67 грн), спочатку зареєструйся або увійди за ніком і паролем."
+        : "Введи нікнейм і пароль, щоб зберігати прогрес, цільовий бал та Преміум.";
+      document.getElementById("auth-modal").classList.remove("hidden");
+    }
+    function closeAuthModal() {
+      pendingPaymentAfterAuth = false;
+      document.getElementById("auth-modal").classList.add("hidden");
+    }
+    function submitAuthForm() {
+      const nick = document.getElementById("auth-nick-input").value.trim();
+      const pass = document.getElementById("auth-pass-input").value.trim();
+      if (!nick || pass.length < 4) {
+        alert("Введіть нікнейм та пароль (мінімум 4 символи).");
+        return;
+      }
+      if (appStore.users[nick]) {
+        if (appStore.users[nick].password !== pass) {
+          alert("Невірний пароль для цього нікнейму.");
+          return;
+        }
+        appStore.activeUser = nick;
+      } else {
+        const migrated = { ...getActiveData(), nick };
+        appStore.users[nick] = { password: pass, data: migrated };
+        appStore.activeUser = nick;
+        appStore.guestData = defaultUserData(null);
+      }
+      syncDayForActiveData();
+      saveStore();
+      const shouldGoPayment = pendingPaymentAfterAuth;
+      pendingPaymentAfterAuth = false;
+      document.getElementById("auth-modal").classList.add("hidden");
+      refreshUI();
+      renderTopics();
+      renderProfile();
+      if (shouldGoPayment) {
+        openPaymentModal();
+      }
+    }
+    function logoutUser() {
+      appStore.activeUser = null;
+      pendingPaymentAfterAuth = false;
+      saveStore();
+      document.getElementById("auth-modal").classList.add("hidden");
+      refreshUI();
+      renderTopics();
+      renderProfile();
+    }
+
+    function saveTargetScore() {
+      const val = Number(document.getElementById("profile-target-input").value);
+      if (val >= 100 && val <= 200) {
+        const d = getActiveData();
+        d.targetScore = val;
+        saveStore();
+        refreshUI();
+        renderProfile();
+        renderAnalytics();
+        alert(`Цільовий бал збережено: ${val} з 200`);
+      } else {
+        alert("Введіть число від 100 до 200.");
+      }
+    }
+
+    function toggleSetting(key, btn) {
+      const d = getActiveData();
+      d.settings[key] = !d.settings[key];
+      const isOn = d.settings[key];
+      btn.classList.toggle("on", isOn);
+      btn.classList.toggle("off", !isOn);
+      saveStore();
+      refreshUI();
+    }
+
+    function handlePlanClick() {
+      if (!getActiveData().isPremium) {
+        openPremiumModal();
+        return;
+      }
+      hideAll();
+      document.getElementById("view-plan").classList.remove("hidden");
+      rebuildPlan();
+    }
+
+    function handleNotesHubClick() {
+      if (!getActiveData().isPremium) {
+        openPremiumModal();
+        return;
+      }
+      hideAll();
+      document.getElementById("view-notes-hub").classList.remove("hidden");
+      document.getElementById("notes-topics-list").innerHTML = topics16.map((t) => `
+        <div class="card card--clickable" onclick="openSingleNoteScreen(${t.id}, 'hub')">
+          <div style="display:flex; justify-content:space-between; font-size:12.5px;">
+            <span style="color:var(--blue); font-weight:700;">${t.sec} · ${t.note.formulas.length} формул</span>
+            <span class="lock-badge lock-badge--pro">Відкрити конспект ›</span>
+          </div>
+          <div class="item-title" style="margin-top:4px;">${t.id}. ${t.title}</div>
+          <div class="item-desc">${t.note.def}</div>
+        </div>
+      `).join("");
+    }
+
+    function openSingleNoteScreen(topicId, backTarget = "hub") {
+      if (!getActiveData().isPremium) {
+        openPremiumModal();
+        return;
+      }
+      const t = topics16.find((x) => x.id === topicId) || topics16[0];
+      hideAll();
+      document.getElementById("view-single-note").classList.remove("hidden");
+
+      const backBtn = document.getElementById("single-note-back-btn");
+      backBtn.onclick = () => {
+        if (backTarget === "topic") openTopicDetail(t.id);
+        else if (backTarget === "plan") handlePlanClick();
+        else handleNotesHubClick();
+      };
+
+      document.getElementById("single-note-section").textContent = `${t.sec} · Тема ${t.id} з 16`;
+      document.getElementById("single-note-title").textContent = t.title;
+
+      const formulasHtml = t.note.formulas.map((item, idx) => `
+        <div class="formula-card">
+          <div style="font-size:12px; font-weight:700; color:var(--purple-text);">Формула / правило ${idx + 1}</div>
+          <div class="formula-code">${item.f}</div>
+          <div class="formula-explain">${item.e}</div>
+        </div>
+      `).join("");
+
+      const sampleTask = t.easy[0];
+      const exampleHtml = `
+        <div class="note-box" style="background:#f8fafc;">
+          <div class="note-box-title">Приклад застосування теорії</div>
+          <div class="note-hint" style="margin-bottom:6px;"><strong>Завдання:</strong> ${sampleTask.text}</div>
+          <div class="note-hint" style="margin-bottom:4px;"><strong>Правильна відповідь:</strong> ${sampleTask.correct}</div>
+          <div class="note-hint"><strong>Пояснення:</strong> ${sampleTask.exp}</div>
+        </div>
+      `;
+
+      document.getElementById("single-note-content").innerHTML = `
+        <div class="note-box">
+          <div class="note-box-title">📖 Визначення та суть теми</div>
+          <div class="note-hint">${t.note.def}</div>
+        </div>
+        <div class="note-box">
+          <div class="note-box-title">⚠️ ОДЗ та важливі обмеження</div>
+          <div class="note-hint">${t.note.odz}</div>
+        </div>
+        <div class="note-box">
+          <div class="note-box-title">📐 Формули та пояснення до них</div>
+          ${formulasHtml}
+        </div>
+        ${exampleHtml}
+        <div class="note-box" style="background:#fffbeb; border-color:#fde68a;">
+          <div class="note-box-title">💡 Важливо для НМТ та типові пастки</div>
+          <div class="note-hint">${t.note.tip}</div>
+        </div>
+      `;
+
+      document.getElementById("single-note-practice-btn").onclick = () => openTopicDetail(t.id);
+    }
+
+    function showToast(msg) {
+      const el = document.getElementById("plan-rule-toast");
+      el.textContent = msg;
+      el.style.display = "block";
+      clearTimeout(window._t);
+      window._t = setTimeout(() => { el.style.display = "none"; }, 3400);
+    }
+
+    function rebuildPlan() {
+      const d = getActiveData();
+      const mins = Number(document.getElementById("daily-minutes-select").value) || 35;
+      const factor = mins === 20 ? 1.25 : mins === 55 ? 0.8 : 1;
+      const goalTxt = d.targetScore ? `${d.targetScore} балів` : "? балів";
+      document.getElementById("plan-goal-sub").textContent =
+        `Ціль: ${goalTxt} · ${mins} хв на день · 16 тем / 480 задач`;
+      document.getElementById("plan-summary-text").textContent =
+        "План поєднує теорію, практику та повторення. Кнопка «📘 Конспект теми» відкриває теорію відповідної теми без переходу в інший розділ вручну.";
+
+      document.getElementById("plan-steps-list").innerHTML = planSteps.map((s, idx) => {
+        const est = Math.max(10, Math.round((s.baseMins * factor) / 5) * 5);
+        const cls = s.kind === "theory" ? "plan-item--theory" : s.kind === "topic" ? "plan-item--topic" : "plan-item--review";
+        const tCls = s.kind === "theory" ? "tag-theory" : s.kind === "topic" ? "tag-topic" : "tag-review";
+        const topicObj = topics16.find((x) => x.id === s.topicId) || topics16[0];
+        const actionBtn = s.kind === "topic"
+          ? `<button type="button" class="mini-btn" onclick="openTopicDetail(${s.topicId})">Відкрити практику</button>`
+          : `<button type="button" class="mini-btn" onclick="openTopicDetail(${s.topicId})">Перевірити тему</button>`;
+
+        return `
+          <div class="plan-item ${cls}">
+            <div>
+              <span class="plan-tag ${tCls}">${s.tag} · ~${est} хв</span>
+              <div class="item-title">${s.title}</div>
+              <div class="item-desc" style="margin-top:2px;">Тема ${topicObj.id}: ${topicObj.title}</div>
+              <div class="plan-actions-row">
+                ${actionBtn}
+                <button type="button" class="note-jump-btn" onclick="openSingleNoteScreen(${s.topicId}, 'plan')">
+                  📘 Конспект теми
+                </button>
+              </div>
+            </div>
+            <div class="move-btns">
+              <button type="button" class="mini-btn" onclick="moveStep(${idx}, -1)">↑</button>
+              <button type="button" class="mini-btn" onclick="moveStep(${idx}, 1)">↓</button>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function moveStep(idx, dir) {
+      const targetIdx = idx + dir;
+      if (targetIdx < 0 || targetIdx >= planSteps.length) return;
+      const moving = planSteps[idx];
+      const other = planSteps[targetIdx];
+      if (moving.kind === "review" && moving.relatedTopicId === other.id && dir < 0) {
+        showToast("Блок повторення не може стояти раніше за тему, до якої він належить.");
+        return;
+      }
+      if (other.kind === "review" && other.relatedTopicId === moving.id && dir > 0) {
+        showToast("Спочатку потрібно пройти тему, а потім блок повторення.");
+        return;
+      }
+      const copy = [...planSteps];
+      [copy[idx], copy[targetIdx]] = [copy[targetIdx], copy[idx]];
+      planSteps = copy;
+      rebuildPlan();
+    }
+
+    function filterAndOpenPractice(group) {
+      currentFilter = group;
+      openTab("tab-practice");
+      ["all", "alg", "geom"].forEach((k) => document.getElementById("chip-" + k).classList.remove("active"));
+      if (group === "Алгебра") document.getElementById("chip-alg").classList.add("active");
+      else if (group === "Геометрія") document.getElementById("chip-geom").classList.add("active");
+      else document.getElementById("chip-all").classList.add("active");
+      renderTopics();
+    }
+
+    function setTopicFilter(f) {
+      currentFilter = f;
+      ["all", "alg", "geom"].forEach((k) => document.getElementById("chip-" + k).classList.remove("active"));
+      if (f === "Усі") document.getElementById("chip-all").classList.add("active");
+      if (f === "Алгебра") document.getElementById("chip-alg").classList.add("active");
+      if (f === "Геометрія") document.getElementById("chip-geom").classList.add("active");
+      renderTopics();
+    }
+
+    function renderTopics() {
+      const d = getActiveData();
+      const filtered = topics16.filter((t) => currentFilter === "Усі" || t.sec === currentFilter);
+      document.getElementById("topics-list").innerHTML = filtered.map((t) => {
+        const st = d.topicStats[t.id];
+        const acc = st && st.answered > 0 ? Math.round((st.correct / st.answered) * 100) : null;
+        const statusStr = acc !== null ? ` · Точність: ${acc}%` : "";
+        const fullyLocked = isTopicFullyLocked(t.id);
+        const halfLocked = !d.isPremium && t.id === 4;
+
+        let badgeHtml = `<span class="lock-badge lock-badge--free">Безкоштовно</span>`;
+        if (fullyLocked) {
+          badgeHtml = `<span class="lock-badge">🔒 Платний доступ</span>`;
+        } else if (halfLocked) {
+          badgeHtml = `<span class="lock-badge--mixed">1–15 вільно · 16–30 🔒</span>`;
+        }
+
+        return `
+          <div class="card card--clickable ${fullyLocked ? "card--locked" : ""}" onclick="openTopicDetail(${t.id})">
+            <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; font-size:12.5px;">
+              <span style="color:var(--blue); font-weight:700;">${t.sec} · Складність ${t.diff}</span>
+              ${badgeHtml}
+            </div>
+            <div class="item-title" style="margin-top:4px;">${t.id}. ${t.title}</div>
+            <div class="item-desc">30 унікальних задач (15 легших + 15 важчих) · ~${t.mins} хв${statusStr}</div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function openTopicDetail(topicId) {
+      const t = topics16.find((x) => x.id === topicId);
+      if (!t) return;
+      const d = getActiveData();
+      hideAll();
+      document.getElementById("view-topic-detail").classList.remove("hidden");
+      document.getElementById("topic-detail-title").textContent = t.title;
+
+      const easyLocked = isBlockLocked(t.id, "easy");
+      const hardLocked = isBlockLocked(t.id, "hard");
+
+      document.getElementById("topic-time-info").textContent =
+        `Складність ${t.diff} · Орієнтовний час: ~${t.mins} хв. ${
+          d.isPremium
+            ? "Преміум-доступ активний: відкрито обидва блоки (1–15 і 16–30) та конспект теми."
+            : t.id <= 3
+              ? "Обидві частини (1–15 і 16–30) доступні безкоштовно."
+              : t.id === 4
+                ? "Перша частина (1–15) безкоштовна; друга частина (16–30) — під замком 🔒 (Преміум)."
+                : "Обидва блоки (1–15 і 16–30) під замком 🔒 (Преміум за 67 грн)."
+        }`;
+
+      const easyBtn = document.getElementById("topic-easy-btn");
+      const hardBtn = document.getElementById("topic-hard-btn");
+
+      easyBtn.textContent = easyLocked ? "🔒 Легша частина (1–15)" : "Легша частина (1–15)";
+      hardBtn.textContent = hardLocked ? "🔒 Важча частина (16–30)" : "Важча частина (16–30)";
+
+      easyBtn.onclick = () => {
+        if (easyLocked) { openPremiumModal(); return; }
+        startRunner(t.easy, `${t.title} (1–15)`, t.id);
+      };
+      hardBtn.onclick = () => {
+        if (hardLocked) { openPremiumModal(); return; }
+        startRunner(t.hard, `${t.title} (16–30)`, t.id);
+      };
+
+      const noteBadge = document.getElementById("topic-note-badge");
+      if (d.isPremium) {
+        noteBadge.textContent = "Відкрити конспект ›";
+        noteBadge.className = "lock-badge lock-badge--pro";
+      } else {
+        noteBadge.textContent = "🔒 Преміум";
+        noteBadge.className = "lock-badge";
+      }
+      document.getElementById("topic-open-note-card").onclick = () => openSingleNoteScreen(t.id, "topic");
+    }
+
+    function openSimulatorView() {
+      hideAll();
+      document.getElementById("view-simulator").classList.remove("hidden");
+      renderSimulatorVariants();
+    }
+
+    function renderSimulatorVariants() {
+      const d = getActiveData();
+      document.getElementById("simulator-variants-list").innerHTML = simulatorVariants.map((v) => {
+        const locked = !v.isFree && !d.isPremium;
+        const badgeClass = v.isFree ? "lock-badge--free" : (d.isPremium ? "lock-badge--pro" : "lock-badge");
+        const badgeText = v.isFree ? "Безкоштовно" : (d.isPremium ? "✅ Преміум" : "🔒 Преміум");
+        return `
+          <div class="card card--clickable ${locked ? "card--locked" : ""}" onclick="startSimulatorVariant('${v.id}')">
+            <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
+              <div class="item-title">${v.title}</div>
+              <span class="lock-badge ${badgeClass}">${badgeText}</span>
+            </div>
+            <div class="item-desc" style="margin-top:6px;">${v.desc}</div>
+            <div style="margin-top:8px; font-size:12.5px; font-weight:700; color:var(--blue);">
+              ${locked ? "🔒 Натисніть, щоб відкрити Преміум (67 грн)" : `Завдань у варіанті: ${v.tasks.length} · Почати ›`}
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function startSimulatorVariant(variantId) {
+      const variant = simulatorVariants.find((v) => v.id === variantId);
+      if (!variant) return;
+      const d = getActiveData();
+      if (!variant.isFree && !d.isPremium) {
+        openPremiumModal();
+        return;
+      }
+      startRunner(variant.tasks, variant.title, null);
+    }
+
+    function startQuickChallenge() {
+      const pool = [
+        ...topics16[0].easy.slice(0, 3),
+        ...topics16[1].easy.slice(0, 3),
+        ...topics16[2].easy.slice(0, 2),
+        ...topics16[3].easy.slice(0, 2)
+      ];
+      startRunner(pool, "Щоденний виклик (10 питань)", null);
+    }
+
+    function startRunner(tasks, title, topicId) {
+      runnerList = tasks;
+      runnerIdx = 0;
+      runnerAnswers = {};
+      runnerTitleText = title;
+      runnerTopicId = topicId;
+      lastWrongTasks = [];
+      hideAll();
+      document.getElementById("view-quiz-runner").classList.remove("hidden");
+      renderRunnerTask();
+    }
+
+    function renderRunnerTask() {
+      const q = runnerList[runnerIdx];
+      const total = runnerList.length;
+      const chosen = runnerAnswers[q.id];
+      const letters = ["А", "Б", "В", "Г", "Д"];
+
+      document.getElementById("runner-title").textContent = runnerTitleText;
+      document.getElementById("runner-counter").textContent = `${runnerIdx + 1} / ${total}`;
+      document.getElementById("runner-progress").style.width = `${Math.round(((runnerIdx + 1) / total) * 100)}%`;
+
+      const optionsHtml = q.options.map((optText, i) => {
+        const letter = letters[i];
+        let cls = "option-btn";
+        let icon = "";
+        if (chosen) {
+          if (letter === q.correct) {
+            cls += " correct-choice";
+            icon = "✓";
+          } else if (letter === chosen) {
+            cls += " wrong-choice";
+            icon = "✕";
+          }
+        }
+        return `
+          <button type="button" class="${cls}" onclick="pickRunnerOption('${q.id}', '${letter}')">
+            <span class="option-left">
+              <span class="letter-circle">${letter}</span>
+              <span>${optText}</span>
+            </span>
+            <span>${icon}</span>
+          </button>
+        `;
+      }).join("");
+
+      let expHtml = "";
+      if (chosen) {
+        const isCorrect = chosen === q.correct;
+        expHtml = `
+          <div class="explanation-card ${isCorrect ? "is-ok" : "is-bad"}">
+            <div class="explanation-heading">
+              ${isCorrect ? "✓ Правильно!" : `✕ Неправильно. Правильна відповідь: ${q.correct}`}
+            </div>
+            <div class="explanation-text">${q.exp}</div>
+          </div>
+        `;
+      }
+
+      const svgHtml = q.svg ? `<div class="chart-frame">${q.svg}</div>` : "";
+
+      document.getElementById("runner-card").innerHTML = `
+        <div class="item-desc" style="margin-top:0; font-weight:700; color:var(--blue);">Завдання №${q.num || (runnerIdx + 1)}</div>
+        <div class="item-title" style="font-size:17px; margin:6px 0 12px; line-height:1.45;">${q.text}</div>
+        ${svgHtml}
+        <div>${optionsHtml}</div>
+        ${expHtml}
+      `;
+
+      document.getElementById("runner-next-btn").textContent =
+        runnerIdx === total - 1 ? "Завершити" : "Далі";
+    }
+
+    function pickRunnerOption(qid, letter) {
+      const alreadyAnswered = Boolean(runnerAnswers[qid]);
+      runnerAnswers[qid] = letter;
+      if (!alreadyAnswered) {
+        const d = getActiveData();
+        syncDayForActiveData();
+        const q = runnerList.find((item) => item.id === qid);
+        const isOk = q && letter === q.correct;
+        d.answeredCount += 1;
+        if (isOk) d.correctCount += 1;
+        d.todaySolvedCount = Math.min(30, d.todaySolvedCount + 1);
+        d.totalSolvedCount = Math.min(480, d.totalSolvedCount + 1);
+        if (runnerTopicId) {
+          if (!d.topicStats[runnerTopicId]) {
+            d.topicStats[runnerTopicId] = { answered: 0, correct: 0 };
+          }
+          d.topicStats[runnerTopicId].answered += 1;
+          if (isOk) d.topicStats[runnerTopicId].correct += 1;
+        }
+        saveStore();
+        refreshUI();
+      }
+      renderRunnerTask();
+    }
+
+    function prevRunnerTask() {
+      if (runnerIdx > 0) {
+        runnerIdx -= 1;
+        renderRunnerTask();
+      } else {
+        openTab("tab-practice");
+      }
+    }
+
+    function nextRunnerTask() {
+      if (runnerIdx < runnerList.length - 1) {
+        runnerIdx += 1;
+        renderRunnerTask();
+      } else {
+        finishRunnerSession();
+      }
+    }
+
+    function finishRunnerSession() {
+      const total = runnerList.length;
+      let okCount = 0;
+      lastWrongTasks = [];
+      runnerList.forEach((q) => {
+        if (runnerAnswers[q.id] === q.correct) okCount += 1;
+        else lastWrongTasks.push(q);
+      });
+
+      const d = getActiveData();
+      if (runnerTopicId && okCount / total >= 0.6 && !d.completedTopicIds.includes(runnerTopicId)) {
+        d.completedTopicIds.push(runnerTopicId);
+        saveStore();
+        refreshUI();
+      }
+
+      let phrase = "Гарна спроба! Кожне завдання наближає до впевненого результату.";
+      let tip = "Розглянь пояснення до пропущених або складних питань та спробуй ще раз.";
+      if (okCount === total) {
+        phrase = "Бездоганно! Усі завдання розв'язано точно.";
+        tip = "Чудовий темп — закріплюй тему регулярним повторенням.";
+        triggerConfetti();
+      } else if (okCount / total >= 0.7) {
+        phrase = "Дуже добрий результат! Ти впевнено тримаєш темп.";
+        tip = "Зверни увагу на кілька задач, де виникли сумніви, і пропрацюй їх.";
+        triggerConfetti();
+      }
+
+      const mistakeBtnHtml = lastWrongTasks.length > 0
+        ? `<button type="button" class="btn-mistake" onclick="startMistakeReview()">Робота над помилками (${lastWrongTasks.length})</button>`
+        : "";
+
+      document.getElementById("runner-card").innerHTML = `
+        <div class="item-desc" style="margin-top:0; font-weight:700; color:var(--blue);">Підсумок сесії</div>
+        <div class="item-title" style="font-size:20px; margin:4px 0;">${runnerTitleText}</div>
+        <div style="font-size:28px; font-weight:800; color:var(--blue); margin:6px 0;">
+          Правильно: ${okCount} з ${total} (${Math.round((okCount / total) * 100)}%)
+        </div>
+        <div class="result-banner">
+          <div class="result-phrase">${phrase}</div>
+          <div class="result-tip">${tip}</div>
+        </div>
+        ${mistakeBtnHtml}
+        <button type="button" class="btn-secondary" style="margin-top:10px;" onclick="openTab('tab-practice')">
+          Повернутися до переліку тем
+        </button>
+      `;
+      document.getElementById("runner-next-btn").textContent = "На головну";
+      document.getElementById("runner-next-btn").onclick = () => openTab("tab-home");
+    }
+
+    function startMistakeReview() {
+      if (!lastWrongTasks.length) return;
+      startRunner(lastWrongTasks, "Робота над помилками", runnerTopicId);
+    }
+
+    function triggerConfetti() {
+      const layer = document.getElementById("confetti-layer");
+      const colors = ["#2563eb", "#16a34a", "#f59e0b", "#ec4899", "#8b5cf6"];
+      layer.innerHTML = "";
+      layer.classList.remove("hidden");
+      for (let i = 0; i < 42; i++) {
+        const piece = document.createElement("div");
+        piece.className = "confetti-piece";
+        piece.style.left = `${Math.random() * 100}%`;
+        piece.style.background = colors[i % colors.length];
+        piece.style.animationDuration = `${1.4 + Math.random() * 1.1}s`;
+        piece.style.animationDelay = `${Math.random() * 0.25}s`;
+        layer.appendChild(piece);
+      }
+      setTimeout(() => {
+        layer.classList.add("hidden");
+        layer.innerHTML = "";
+      }, 2700);
+    }
+
+    function openSupportView() {
+      hideAll();
+      document.getElementById("view-support").classList.remove("hidden");
+      renderSupportStep1();
+    }
+
+    function renderSupportStep1() {
+      document.getElementById("support-body").innerHTML = `
+        <div class="item-desc" style="margin-top:0; font-weight:700; color:var(--blue);">Крок 1 з 3</div>
+        <div class="item-title" style="font-size:18px; margin:6px 0 14px;">Як ти почуваєшся сьогодні?</div>
+        <button type="button" class="option-btn" onclick="renderSupportStep2('Спокійно')"><span class="option-left"><span class="letter-circle">😌</span><span>Спокійно</span></span><span>›</span></button>
+        <button type="button" class="option-btn" onclick="renderSupportStep2('Зосереджено')"><span class="option-left"><span class="letter-circle">🎯</span><span>Зосереджено</span></span><span>›</span></button>
+        <button type="button" class="option-btn" onclick="renderSupportStep2('Втома')"><span class="option-left"><span class="letter-circle">😴</span><span>Втома</span></span><span>›</span></button>
+        <button type="button" class="option-btn" onclick="renderSupportStep2('Тривожно')"><span class="option-left"><span class="letter-circle">💭</span><span>Тривожно</span></span><span>›</span></button>
+      `;
+    }
+
+    function renderSupportStep2(mood) {
+      if (mood === "Втома") {
+        document.getElementById("support-body").innerHTML = `
+          <div class="support-warm-card">
+            <div style="font-size:13px; font-weight:700; color:var(--purple-text); margin-bottom:6px;">Підтримка у момент втоми</div>
+            <div style="font-size:16px; font-weight:700; line-height:1.5; color:var(--text);">
+              Втома — це природний сигнал зупинитися й перезавантажитися. Сьогодні не обов'язково робити максимум: обери темп, який підходить саме зараз.
+            </div>
+          </div>
+          <button type="button" class="btn-primary" style="margin-bottom:10px;" onclick="openTab('tab-practice')">
+            Перейти до завдань
+          </button>
+          <button type="button" class="btn-secondary" onclick="openTab('tab-home')">
+            Відпочити
+          </button>
+        `;
+        return;
+      }
+
+      document.getElementById("support-body").innerHTML = `
+        <div class="item-desc" style="margin-top:0; font-weight:700; color:var(--blue);">Крок 2 з 3 · Настрій: ${mood}</div>
+        <div class="item-title" style="font-size:18px; margin:6px 0 14px;">Який зараз рівень енергії?</div>
+        <button type="button" class="option-btn" onclick="renderSupportStep3('${mood}', 'Низька')"><span class="option-left"><span class="letter-circle">🔋</span><span>Низька — хочеться легкого старту</span></span><span>›</span></button>
+        <button type="button" class="option-btn" onclick="renderSupportStep3('${mood}', 'Середня')"><span class="option-left"><span class="letter-circle">⚡</span><span>Середня — готовий до спокійної роботи</span></span><span>›</span></button>
+        <button type="button" class="option-btn" onclick="renderSupportStep3('${mood}', 'Висока')"><span class="option-left"><span class="letter-circle">🚀</span><span>Висока — є ресурс на складніші задачі</span></span><span>›</span></button>
+      `;
+    }
+
+    function renderSupportStep3(mood, energy) {
+      document.getElementById("support-body").innerHTML = `
+        <div class="item-desc" style="margin-top:0; font-weight:700; color:var(--blue);">Крок 3 з 3 · Енергія: ${energy}</div>
+        <div class="item-title" style="font-size:18px; margin:6px 0 14px;">Що буде найкориснішим саме зараз?</div>
+        <button type="button" class="option-btn" onclick="showSupportAdvice('${mood}', '${energy}', 'Короткий блок практики (10–15 хв)')"><span class="option-left"><span class="letter-circle">1</span><span>Короткий блок практики (10–15 хв)</span></span><span>›</span></button>
+        <button type="button" class="option-btn" onclick="showSupportAdvice('${mood}', '${energy}', 'Спокійний розбір теорії та формул')"><span class="option-left"><span class="letter-circle">2</span><span>Спокійний розбір теорії та формул</span></span><span>›</span></button>
+        <button type="button" class="option-btn" onclick="showSupportAdvice('${mood}', '${energy}', 'Коротка пауза без провини')"><span class="option-left"><span class="letter-circle">3</span><span>Коротка пауза без провини</span></span><span>›</span></button>
+      `;
+    }
+
+    function showSupportAdvice(mood, energy, focus) {
+      document.getElementById("support-body").innerHTML = `
+        <div class="item-desc" style="margin-top:0; font-weight:700; color:var(--green-text);">Рекомендація на зараз</div>
+        <div class="item-title" style="font-size:18px; margin:6px 0 8px;">${focus}</div>
+        <div class="item-desc" style="font-size:14px; color:#1e293b; margin-bottom:14px;">
+          Стан: <strong>${mood}</strong>, енергія: <strong>${energy}</strong>. Працюй у власному темпі: стабільність важливіша за перевтому.
+        </div>
+        <button type="button" class="btn-primary" style="margin-bottom:8px;" onclick="openTab('tab-practice')">Перейти до практики</button>
+        <button type="button" class="btn-secondary" onclick="openTab('tab-home')">Повернутися на головну</button>
+      `;
+    }
+
+    function renderAnalytics() {
+      const d = getActiveData();
+      const solved = Math.min(480, d.totalSolvedCount || 0);
+      const pct = Math.min(100, Math.round((solved / 480) * 100));
+      const acc = d.answeredCount > 0 ? Math.round((d.correctCount / d.answeredCount) * 100) : 0;
+      const doneTopics = d.completedTopicIds.length;
+      const goalTxt = d.targetScore ? `${d.targetScore}` : "?";
+      const estScore = Math.min(200, 100 + Math.round((solved / 480) * 65) + Math.round((acc / 100) * 35));
+
+      document.getElementById("analytics-target-pill").textContent = `🎯 Ціль: ${goalTxt}`;
+      document.getElementById("analytics-goal-badge").textContent = `• Ціль: ${goalTxt}`;
+      document.getElementById("analytics-readiness-score").textContent = `${estScore} / 200`;
+      document.getElementById("analytics-program-bar").style.width = `${pct}%`;
+      document.getElementById("analytics-solved-count").textContent = `Виконано завдань: ${solved} з 480`;
+      document.getElementById("analytics-program-pct").textContent = `${pct}% програми`;
+      document.getElementById("analytics-accuracy").textContent = `${acc}%`;
+      document.getElementById("analytics-topics-done").textContent = `${doneTopics} / 16`;
+
+      const sections = [
+        { name: "Алгебра та початки аналізу", range: "Теми 1–12" },
+        { name: "Геометрія (планіметрія та стереометрія)", range: "Теми 13–16" },
+        { name: "Функції, похідна та інтеграл", range: "Теми 9–11" },
+        { name: "Ймовірність, статистика та прогресії", range: "Теми 8, 12" }
+      ];
+
+      document.getElementById("analytics-sections-card").innerHTML = sections.map((s) => `
+        <div class="section-row-item">
+          <div style="display:flex; justify-content:space-between; font-weight:700; font-size:14px;">
+            <span>${s.name}</span>
+            <span style="color:var(--blue);">${acc}%</span>
+          </div>
+          <div class="progress-bar" style="height:6px; margin:6px 0 4px;"><div class="progress-fill" style="width:${acc}%;"></div></div>
+          <div class="item-desc" style="margin:0;">${s.range}</div>
+        </div>
+      `).join("");
+
+      const weakTopics = topics16.filter((t) => {
+        const st = d.topicStats[t.id];
+        return st && st.answered > 0 && (st.correct / st.answered) < 0.7;
+      });
+
+      document.getElementById("analytics-review-zones").innerHTML = weakTopics.length
+        ? weakTopics.map((t) => `
+            <div class="section-row-item" style="cursor:pointer;" onclick="openTopicDetail(${t.id})">
+              <div style="font-weight:700; font-size:14px;">${t.id}. ${t.title}</div>
+              <div class="item-desc" style="margin:0;">Рекомендується повторити теорію та закріпити задачі ›</div>
+            </div>
+          `).join("")
+        : `<div class="item-desc" style="margin:0;">Поки що слабких зон не виявлено — продовжуй розв'язувати теми в розділі «Практика».</div>`;
+    }
+
+    function renderProfile() {
+      const d = getActiveData();
+      const nick = d.nick || "Гість";
+      document.getElementById("profile-avatar").textContent = nick.charAt(0).toUpperCase();
+      document.getElementById("profile-nick-title").textContent = nick;
+      document.getElementById("profile-plan-status").textContent = d.isPremium ? "Преміум активовано" : "Базовий доступ";
+      document.getElementById("profile-streak-badge").textContent = `🔥 ${d.streakDays || 1} день`;
+      document.getElementById("profile-auth-btn").textContent = d.nick
+        ? `Акаунт: ${d.nick} (змінити / вийти)`
+        : "Увійти або зареєструватися (нік + пароль)";
+      document.getElementById("profile-target-display").textContent =
+        d.targetScore ? `${d.targetScore} балів із 200` : "? балів із 200";
+      if (d.targetScore) document.getElementById("profile-target-input").value = d.targetScore;
+      document.getElementById("profile-solved-stat").textContent = String(Math.min(480, d.totalSolvedCount || 0));
+
+      const now = new Date();
+      let year = now.getFullYear();
+      let sessionDate = new Date(year, 5, 1);
+      if (now > sessionDate) sessionDate = new Date(year + 1, 5, 1);
+      const diffDays = Math.max(1, Math.ceil((sessionDate - now) / (1000 * 60 * 60 * 24)));
+      document.getElementById("profile-days-left").textContent = `${diffDays} дн.`;
+
+      const s = d.settings || { reminders: true, countdown: true, offline: true };
+      const setSw = (id, val) => {
+        const el = document.getElementById(id);
+        el.classList.toggle("on", Boolean(val));
+        el.classList.toggle("off", !val);
+      };
+      setSw("sw-reminders", s.reminders);
+      setSw("sw-countdown", s.countdown);
+      setSw("sw-offline", s.offline);
+    }
+
+    function refreshUI() {
+      syncDayForActiveData();
+      const d = getActiveData();
+      const todaySolved = Math.min(30, d.todaySolvedCount || 0);
+      const dailyPct = Math.min(100, Math.round((todaySolved / 30) * 100));
+      const targetTxt = d.targetScore ? `${d.targetScore}/200` : "?/200";
+
+      document.getElementById("home-greeting").textContent = d.nick ? `Привіт, ${d.nick}!` : "Привіт!";
+      document.getElementById("home-auth-pill").textContent = d.nick ? `👤 ${d.nick}` : "👤 Увійти / Реєстрація";
+      document.getElementById("guest-save-banner").classList.toggle("hidden", Boolean(d.nick));
+      document.getElementById("home-target-pill").textContent = `🎯 ${targetTxt}`;
+      document.getElementById("daily-progress-label").textContent = `${dailyPct}% виконано сьогодні`;
+      document.getElementById("daily-progress-bar").style.width = `${dailyPct}%`;
+
+      const showCountdown = d.settings ? d.settings.countdown !== false : true;
+      const now = new Date();
+      let sessionDate = new Date(now.getFullYear(), 5, 1);
+      if (now > sessionDate) sessionDate = new Date(now.getFullYear() + 1, 5, 1);
+      const diffDays = Math.max(1, Math.ceil((sessionDate - now) / (1000 * 60 * 60 * 24)));
+      document.getElementById("home-countdown-sub").textContent = showCountdown
+        ? `Підготовка до тестування 2026 · До основної сесії (червень): ${diffDays} дн.`
+        : "Підготовка до тестування 2026";
+
+      const planBadge = document.getElementById("plan-lock-badge");
+      const notesHubBadge = document.getElementById("notes-hub-badge");
+      if (d.isPremium) {
+        planBadge.textContent = "✅ Преміум";
+        planBadge.className = "lock-badge lock-badge--pro";
+        notesHubBadge.textContent = "✅ Преміум";
+        notesHubBadge.className = "lock-badge lock-badge--pro";
+      } else {
+        planBadge.textContent = "🔒 Преміум";
+        planBadge.className = "lock-badge";
+        notesHubBadge.textContent = "🔒 Преміум";
+        notesHubBadge.className = "lock-badge";
+      }
+    }
+
+    loadStore();
+    refreshUI();
+  </script>
+</body>
+</html>
